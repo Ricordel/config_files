@@ -1,0 +1,33 @@
+[global_config]
+  window_state = maximise
+  title_transmit_bg_color = "#a8a8a8"
+  tab_position = right
+[keybindings]
+  go_up = <Super>k
+  next_tab = <Control>Tab
+  go_prev = <Shift><Super>Tab
+  prev_tab = <Shift><Control>Tab
+  go_down = <Super>j
+  go_right = <Super>l
+  go_next = <Super>Tab
+  go_left = <Super>h
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    palette = "#2e3436:#e92011:#4e9a06:#c4a000:#027dd2:#731183:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#4e85bf:#ad7fa8:#34e2e2:#eeeeec"
+    background_darkness = 0.86
+    use_system_font = False
+    foreground_color = "#d5d3d3"
+    font = DejaVu Sans Mono 12
+    background_color = "#111111"
+    cursor_blink = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      profile = default
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

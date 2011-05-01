@@ -261,5 +261,7 @@ hi def link cDelimiter Delimiter
 hi def link cAnsiFunction Function
 hi def link cAnsiName Identifier
 hi def link cBoolean Boolean
+hi def link cOperator Special
+hi def link cDelimiter Special
 
 

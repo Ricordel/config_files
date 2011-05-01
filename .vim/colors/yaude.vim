@@ -16,12 +16,12 @@
 
 set background=dark
 if version > 580
-    " no guarantees for version 5.8 and below, but this makes it stop
-    " complaining
-    hi clear
-    if exists("syntax_on")
-	syntax reset
-    endif
+	" no guarantees for version 5.8 and below, but this makes it stop
+	" complaining
+	hi clear
+	if exists("syntax_on")
+		syntax reset
+	endif
 endif
 let g:colors_name="yaude"
 
@@ -54,21 +54,36 @@ hi Number   	guifg=#72FC27		gui=none		ctermfg=105		cterm=bold
 hi String		guifg=#9DDA53						ctermfg=10
 hi Character	guifg=#E0E0E0		gui=bold		ctermfg=lightgrey cterm=bold
 hi Boolean		guifg=#89DE00		gui=bold		ctermfg=106		cterm=bold
-hi Identifier	guifg=#00AEFF		gui=bold		ctermfg=69		cterm=bold
+hi Identifier	guifg=#00AEFF		gui=bold		ctermfg=white		cterm=bold
+hi Function										    ctermfg=69    cterm=bold
 hi cUserFunction guifg=#00AEFF		gui=bold		ctermfg=39		cterm=bold
 hi pythonUserFunction guifg=#00AEFF		gui=bold	ctermfg=39		cterm=bold
+hi scalaDefName guifg=#00AEFF		gui=bold		ctermfg=39		cterm=bold
+hi scalaDefSpecializer guifg=#00AEFF		gui=bold		ctermfg=white		cterm=bold
+hi scalaMethodCall guifg=#00AEFF		gui=bold		ctermfg=69		cterm=bold
 hi pythonSelf	guifg=#36C23C		gui=bold,italic ctermfg=28		cterm=bold
 hi Statement	guifg=#CC01F2	    gui=bold		ctermfg=197		cterm=bold
 hi Exception	guifg=#D400E7		gui=bold		ctermfg=magenta cterm=bold
-hi operator		guifg=#5F5FFF		gui=bold		ctermfg=62		cterm=bold
+hi operator		guifg=#5F5FFF		gui=bold		ctermfg=68		cterm=bold
 hi PreProc		guifg=#48AFBF		gui=bold		ctermfg=31	cterm=bold
 hi Type			guifg=#00BF09		gui=bold		ctermfg=106	cterm=bold
-hi Special		guifg=#FFC31C		gui=bold		ctermfg=214
+hi Special		guifg=#FFC31C		gui=bold		ctermfg=214 cterm=bold
 hi Tag			guifg=red
 hi Delimiter	guifg=#FFA41E		gui=bold		ctermfg=214		cterm=bold
 hi pythonDelimiter guifg=#FFC005 gui=bold			ctermfg=214		cterm=bold
 hi Ignore		guifg=grey40
 hi Todo			guifg=black guibg=yellow2
+hi keyword												ctermfg=105		 cterm=bold
+hi scalaSymbol											ctermfg=white cterm=bold
+hi scalaRoot											ctermfg=white cterm=bold
+hi scalaKeyword											ctermfg=106       cterm=bold
+hi scalaClassName										ctermfg=82		cterm=bold
+hi scalaDef guifg=#36C23C		gui=bold,italic ctermfg=197		cterm=bold
+hi scalaVar guifg=#36C23C		gui=bold,italic ctermfg=197		cterm=bold
+hi scalaVal guifg=#36C23C		gui=bold,italic ctermfg=197		cterm=bold
+
+
+
 
 hi Visual	cterm=reverse
 hi VisualNOS	cterm=bold,underline

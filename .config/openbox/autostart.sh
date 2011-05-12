@@ -51,6 +51,10 @@ tint2 &
 # fond d'ecran
 nitrogen --restore &
 # demarrer l'applet network-manager proprement
-/usr/bin/nm-applet --sm-disable &
+#/usr/bin/nm-applet --sm-disable &
+#Terminal déroulant
+#guake &
+# Lanceur d'applications
+#gnome-do &
 # Pulse-audio
 start-pulseaudio-x11

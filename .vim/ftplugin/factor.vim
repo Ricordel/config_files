@@ -2,7 +2,7 @@
 " http://concatenative.org/wiki/view/Factor/Coding%20Style
 
 " Tabs are not allowed in Factor source files; use four spaces instead.
-setlocal expandtab tabstop=8 shiftwidth=8 softtabstop=8
+setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " Try to limit lines to 64 characters, except for documentation, which can be
 " any length.

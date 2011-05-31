@@ -83,7 +83,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias cdc='cd ~/Telecom/plnc/cours/factor'
+alias cdc='cd ~/Telecom/plnc/cours/haskell'
 
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents

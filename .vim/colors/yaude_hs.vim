@@ -66,7 +66,7 @@ hi scalaMethodCall guifg=#00AEFF		gui=bold		ctermfg=69		cterm=bold
 hi pythonSelf	guifg=#36C23C		gui=bold,italic ctermfg=28		cterm=bold
 hi Statement	guifg=#CC01F2	    gui=bold		ctermfg=197		cterm=bold
 hi Exception	guifg=#D400E7		gui=bold		ctermfg=magenta cterm=bold
-hi operator		guifg=#5F5FFF		gui=bold		ctermfg=68		cterm=bold
+hi operator		guifg=#5F5FFF		gui=bold		ctermfg=197		cterm=bold
 hi PreProc		guifg=#48AFBF		gui=bold		ctermfg=31	cterm=bold
 hi Type			guifg=#00BF09		gui=bold		ctermfg=106	cterm=bold
 hi Special		guifg=#FFC31C		gui=bold		ctermfg=214 cterm=bold

@@ -160,6 +160,7 @@ syn match   factorModifier  "C:"
 syn match   factorModifier  "ALIEN:"
 syn match   factorModifier  "SLOT:"
 syn match   factorModifier  "MEMO:"
+syn match   factorModifier  "EBNF:"
 "syn match   factorModifier  "GENERIC:"
 
 syn cluster factorWordOps       contains=factorConstant,factorAlias,factorSingleton,factorSingletons,factorSymbol,factorSymbols,factorPostpone,factorDefer,factorForget,factorMixin,factorInstance,factorHook,factorMain,factorConstructor

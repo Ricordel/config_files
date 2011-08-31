@@ -83,7 +83,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias cdc='cd ~/Telecom/plnc/cours/haskell'
+alias cdc='cd ~/Telecom/plnc/projet/src'
 
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
@@ -101,8 +101,15 @@ alias lll='ls -lh | less'
 alias la='ls -a'
 alias lla='ls -la'
 
+# Un cd && ls qui va bien
+function cd_ls {
+	cd "$*"; ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable;
+}
+
+
 # Quelques alias pratiques
-alias c='clear'
+alias c='cd_ls $*'
+alias cl='clear'
 alias less='less --quiet'
 alias s='cd ..'
 alias u='cd .. && ls'

@@ -233,6 +233,9 @@ syn keyword	cAnsiName	and bitor not_eq xor
 syn keyword	cAnsiName	and_eq compl or xor_eq
 syn keyword	cAnsiName	bitand not or_eq
 
+syn keyword cTypeModifier    static volatile const extern inline
+syn keyword cTypeDeclarator  typedef union struct
+
 " Operators
 syn match cOperator	"\(<<\|>>\|[-+*/%&^|<>!=]\)="
 syn match cOperator	"<<\|>>\|&&\|||\|++\|--\|->"
@@ -256,6 +259,9 @@ syn match cDelimiter	"[(){};\\]"
 syn keyword cBoolean true false TRUE FALSE
 
 
+" user defined types ending by "_t"
+syn match cUserType "\w*_t "
+
 " Links
 hi def link cDelimiter Delimiter
 hi def link cAnsiFunction Function
@@ -263,5 +269,6 @@ hi def link cAnsiName Identifier
 hi def link cBoolean Boolean
 hi def link cOperator Special
 hi def link cDelimiter Special
+hi def link cUserType Type
 
 

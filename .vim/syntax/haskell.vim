@@ -167,7 +167,7 @@ if version >= 508 || !exists("did_hs_syntax_inits")
   hi link hsForeign		hsImport
   hi link hsInfix               PreProc
   hi link hsStructure           Structure
-  hi link hsStatement           Statement
+  "hi link hsStatement           Statement
   hi link hsConditional         Conditional
   hi link hsSpecialChar	        SpecialChar
   hi link hsTypedef             Typedef

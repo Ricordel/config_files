@@ -60,6 +60,8 @@ hi cUserFunction guifg=#00AEFF		gui=bold		ctermfg=39		cterm=bold
 hi pythonUserFunction guifg=#00AEFF		gui=bold	ctermfg=39		cterm=bold
 hi hsFunction							ctermfg=white	cterm=bold
 hi hsUserFunction							ctermfg=39		cterm=bold
+hi hsStatement							ctermfg=28		cterm=bold
+hi Structure							ctermfg=28		cterm=bold
 hi scalaDefName guifg=#00AEFF		gui=bold		ctermfg=39		cterm=bold
 hi scalaDefSpecializer guifg=#00AEFF		gui=bold		ctermfg=white		cterm=bold
 hi scalaMethodCall guifg=#00AEFF		gui=bold		ctermfg=69		cterm=bold

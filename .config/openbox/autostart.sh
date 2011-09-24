@@ -32,9 +32,10 @@ elif which xfce-mcs-manager >/dev/null 2>&1; then
 fi
 
 # Preload stuff for KDE apps
-if which start_kdeinit >/dev/null 2>&1; then
-  LD_BIND_NOW=true start_kdeinit --new-startup +kcminit_startup &
-fi
+# XXX I don't use a lot of kde apps, no need for that
+#if which start_kdeinit >/dev/null 2>&1; then
+  #LD_BIND_NOW=true start_kdeinit --new-startup +kcminit_startup &
+#fi
 
 # Run XDG autostart things.  By default don't run anything desktop-specific
 # See xdg-autostart --help more info

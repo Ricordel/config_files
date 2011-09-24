@@ -5,6 +5,9 @@
 # Pour le buildroot armadeus
 export BUILDROOT_VERSION=2010.11
 
+# Vi mode
+set -o vi
+
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return

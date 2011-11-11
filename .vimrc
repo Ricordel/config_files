@@ -15,6 +15,8 @@ filetype on
 filetype indent on
 filetype plugin on
 
+"Undo persistant : conserve l'historique même en cas de fermeture de fichier
+set undofile
 
 set nobackup                    " Pas de sauvegarde
 

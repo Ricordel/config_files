@@ -82,9 +82,18 @@ esac
 
 # enable color support of ls and also add handy aliases
 
+function recursive_grep {
+	grep --color=auto -r $* .
+}
+function recursive_grep_case_ins {
+	grep --color=auto -ri $* .
+}
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias rg='recursive_grep $*'
+alias rgi='recursive_grep_case_ins $*'
+
 
 alias cdc='cd ~/Telecom/plnc/projet/src'
 

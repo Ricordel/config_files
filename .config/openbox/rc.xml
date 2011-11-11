@@ -42,7 +42,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Mire_v2_lime</name>
+    <name>Mire_v2_orange</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -92,14 +92,14 @@
       <slant>normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
-    <font place="OnScreenDisplay">
-      <name>sans</name>
-      <size>9</size>
-      <!-- font size in points -->
-      <weight>bold</weight>
-      <!-- 'bold' or 'normal' -->
-      <slant>normal</slant>
-      <!-- 'italic' or 'normal' -->
+    <font place="ActiveOnScreenDisplay">
+      <name/>
+    </font>
+    <font place="InactiveOnScreenDisplay">
+      <name>Sans</name>
+      <size>8</size>
+      <weight></weight>
+      <slant></slant>
     </font>
   </theme>
   <desktops>
@@ -305,18 +305,18 @@
         <execute>/home/leyaude/.pulse/volume_control/volume_mute.sh</execute>
       </action>
     </keybind>
-	<!-- Ouvrir le contrôleur de volume -->
-	<keybind key="W-A-p">
-		<action name="Execute">
-			<execute>pavucontrol</execute>
-		</action>
-	</keybind>
-	<!-- Lecture/Pause dans Exaile -->
-	<keybind key="XF86AudioPlay">
-		<action name="Execute">
-			<execute>exaile -t</execute>
-		</action>
-	</keybind>
+    <!-- Ouvrir le contrôleur de volume -->
+    <keybind key="W-A-p">
+      <action name="Execute">
+        <execute>pavucontrol</execute>
+      </action>
+    </keybind>
+    <!-- Lecture/Pause dans Exaile -->
+    <keybind key="XF86AudioPlay">
+      <action name="Execute">
+        <execute>exaile -t</execute>
+      </action>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>

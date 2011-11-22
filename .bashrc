@@ -138,6 +138,12 @@ alias g='git'
 alias qgit='qgit --all'
 alias cg='cd ~/Rose/git'
 
+
+# A bit better than ps aux | grep pattern
+# -l : list process name too
+# -f : search the whole line
+alias pgrep='pgrep -l -f'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.

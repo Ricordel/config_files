@@ -77,7 +77,7 @@ esac
 
 
 #########################################################
-#						Des alias						#
+#                       Des alias                       #
 #########################################################
 
 # enable color support of ls and also add handy aliases
@@ -143,6 +143,14 @@ alias cg='cd ~/Rose/git'
 # -l : list process name too
 # -f : search the whole line
 alias pgrep='pgrep -l -f'
+
+
+# A vim + find usefull when dealing with profound trees
+function vim_find {
+	vim "`find ./* -name *$1*`"
+}
+alias vimf='vim_find $*'
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

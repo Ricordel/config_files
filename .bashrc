@@ -132,7 +132,10 @@ alias duu='du --max-depth=1'
 alias md='mkdir'
 alias rd='rmdir'
 alias maman='sudo'
-alias make='clear && make'
+alias make='clear && make -j5'
+alias m='make'
+# Make with clang as C compiler (for better error messages)
+alias makec='make CC=clang LD=clang'
 
 alias g='git'
 alias qgit='qgit --all'
@@ -151,6 +154,12 @@ function vim_find {
 }
 alias vimf='vim_find $*'
 
+# Un alias pour vim avec fichier de tags ROSE
+alias rvim='vim "+set tags=/home/leyaude/Rose/git/IRL/work/tags"'
+
+# Emacs est mieux en plein écran
+alias emacs='emacs --fullscreen'
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -164,6 +173,6 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    #. /etc/bash_completion
+#fi

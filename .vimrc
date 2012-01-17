@@ -26,9 +26,13 @@ set backspace=indent,eol,start
 "Indentation et compagnie
 set autoindent                  " Autoindentation
 set smartindent
-set tabstop=8                   " Taille des tabulations à 8
-set softtabstop=8
-set shiftwidth=8
+set tabstop=4                   " Taille des tabulations à 4
+set softtabstop=4
+set shiftwidth=4
+
+
+" This damn cursor won't blink !
+set guicursor=a:blinkon0
 
 
 set mouse=a                     " Possibilité d'utiliser la souris

@@ -1,7 +1,7 @@
 [global_config]
   window_state = maximise
-  title_transmit_bg_color = "#a8a8a8"
   tab_position = right
+  title_transmit_bg_color = "#a8a8a8"
 [keybindings]
   go_up = <Super>k
   next_tab = <Control>Tab
@@ -18,6 +18,7 @@
     background_darkness = 0.86
     use_system_font = False
     foreground_color = "#d5d3d3"
+    show_titlebar = False
     font = DejaVu Sans Mono 12
     background_color = "#101010"
     cursor_blink = False

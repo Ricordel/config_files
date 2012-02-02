@@ -13,7 +13,7 @@ set -o vi
 [ -z "$PS1" ] && return
 
 #Ajouter la suite arp-none-eabi au PATH
-export PATH=$PATH:/opt/arm_none_eabi/bin:~/Rose/git/IRL/armadeus-3.4/buildroot/output/build/staging_dir/usr/bin:/opt/Xilinx/13.1/ISE_DS/ISE/bin/lin64
+export PATH=$PATH:/opt/arm_none_eabi/bin:~/Rose/git/IRL/armadeus-3.4/buildroot/output/build/staging_dir/usr/bin:/opt/Xilinx/13.1/ISE_DS/ISE/bin/lin64:~/bin
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -136,6 +136,8 @@ alias make='clear && make -j5'
 alias m='make'
 # Make with clang as C compiler (for better error messages)
 alias makec='make CC=clang LD=clang'
+# Make with debug infos
+alias maked='make CPPFLAGS+=-DDEBUG'
 
 alias g='git'
 alias qgit='qgit --all'
@@ -160,6 +162,22 @@ alias rvim='vim "+set tags=/home/leyaude/Rose/git/IRL/work/tags"'
 # Emacs est mieux en plein écran
 alias emacs='emacs --fullscreen'
 
+
+# GCC in english and with colors
+alias gcc='LC_ALL=C grc -e gcc'
+
+# Some other grc improvements
+alias configure='grc configure'
+alias cvs='grc cvs'
+alias diff='grc diff'
+alias log='grc log'
+alias netstat='grc netstat'
+alias ping='grc ping'
+alias traceroute='grc traceroute'
+
+# Tell tmux to use ~/.config/tmux/.tmux.conf as a config file
+# -2 is to use 256 colors
+alias tmux='tmux -2 -f ~/.config/tmux/tmux.conf'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

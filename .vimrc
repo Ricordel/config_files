@@ -79,7 +79,7 @@ colors yaude
 
 " Une fonction pour transoformer les tabs en espaces, et convertir les
 " fichiers Mac et DOS au format Unix
-fun CleanText()
+fun! CleanText()
 	let curcol = col(".")
 	let curline = line(".")
 	exe ":retab"
@@ -133,11 +133,15 @@ nnoremap <silent> <F9> :NERDTreeToggle ./<CR>
 
 
 "----------------- Pour le plugin Taglist ----------------------------
-nnoremap <silent> <f8> :TlistToggle <CR>		
-set statusline=%<%f%=%([%{Tlist_Get_Tagname_By_Line()}]%)		" Pour que le tag courant soit dans la barre de statut
-let Tlist_Process_File_Always=1									" Pour que ce qui est au-dessus marche
-let Tlist_Exit_OnlyWindow = 1					" Vim se ferme s'il ne reste qu el afenêtre des tags
-let Tlist_Use_Right_Window = 1						" Affiche les tags sur le côté droit de l'écran
+"nnoremap <silent> <f8> :TlistToggle <CR>		
+"set statusline=%<%f%=%([%{Tlist_Get_Tagname_By_Line()}]%)		" Pour que le tag courant soit dans la barre de statut
+"let Tlist_Process_File_Always=1									" Pour que ce qui est au-dessus marche
+"let Tlist_Exit_OnlyWindow = 1					" Vim se ferme s'il ne reste qu el afenêtre des tags
+"let Tlist_Use_Right_Window = 1						" Affiche les tags sur le côté droit de l'écran
+
+"---------------- Another try with tagbar instead. Tagbar cares of scopes,
+"--- which is helpful
+nmap <F8> :TagbarToggle<CR> 
 
 
 
@@ -158,3 +162,89 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
 
 set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
+
+
+" Scala syntax for tagbar
+let g:tagbar_type_scala = {
+		\ 'ctagstype' : 'Scala',
+		\ 'kinds'     : [
+			\ 'p:packages:1',
+			\ 'V:values',
+			\ 'v:variables',
+			\ 'T:types',
+			\ 't:traits',
+			\ 'o:objects',
+			\ 'a:aclasses',
+			\ 'c:classes',
+			\ 'r:cclasses',
+			\ 'm:methods'
+	\ ]
+\ }
+
+
+" Vim addon-manager, principalement pour vim-addon-sbt
+fun! SetupVAM()
+          " YES, you can customize this vam_install_path path and everything still works!
+          let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
+          exec 'set runtimepath+='.vam_install_path.'/vim-addon-manager'
+
+          " * unix based os users may want to use this code checking out VAM
+          " * windows users want to use http://mawercer.de/~marc/vam/index.php
+          " to fetch VAM, VAM-known-repositories and the listed plugins
+          " without having to install curl, unzip, git tool chain first
+          " -> BUG [4] (git-less installation)
+          if !filereadable(vam_install_path.'/vim-addon-manager/.git/config') && 1 == confirm("git clone VAM into ".vam_install_path."?","&Y\n&N")
+            " I'm sorry having to add this reminder. Eventually it'll pay off.
+            call confirm("Remind yourself that most plugins ship with documentation (README*, doc/*.txt). Its your first source of knowledge. If you can't find the info you're looking for in reasonable time ask maintainers to improve documentation")
+            exec '!p='.shellescape(vam_install_path).'; mkdir -p "$p" && cd "$p" && git clone --depth 1 git://github.com/MarcWeber/vim-addon-manager.git'
+            " VAM run helptags automatically if you install or update plugins
+            exec 'helptags '.fnameescape(vam_install_path.'/vim-addon-manager/doc')
+          endif
+
+          " Example drop git sources unless git is in PATH. Same plugins can
+          " be installed form www.vim.org. Lookup MergeSources to get more control
+          " let g:vim_addon_manager['drop_git_sources'] = !executable('git')
+
+          call vam#ActivateAddons([], {'auto_install' : 0})
+          " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
+          " - look up source from pool (<c-x><c-p> complete plugin names):
+          " ActivateAddons(["foo", ..
+          " - name rewritings:
+          " ..ActivateAddons(["github:foo", .. => github://foo/vim-addon-foo
+          " ..ActivateAddons(["github:user/repo", .. => github://user/repo
+          " Also see section "2.2. names of addons and addon sources" in VAM's documentation
+        endfun
+		call SetupVAM()
+        " experimental: run after gui has been started (gvim) [3]
+        " option1: au VimEnter * call SetupVAM()
+        " option2: au GUIEnter * call SetupVAM()
+        " See BUGS sections below [*]
+        " Vim 7.0 users see BUGS section [3]
+		
+" Vu juste au-dessus !
+set rtp+=PATH-TO-VAM
+
+au GUIEnter * call SetupVAM()
+
+
+ call vam#ActivateAddons(['ensime', 'tlib', 'vim-addon-actions', 'vim-addon-async', 'vim-addon-completion', 'vim-addon-json-encoding', 'vim-addon-mw-utils', 'vim-addon-sbt', 'vim-addon-signs'], {'auto_install' : 0})
+
+
+" NeocompleteCache, une autocomplétion qu'elle est mieux
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+
+" How to tell it that is should look at scala STL ?

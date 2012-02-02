@@ -159,6 +159,9 @@ alias vimf='vim_find $*'
 # Un alias pour vim avec fichier de tags ROSE
 alias rvim='vim "+set tags=/home/leyaude/Rose/git/IRL/work/tags"'
 
+# Alias pour vim pour projet de Scala
+alias wvim='vim "+set tags=/home/leyaude/Programmation/scala/ScalaPod/wtf/src/tags"'
+
 # Emacs est mieux en plein écran
 alias emacs='emacs --fullscreen'
 

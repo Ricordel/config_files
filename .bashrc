@@ -110,8 +110,8 @@ alias mv='mv --interactive'
 alias l='ls'
 alias ll='ls -lh'
 alias lll='ls -lh | less'
-alias la='ls -a'
-alias lla='ls -la'
+alias la='ls -A'
+alias lla='ls -lA'
 
 # Un cd && ls qui va bien
 function cd_ls {

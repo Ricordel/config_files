@@ -56,6 +56,6 @@ nitrogen --restore &
 #Terminal déroulant
 #guake &
 # Lanceur d'applications
-#gnome-do &
+synapse &
 # Pulse-audio
 start-pulseaudio-x11

@@ -1,0 +1,15 @@
+Divers :
+    Un plugin "projet" (ça existe)
+    Snippets
+    Plugin de refactoring
+
+Python :
+    Une auto-complétion qui envoit un peu plus
+    Un outil d'analyse statique (rapide) pour le quickfix :
+        - au moins la syntaxe
+        - de preférence du typage vite fait
+
+
+Done:
+    Clang-complete
+    Quickfix

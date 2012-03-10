@@ -249,8 +249,6 @@ syn match cOperator	"[][]"
 syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType
 syn match cUserFunctionPointer "(\s*\*\s*\h\w*\s*)\(\s\|\n\)*(" contains=cDelimiter,cOperator
 
-hi def link cUserFunction cFunction
-hi def link cUserFunctionPointer cFunction
 
 " Delimiters
 syn match cDelimiter	"[(){};\\]"
@@ -263,8 +261,10 @@ syn keyword cBoolean true false TRUE FALSE
 syn match cUserType "\w*_t "
 
 " Links
+hi def link cUserFunction Function
+hi def link cUserFunctionPointer Function
 hi def link cDelimiter Delimiter
-hi def link cAnsiFunction Function
+hi def link cAnsiFunction stdFunction
 hi def link cAnsiName Identifier
 hi def link cBoolean Boolean
 hi def link cOperator Special

@@ -1,2 +1,0 @@
-supertab.vba: call delete('/home/leyaude/.vim/doc/supertab.txt')|call delete('/home/leyaude/.vim/plugin/supertab.vim')
-tagbar.vmb: call delete('/home/leyaude/.vim/autoload/tagbar.vim')|call delete('/home/leyaude/.vim/doc/tagbar.txt')|call delete('/home/leyaude/.vim/plugin/tagbar.vim')|call delete('/home/leyaude/.vim/syntax/tagbar.vim')

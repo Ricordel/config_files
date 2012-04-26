@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neocomplcache.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 10 Mar 2012.
+" Last Modified: 20 Apr 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -55,11 +55,15 @@ function! neocomplcache#enable() "{{{
     autocmd neocomplcache InsertCharPre *
           \ call s:do_auto_complete('InsertCharPre')
   elseif g:neocomplcache_enable_cursor_hold_i
-    autocmd neocomplcache CursorHoldI *
-          \ call s:do_auto_complete('CursorHoldI')
+    augroup neocomplcache
+      autocmd CursorHoldI *
+            \ call s:do_auto_complete('CursorHoldI')
+      autocmd InsertEnter *
+            \ call s:change_update_time()
+      autocmd InsertLeave *
+            \ call s:restore_update_time()
+    augroup END
   else
-    autocmd neocomplcache InsertEnter *
-          \ call s:on_insert_enter()
     autocmd neocomplcache CursorMovedI *
           \ call s:do_auto_complete('CursorMovedI')
   endif
@@ -124,7 +128,9 @@ function! neocomplcache#enable() "{{{
         \'\k\+')
   call neocomplcache#set_dictionary_helper(g:neocomplcache_keyword_patterns,
         \'filename',
-        \'\%(\\[^[:alnum:].-]\|\f\)\+')
+        \ neocomplcache#util#is_windows() ?
+        \'\%(\a\+:[/\\]\)\?[\\/[:alnum:]()$+_\~.-]\+' :
+        \'[/\[\][:alnum:]()$+_\~.-]\+')
   call neocomplcache#set_dictionary_helper(g:neocomplcache_keyword_patterns,
         \'lisp,scheme,clojure,int-gosh,int-clisp,int-clj',
         \'[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*')
@@ -148,8 +154,8 @@ function! neocomplcache#enable() "{{{
         \'[=]\?\h\w*')
   call neocomplcache#set_dictionary_helper(g:neocomplcache_keyword_patterns,
         \'vim,help',
-        \'-\h[[:alnum:]-]*=\?\|\c\[:\%(\h\w*:\]\)\?\|&\h[[:alnum:]_:]*\|\$\h\w*'
-        \'\|<SID>\%(\h\w*\)\?\|<Plug>([^)]*)\?\|<\h[[:alnum:]_-]*>\?\|\h[[:alnum:]_:#]*!\?')
+        \'-\h[[:alnum:]-]*=\?\|\c\[:\%(\h\w*:\]\)\?\|&\h[[:alnum:]_:]*\|'
+        \'<SID>\%(\h\w*\)\?\|<Plug>([^)]*)\?\|<\h[[:alnum:]_-]*>\?\|\h[[:alnum:]_:#]*!\?\|$\h\w*')
   call neocomplcache#set_dictionary_helper(g:neocomplcache_keyword_patterns,
         \'tex',
         \'\\\a{\a\{1,2}}\|\\[[:alpha:]@][[:alnum:]@]*\%({\%([[:alnum:]:_]\+\*\?}\?\)\?\)\?\|\a[[:alnum:]:_]*\*\?')
@@ -257,7 +263,7 @@ function! neocomplcache#enable() "{{{
         \'\$\w+\|[[:alpha:]_./-][[:alnum:]_.-]*')
   call neocomplcache#set_dictionary_helper(g:neocomplcache_keyword_patterns,
         \'vb',
-        \'\a[[:alnum:]]*\|#\a[[:alnum:]]*')
+        \'\h\w*\|#\h\w*')
   call neocomplcache#set_dictionary_helper(g:neocomplcache_keyword_patterns,
         \'lua',
         \'\h\w*')
@@ -517,8 +523,6 @@ function! neocomplcache#enable() "{{{
   set completeopt+=menuone
 
   " For auto complete keymappings.
-  inoremap <silent> <Plug>(neocomplcache_start_auto_complete)
-        \ <C-x><C-u><C-r>=neocomplcache#popup_post()<CR>
   inoremap <expr><silent> <Plug>(neocomplcache_start_unite_complete)
         \ unite#sources#neocomplcache#start_complete()
   inoremap <expr><silent> <Plug>(neocomplcache_start_unite_quick_match)
@@ -583,7 +587,7 @@ function! neocomplcache#manual_complete(findstart, base)"{{{
       let &l:completefunc = 'neocomplcache#manual_complete'
       return (g:neocomplcache_enable_prefetch
             \ || g:neocomplcache_enable_insert_char_pre) ?
-            \ -1 : -2
+            \ -1 : -3
     endif
 
     " Get cur_keyword_pos.
@@ -603,7 +607,7 @@ function! neocomplcache#manual_complete(findstart, base)"{{{
       let s:complete_results = {}
       return (g:neocomplcache_enable_prefetch
             \ || g:neocomplcache_enable_insert_char_pre) ?
-            \ -1 : -2
+            \ -1 : -3
     endif
 
     return cur_keyword_pos
@@ -618,8 +622,10 @@ function! neocomplcache#manual_complete(findstart, base)"{{{
   if v:version > 703 || v:version == 703 && has('patch418')
     let dict = { 'words' : s:complete_words }
 
-    " Note: Vim Still have broken register-. problem.
-    " let dict.refresh = 'always'
+    if g:neocomplcache_enable_cursor_hold_i
+      " Note: Vim Still have broken register-. problem.
+      let dict.refresh = 'always'
+    endif
     return dict
   else
     return s:complete_words
@@ -764,7 +770,14 @@ function! s:do_auto_complete(event)"{{{
   set completeopt+=menuone
 
   " Start auto complete.
-  call feedkeys("\<Plug>(neocomplcache_start_auto_complete)")
+  if g:neocomplcache_enable_prefetch || &l:formatoptions =~# 'a'
+    call feedkeys((g:neocomplcache_enable_auto_select ?
+          \ "\<C-x>\<C-u>\<C-p>\<Down>" :
+          \ "\<C-x>\<C-u>\<C-p>"), "n")
+  else
+    call feedkeys("\<C-x>\<C-u>"
+          \."\<C-r>=neocomplcache#popup_post()\<CR>", "n")
+  endif
 
   let s:changedtick = b:changedtick
 endfunction"}}}
@@ -799,24 +812,36 @@ function! neocomplcache#keyword_escape(cur_keyword_str)"{{{
   endif"}}}
 
   " Fuzzy completion.
+  let keyword_len = len(keyword_escape)
   if g:neocomplcache_enable_fuzzy_completion
-    if len(keyword_escape) < 8
-      let keyword_escape = keyword_escape[: 1] . substitute(keyword_escape[2:], '\w',
-            \ '\\%(\0\\|\U\0\E\\l*\\|\0\\w*\\W\\)', 'g')
-    elseif len(keyword_escape) < 20
-      let keyword_escape = keyword_escape[: 3] . substitute(keyword_escape[4:12], '\w',
-            \ '\\%(\0\\|\U\0\E\\l*\\|\0\\w*\\W\\)', 'g') . keyword_escape[13:]
+        \ && (g:neocomplcache_fuzzy_completion_start_length
+        \          <= keyword_len && keyword_len < 20)
+    let fuzzy_start = g:neocomplcache_fuzzy_completion_start_length
+    if fuzzy_start <= 1
+      let keyword_escape =
+            \ substitute(keyword_escape, '\w',
+            \   '\\%(\0\\|\U\0\E\\l*\\|\0\\w*\\W\\)', 'g')
+    elseif keyword_len < 8
+      let keyword_escape = keyword_escape[: fuzzy_start - 2]
+            \ . substitute(keyword_escape[fuzzy_start-1 :], '\w',
+            \     '\\%(\0\\|\U\0\E\\l*\\|\0\\w*\\W\\)', 'g')
+    else
+      let keyword_escape = keyword_escape[: 3] .
+            \ substitute(keyword_escape[4:12], '\w',
+            \     '\\%(\0\\|\U\0\E\\l*\\|\0\\w*\\W\\)', 'g') . keyword_escape[13:]
     endif
   else
     " Underbar completion."{{{
     if g:neocomplcache_enable_underbar_completion
           \ && keyword_escape =~ '_'
       let keyword_escape_orig = keyword_escape
-      let keyword_escape = substitute(keyword_escape, '[^_]\zs_', '[^_]*_', 'g')
+      let keyword_escape = substitute(keyword_escape,
+            \ '[^_]\zs_', '[^_]*_', 'g')
     endif
     if g:neocomplcache_enable_underbar_completion
           \ && '-' =~ '\k' && keyword_escape =~ '-'
-      let keyword_escape = substitute(keyword_escape, '[^-]\zs-', '[^-]*-', 'g')
+      let keyword_escape = substitute(keyword_escape,
+            \ '[^-]\zs-', '[^-]*-', 'g')
     endif
     "}}}
     " Camel case completion."{{{
@@ -944,9 +969,8 @@ function! neocomplcache#dictionary_filter(dictionary, cur_keyword_str, completio
   endif
 
   if len(a:cur_keyword_str) < a:completion_length ||
-        \ (!g:neocomplcache_enable_fuzzy_completion
-        \   && neocomplcache#check_completion_length_match(
-        \   a:cur_keyword_str, a:completion_length))
+        \ neocomplcache#check_completion_length_match(
+        \   a:cur_keyword_str, a:completion_length)
     return neocomplcache#keyword_filter(
           \ neocomplcache#unpack_dictionary(a:dictionary), a:cur_keyword_str)
   else
@@ -1898,14 +1922,6 @@ function! s:on_moved_i()"{{{
     endif
   endif
 endfunction"}}}
-function! s:on_insert_enter()"{{{
-  if g:neocomplcache_enable_cursor_hold_i &&
-        \ &updatetime > g:neocomplcache_cursor_hold_i_time
-    " Change updatetime.
-    let s:update_time_save = &updatetime
-    let &updatetime = g:neocomplcache_cursor_hold_i_time
-  endif
-endfunction"}}}
 function! s:on_insert_leave()"{{{
   let s:cur_text = ''
   let s:cur_keyword_str = ''
@@ -1914,9 +1930,16 @@ function! s:on_insert_leave()"{{{
   let s:is_text_mode = 0
   let s:skip_next_complete = 0
   let s:is_prefetch = 0
-
-  if g:neocomplcache_enable_cursor_hold_i &&
-        \ &updatetime < s:update_time_save
+endfunction"}}}
+function! s:change_update_time()"{{{
+  if &updatetime > g:neocomplcache_cursor_hold_i_time
+    " Change updatetime.
+    let s:update_time_save = &updatetime
+    let &updatetime = g:neocomplcache_cursor_hold_i_time
+  endif
+endfunction"}}}
+function! s:restore_update_time()"{{{
+  if &updatetime < s:update_time_save
     " Restore updatetime.
     let &updatetime = s:update_time_save
   endif
@@ -1960,10 +1983,11 @@ endfunction"}}}
 
 " Internal helper functions."{{{
 function! s:get_cur_text()"{{{
-  let s:cur_text = (col('.') >= len(getline('.'))) ?
-        \ getline('.') :
-        \ matchstr(getline('.'),
-        \    '^.*\%' . col('.') . 'c' . (mode() ==# 'i' ? '' : '.'))
+  let s:cur_text =
+        \ (mode() ==# 'i' ? (col('.')-1) : col('.')) >= len(getline('.')) ?
+        \      getline('.') :
+        \      matchstr(getline('.'),
+        \         '^.*\%' . col('.') . 'c' . (mode() ==# 'i' ? '' : '.'))
 
   " Save cur_text.
   return s:cur_text

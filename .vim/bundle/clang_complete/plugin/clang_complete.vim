@@ -9,6 +9,9 @@
 
 au FileType c,cpp,objc,objcpp call <SID>ClangCompleteInit()
 
+" XXX
+python import vim
+
 let b:clang_parameters = ''
 let b:clang_user_options = ''
 let b:my_changedtick = 0
@@ -221,6 +224,7 @@ function! s:initClangCompletePython()
     python import sys
     if exists('g:clang_library_path')
       " Load the library from the given library path.
+      " XXX : est-ce vraiment libclang.so qu'il faut mettre là-dedans ? Ou plutôt libclang.py ?
       exe 'python sys.argv = ["' . escape(g:clang_library_path, '\') . '"]'
     else
       " By setting argv[0] to '' force the python bindings to load the library

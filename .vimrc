@@ -167,6 +167,9 @@ nnoremap <silent> <F8> :NERDTreeToggle ./<CR>
 " Tagbar toggles with F9
 nmap <F9> :TagbarToggle<CR>
 
+" Recognize Scala fileType, which does not seem automatic
+au BufRead,BufNewFile *.scala setlocal ft=scala
+
 " Scala syntax for tagbar
 let g:tagbar_type_scala = {
 		\ 'ctagstype' : 'Scala',

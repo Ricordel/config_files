@@ -52,6 +52,7 @@ g:neocomplcache_enable_wildcard	neocomplcache.txt	/*g:neocomplcache_enable_wildc
 g:neocomplcache_filename_include_exprs	neocomplcache.txt	/*g:neocomplcache_filename_include_exprs*
 g:neocomplcache_filename_include_exts	neocomplcache.txt	/*g:neocomplcache_filename_include_exts*
 g:neocomplcache_force_overwrite_completefunc	neocomplcache.txt	/*g:neocomplcache_force_overwrite_completefunc*
+g:neocomplcache_fuzzy_completion_start_length	neocomplcache.txt	/*g:neocomplcache_fuzzy_completion_start_length*
 g:neocomplcache_include_exprs	neocomplcache.txt	/*g:neocomplcache_include_exprs*
 g:neocomplcache_include_functions	neocomplcache.txt	/*g:neocomplcache_include_functions*
 g:neocomplcache_include_max_processes	neocomplcache.txt	/*g:neocomplcache_include_max_processes*

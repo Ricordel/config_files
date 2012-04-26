@@ -4,6 +4,13 @@ import time
 import re
 import threading
 
+
+def print_log(msg):
+  f = open("/tmp/debug", "a")
+  f.write(msg+"\n")
+  f.close()
+
+
 def initClangComplete(clang_complete_flags):
   global index
   index = Index.create()
@@ -225,6 +232,7 @@ class CompleteThread(threading.Thread):
     userOptionsLocal = splitOptions(vim.eval("b:clang_user_options"))
     self.args = userOptionsGlobal + userOptionsLocal
 
+
   def run(self):
     try:
       CompleteThread.lock.acquire()
@@ -240,14 +248,24 @@ class CompleteThread(threading.Thread):
         self.result = getCurrentCompletionResults(self.line, self.column,
                                           self.args, self.currentFile, self.fileName)
     except Exception:
+      print_log("Will pass.")
       pass
-    CompleteThread.lock.release()
+    if CompleteThread.lock.locked():
+      print_log("Was locked !")
+      CompleteThread.lock.release()
+      print_log("Has been unlocked !")
+    else:
+      print_log("Was not locked !")
+
+
 
 def WarmupCache():
   global debug
   debug = int(vim.eval("g:clang_debug")) == 1
   t = CompleteThread(-1, -1, getCurrentFile(), vim.current.buffer.name)
+  print_log("Before WarmupCache start()")
   t.start()
+  print_log("after WarmupCache start()")
 
 
 def getCurrentCompletions(base):

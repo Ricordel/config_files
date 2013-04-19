@@ -67,7 +67,7 @@ nmap k gk
 
 " Buffer next and buffer previous
 nmap <c-n> :bn<cr>
-nmap <c-p> :bp<cr>
+nmap <c-b> :bp<cr>
 
 
 " Move into splits with C-j, k, l, ...
@@ -180,6 +180,7 @@ autocmd FileType xml         set omnifunc=xmlcomplete#CompleteTags
 let NERDTreeQuitOnOpen=1 " Quit tree window when opening a file
 " Toggle nerdTree window with F9
 nnoremap <silent> <F8> :NERDTreeToggle ./<CR> 
+let NERDTreeIgnore=['\.class$', '\.o$', '\.pyc$', '\~$']
 
 " Tagbar toggles with F9
 nmap <F9> :TagbarToggle<CR>
@@ -223,4 +224,33 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,*.pyc,*.a
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,*.pyc,*.a,*.class
+
+
+" Some stuff for clojure mode
+let vimclojure#HighlightBuiltins=1      " Highlight Clojure's builtins
+let vimclojure#ParenRainbow=1           " Rainbow parentheses'!
+
+" For the viewdoc plugin
+let g:viewdoc_open='split'      " Doc opened in an horizontal split
+
+
+
+"""""""""""""" Some pyclewn stuff
+
+" Print the variable under the cursor
+map <leader>dp :exe "Cprint " . expand("<cword>") <CR>
+" Print the value pointed to by the pointer under the cursor
+map <leader>dx :exe "Cprint *" . expand("<cword>") <CR>
+" Watch value under cursor
+map <leader>dw :exe "Cdbgvar " . expand("<cword>") <CR>
+" Unwatch value under cursor
+map <leader>dd :exe "Cdelvar " . expand("<cword>") <CR>
+" Expand/collapse watched value under cursor
+map <leader>de :exe "Cfoldvar " . expand("<cword>") <CR>
+" Activate the pyclewn mappings
+map <leader>dm :Cmapkeys <CR>
+" Desactivate them
+map <leader>du :Cunmapkeys <CR>
+" Start a debug session
+map <leader>ds :Pyclewn <CR> :Cmapkeys <CR> :Cfile 

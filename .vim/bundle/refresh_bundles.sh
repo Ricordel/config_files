@@ -70,8 +70,18 @@ refresh https://github.com/koron/nyancat-vim.git
 # Powerline, a better status line
 refresh https://github.com/Lokaltog/vim-powerline
 
-# A restructured text plugin qui va bien
-refresh https://github.com/Rykka/riv.vim
+# A restructured text plugin. Celui-là est pourri, fait n'importe quoi avec les tableaux
+#refresh https://github.com/Rykka/riv.vim
+# Celui-là interfère avec la coloration python. Bien joué.
+#refresh https://github.com/vim-scripts/VOoM.git
+
+# Nouvel essai (pas sur github): http://www.vim.org/scripts/script.php?script_id=1334
 
 # Ctrl-P, fuzzy finder
 refresh https://github.com/kien/ctrlp.vim.git
+
+# vim clojure
+refresh https://github.com/vim-scripts/VimClojure.git
+
+# Better documentation viewing
+refresh https://github.com/powerman/vim-plugin-viewdoc

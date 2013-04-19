@@ -210,8 +210,8 @@ if [ -f /etc/bash_completion ]; then
 fi # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk/
-export SCALA_HOME=/usr/share/scala
+#export JAVA_HOME=/usr/lib/jvm/java-7-openjdk/
+#export SCALA_HOME=/usr/share/scala
 
 # go root and stuff
 export GOROOT=/home/leyaude/bin/go

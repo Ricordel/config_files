@@ -3,6 +3,8 @@
 
 " Autocomplete with Ctrl-Space
 inoremap <silent> <buffer> <Nul> <c-x><c-u>
+" try with ,d
+inoremap <silent> <buffer> <leader>d <c-x><c-u>
 
 "XXX decide later if we want completion to be case sensitive
 " let g:EclimJavaCompleteCaseSensitive=1

@@ -6,13 +6,15 @@ setlocal tabstop=8
 map <leader>m :make<CR><CR> :copen<CR> <C-k>
 
 
+
 "For Eclim:
 
 " Search the definition/use of the symbol under the cursor
 "nnoremap <silent> <buffer> <leader>js :CSearchContext<cr>
 
 " Autocomplete with C-space
-"inoremap <silent> <buffer> <Nul> <c-x><c-u>
+inoremap <silent> <buffer> <Nul> <c-x><c-u>
+inoremap <silent> <buffer> <leader>d <c-x><c-u>
 
 "let g:EclimCSearchSingleResult='edit'
 

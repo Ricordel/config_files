@@ -67,10 +67,13 @@ hi scalaStdFunction guifg=#00AEFF       gui=bold        ctermfg=69      cterm=bo
 hi pythonSelf   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
 hi cTypeModifier                                    ctermfg=112     cterm=bold
 hi cTypeDeclarator                                    ctermfg=112     cterm=bold
-hi Statement    guifg=#CC01F2       gui=bold        ctermfg=165     cterm=bold
+"hi Statement    guifg=#CC01F2       gui=bold        ctermfg=135     cterm=bold
+hi Statement    guifg=#CC01F2       gui=bold        ctermfg=9     cterm=bold
 hi Exception    guifg=#D400E7       gui=bold        ctermfg=magenta cterm=bold
-hi operator     guifg=#5F5FFF       gui=bold        ctermfg=207       cterm=bold
+"hi operator     guifg=#5F5FFF       gui=bold        ctermfg=105       cterm=bold
+"hi operator     guifg=#5F5FFF       gui=bold        ctermfg=207       cterm=bold
 "hi operator     guifg=#5F5FFF       gui=bold        ctermfg=203       cterm=bold
+hi operator     guifg=#5F5FFF       gui=bold        ctermfg=171       cterm=bold
 hi PreProc      guifg=#48AFBF       gui=bold        ctermfg=31  cterm=bold
 hi Type         guifg=#00BF09       gui=bold        ctermfg=106 cterm=bold
 hi Special      guifg=#FFC31C       gui=bold        ctermfg=214 cterm=bold
@@ -83,7 +86,8 @@ hi keyword                                              ctermfg=105      cterm=b
 hi scalaSymbol                                          ctermfg=white cterm=bold
 hi scalaRoot                                            ctermfg=white cterm=bold
 "hi scalaKeyword                                            ctermfg=106       cterm=bold
-hi scalaClassName                                       ctermfg=82      cterm=bold
+"hi scalaClassName                                       ctermfg=82      cterm=bold
+hi scalaClassName                                       ctermfg=28      cterm=bold
 hi scalaDef guifg=#36C23C       gui=bold,italic ctermfg=197     cterm=bold
 hi scalaVar guifg=#36C23C       gui=bold,italic ctermfg=197     cterm=bold
 hi scalaVal guifg=#36C23C       gui=bold,italic ctermfg=197     cterm=bold

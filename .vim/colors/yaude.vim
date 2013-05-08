@@ -51,7 +51,7 @@ hi WarningMsg   guifg=salmon
 hi Comment      guifg=#808080       gui=bold        ctermfg=245     cterm=bold
 hi Constant     guifg=#6CD800       gui=bold        ctermfg=106     cterm=bold
 hi Number       guifg=#72FC27       gui=none        ctermfg=105     cterm=bold
-hi String       guifg=#9DDA53                       ctermfg=10
+hi String       guifg=#9DDA53                       ctermfg=11
 hi Character    guifg=#E0E0E0       gui=bold        ctermfg=lightgrey cterm=bold
 hi Boolean      guifg=#89DE00       gui=bold        ctermfg=106     cterm=bold
 hi Identifier   guifg=#00AEFF       gui=bold        ctermfg=white       cterm=bold
@@ -60,37 +60,26 @@ hi Function                                         ctermfg=39    cterm=bold
 hi pythonUserFunction guifg=#00AEFF     gui=bold    ctermfg=39      cterm=bold
 hi hsFunction                           ctermfg=white   cterm=bold
 hi hsUserFunction                           ctermfg=39      cterm=bold
-hi scalaDefName guifg=#00AEFF       gui=bold        ctermfg=39      cterm=bold
-hi scalaDefSpecializer guifg=#00AEFF        gui=bold        ctermfg=white       cterm=bold
-hi scalaMethodCall guifg=#00AEFF        gui=bold        ctermfg=69      cterm=bold
-hi scalaStdFunction guifg=#00AEFF       gui=bold        ctermfg=69      cterm=bold
 hi pythonSelf   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
-hi cTypeModifier                                    ctermfg=112     cterm=bold
-hi cTypeDeclarator                                    ctermfg=112     cterm=bold
+hi cTypeModifier                                    ctermfg=106     cterm=bold
+hi cTypeDeclarator                                    ctermfg=106     cterm=bold
 "hi Statement    guifg=#CC01F2       gui=bold        ctermfg=135     cterm=bold
-hi Statement    guifg=#CC01F2       gui=bold        ctermfg=9     cterm=bold
+hi Statement    guifg=#CC01F2       gui=bold        ctermfg=161     cterm=bold
 hi Exception    guifg=#D400E7       gui=bold        ctermfg=magenta cterm=bold
-"hi operator     guifg=#5F5FFF       gui=bold        ctermfg=105       cterm=bold
-"hi operator     guifg=#5F5FFF       gui=bold        ctermfg=207       cterm=bold
-"hi operator     guifg=#5F5FFF       gui=bold        ctermfg=203       cterm=bold
-hi operator     guifg=#5F5FFF       gui=bold        ctermfg=171       cterm=bold
+hi operator     guifg=#5F5FFF       gui=bold        ctermfg=135       cterm=bold
 hi PreProc      guifg=#48AFBF       gui=bold        ctermfg=31  cterm=bold
-hi Type         guifg=#00BF09       gui=bold        ctermfg=106 cterm=bold
+"hi Type         guifg=#00BF09       gui=bold        ctermfg=106 cterm=bold
+hi Type         guifg=#00BF09       gui=bold        ctermfg=70 cterm=bold
 hi Special      guifg=#FFC31C       gui=bold        ctermfg=214 cterm=bold
 hi Tag          guifg=red
 hi Delimiter    guifg=#FFA41E       gui=bold        ctermfg=214     cterm=bold
 hi pythonDelimiter guifg=#FFC005 gui=bold           ctermfg=214     cterm=bold
 hi Ignore       guifg=grey40
 hi Todo         guifg=black guibg=yellow2
-hi keyword                                              ctermfg=105      cterm=bold
+hi keyword                                          ctermfg=161      cterm=bold
+
 hi scalaSymbol                                          ctermfg=white cterm=bold
 hi scalaRoot                                            ctermfg=white cterm=bold
-"hi scalaKeyword                                            ctermfg=106       cterm=bold
-"hi scalaClassName                                       ctermfg=82      cterm=bold
-hi scalaClassName                                       ctermfg=28      cterm=bold
-hi scalaDef guifg=#36C23C       gui=bold,italic ctermfg=197     cterm=bold
-hi scalaVar guifg=#36C23C       gui=bold,italic ctermfg=197     cterm=bold
-hi scalaVal guifg=#36C23C       gui=bold,italic ctermfg=197     cterm=bold
 
 " weird thing that does not work if directly linked with Type... (cf after/syntax/c.vim)
 hi cCustomClass   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold

@@ -85,3 +85,6 @@ refresh https://github.com/vim-scripts/VimClojure.git
 
 # Better documentation viewing
 refresh https://github.com/powerman/vim-plugin-viewdoc
+
+# Scala files
+refresh git@github.com:Ricordel/vim-scala.git

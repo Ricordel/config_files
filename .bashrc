@@ -217,6 +217,3 @@ fi # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 export GOROOT=/home/leyaude/bin/go
 export GOBIN=$GOROOT/bin
 export PATH=$PATH:$GOBIN
-
-# Tell Vmail to use elinks for html visualization
-export VMAIL_HTML_PART_READER='elinks -dump'

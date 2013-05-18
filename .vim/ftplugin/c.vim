@@ -32,7 +32,7 @@ let b:clang_complete_macros = 1
 let g:clang_hl_errors = 0
 let g:clang_user_option = '2>/dev/null || exit 0'
 let g:clang_use_library = 1
-let g:clang_library_path = '/usr/lib/'
+let g:clang_library_path = '/usr/lib/llvm-3.3/lib/'
 let g:clang_periodic_quickfix = 0
 
 let g:clang_snippets=1

@@ -1,0 +1,17 @@
+[user]
+	name = Yoann Ricordel
+	email = leyaude@gmail.com
+[core]
+	editor = vim
+	mergetool = vimdiff
+
+[alias]
+	ci = commit
+	st = status
+	ch = checkout
+    co = checkout
+	br = branch
+    aa = add -A
+    au = add -u
+[color]
+	ui = true

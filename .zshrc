@@ -44,6 +44,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # that the syntax-highlight plugin must be set last
 plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
 
+# Restore history search, apparently absent with vi-mode
+bindkey '^R' history-incremental-search-backward
+
 source $ZSH/oh-my-zsh.sh
 
 
@@ -179,6 +182,8 @@ alias -s scala=vim
 alias -s txt=vim
 alias -s jpg=gpicview
 alias -s png=gpicview
+alias -s JPG=gpicview
+alias -s PNG=gpicview
 alias -s pdf=evince
 alias -s epub=ebook-viewer
 alias -s mp4=mplayer

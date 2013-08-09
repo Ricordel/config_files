@@ -59,10 +59,13 @@ refresh https://github.com/andreypopp/ensime
 refresh https://github.com/msanders/snipmate.vim.git snipmate
 
 # Go standard plugins
-regresh https://github.com/jnwhiteh/vim-golang.git
+git clone https://github.com/jnwhiteh/vim-golang
 
 # Go autocomplete
-refresh https://github.com/nsf/gocode.git
+go get -u github.com/nsf/gocode # This has to go in $GOPATH, not in bundles, which 'go get' will do
+# Get the right stuff at the right place for pathogen
+$GOPATH/src/github.com/nsf/gocode/vim/pathogen_update.sh
+
 
 # Nyan cat, because...
 refresh https://github.com/koron/nyancat-vim.git
@@ -83,8 +86,8 @@ refresh https://github.com/kien/ctrlp.vim.git
 # vim clojure
 refresh https://github.com/vim-scripts/VimClojure.git
 
-# Better documentation viewing
-refresh https://github.com/powerman/vim-plugin-viewdoc
+# Better documentation viewing, breaks Python syntax highlighting
+#refresh https://github.com/powerman/vim-plugin-viewdoc
 
 # Scala files
 refresh git@github.com:Ricordel/vim-scala.git

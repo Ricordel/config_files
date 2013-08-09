@@ -235,6 +235,10 @@ let vimclojure#ParenRainbow=1           " Rainbow parentheses'!
 let g:viewdoc_open='split'      " Doc opened in an horizontal split
 
 
+" For go syntax highlighting, I HATE trailing whitespace highlighting while I type
+let go_highlight_trailing_whitespace_error = 0
+
+
 
 """""""""""""" Some pyclewn stuff
 

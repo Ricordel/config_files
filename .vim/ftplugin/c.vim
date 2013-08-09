@@ -3,7 +3,7 @@
 setlocal shiftwidth=8
 setlocal tabstop=8
 
-map <leader>m :make<CR><CR> :copen<CR> <C-k>
+map <leader>m :make<CR><CR> :copen<CR>
 
 
 

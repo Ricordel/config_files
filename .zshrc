@@ -44,6 +44,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # that the syntax-highlight plugin must be set last
 plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
 
+# zmv, the built-in mass file renamer
+autoload zmv
+
 # Restore history search, apparently absent with vi-mode
 bindkey '^R' history-incremental-search-backward
 
@@ -58,10 +61,10 @@ export EDITOR=vim
 
 # my local bin, IntelliJ Idea
 export PATH=~/bin:$PATH:/home/leyaude/bin/intellij/idea-IC-123.123/bin
-# go root and stuff
-export GOROOT=/home/leyaude/bin/go
-export GOBIN=$GOROOT/bin
-export PATH=$PATH:$GOBIN
+
+# go path
+export GOPATH=~/data/Programmation/go
+export PATH=$PATH:$GOPATH/bin
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -122,6 +125,7 @@ alias makec='make CC=clang LD=clang CXX=clang++'
 alias maked='make CPPFLAGS+=-DDEBUG'
 
 alias g='git'
+alias ts='tig status' # tig is SO awesome
 
 
 # A bit better than ps aux | grep pattern
@@ -158,6 +162,8 @@ alias subwayssh='ssh ricordel@subway.it.kth.se'
 alias malavitassh='ssh ricordel@malavita.it.kth.se'
 alias ferlinssh='ssh ricordel@ferlin.pdc.kth.se'
 
+alias dodo='sudo pm-suspend'
+
 
 # Some shorthands for the conversion utility I wrote (in ~/bin)
 alias 10to16='~/bin/convert_base 10 16'
@@ -177,7 +183,6 @@ alias -s cc=vim
 alias -s hh=vim
 alias -s cpp=vim
 alias -s hpp=vim
-alias -s py=vim
 alias -s scala=vim
 alias -s txt=vim
 alias -s jpg=gpicview

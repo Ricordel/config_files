@@ -55,8 +55,14 @@ refresh https://github.com/tpope/vim-surround
 # New tentative ensime integration by Andrey Popp
 refresh https://github.com/andreypopp/ensime
 
-# Snipmate, snippet engine
-refresh https://github.com/msanders/snipmate.vim.git snipmate
+# Snipmate, snippet engine, and dependancies
+#refresh https://github.com/msanders/snipmate.vim.git snipmate
+git clone https://github.com/tomtom/tlib_vim.git
+git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
+git clone https://github.com/garbas/vim-snipmate.git
+# And the snippets that go with
+git clone https://github.com/honza/vim-snippets.git
+
 
 # Go standard plugins
 regresh https://github.com/jnwhiteh/vim-golang.git
@@ -83,8 +89,30 @@ refresh https://github.com/kien/ctrlp.vim.git
 # vim clojure
 refresh https://github.com/vim-scripts/VimClojure.git
 
-# Better documentation viewing
-refresh https://github.com/powerman/vim-plugin-viewdoc
+# Better documentation viewing BREAKS PYTHON SYNTAX !!
+#refresh https://github.com/powerman/vim-plugin-viewdoc
 
 # Scala files
 refresh git@github.com:Ricordel/vim-scala.git
+
+# Testing Omnisharp, a C# plugin
+git clone https://github.com/nosami/Omnisharp.git
+git submodule update --init
+cd Omnisharp/server
+xbuild /p:Platform="Any CPU"
+
+# Dependancy for Omnisharp
+git clone git://github.com/tpope/vim-dispatch.git
+
+# Buffer grep: grep on open buffers with :Bgrep
+git clone https://github.com/vim-scripts/buffergrep.git
+
+# Supertab, let's try
+git clone https://github.com/ervandew/supertab.git
+
+# Fuzzyinder
+hg clone https://bitbucket.org/ns9tks/vim-l9
+hg clone https://bitbucket.org/ns9tks/vim-fuzzyfinder
+
+# hilinks, to debug syntax files, mostly
+git clone https://github.com/kergoth/vim-hilinks.git

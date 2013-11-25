@@ -1,7 +1,5 @@
 "inoremap <Nul> <c-x><c-o>
 
-setlocal shiftwidth=8
-setlocal tabstop=8
 
 map <leader>m :make<CR><CR> :copen<CR> <C-k>
 
@@ -32,16 +30,24 @@ let b:clang_complete_macros = 1
 let g:clang_hl_errors = 0
 let g:clang_user_option = '2>/dev/null || exit 0'
 let g:clang_use_library = 1
-let g:clang_library_path = '/usr/lib/llvm-3.3/lib/'
+let g:clang_library_path = '/usr/lib/'
+let g:clang_library_name = 'libclang1'
 let g:clang_periodic_quickfix = 0
+let g:clang_auto_user_options = ".clang_complete"
+let g:clang_jumpto_declaration_key='gd'
 
 let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
 let g:clang_trailing_placeholder=1
 
-setlocal tabstop=8
-setlocal softtabstop=8
-setlocal shiftwidth=8
+"setlocal tabstop=8
+"setlocal softtabstop=8
+"setlocal shiftwidth=8
+" To keep the 'style' in Qfs sources, let's put this to 2. Makes me sad.
+setlocal shiftwidth=2
+setlocal softtabstop=2
+setlocal tabstop=2
+
 setlocal autoindent
 setlocal smartindent
 setlocal expandtab

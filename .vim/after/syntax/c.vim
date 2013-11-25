@@ -234,7 +234,12 @@ syn keyword	cAnsiName	and_eq compl or xor_eq
 syn keyword	cAnsiName	bitand not or_eq
 
 syn keyword cTypeModifier    static volatile const extern inline
-syn keyword cTypeDeclarator  typedef union struct
+syn keyword cTypeDeclarator  typedef union struct enum
+
+" XXX does not work, don't know why
+syn match cStructName "struct \w\+" contains=cTypeDeclarator contained
+syn match cEnumName "enum \w\+"  contains=cTypeDeclarator contained
+syn match cUnionName "union \w\+"  contains=cTypeDeclarator contained
 
 " Operators
 syn match cOperator	"\(<<\|>>\|[-+*/%&^|<>!=]\)="
@@ -246,7 +251,7 @@ syn match cOperator "&&\|||"
 syn match cOperator	"[][]"
 
 " Functions
-syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType
+syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType,cEnumName,cStructName,cUnionName
 syn match cUserFunctionPointer "(\s*\*\s*\h\w*\s*)\(\s\|\n\)*(" contains=cDelimiter,cOperator
 
 
@@ -267,20 +272,26 @@ hi def link cDelimiter Delimiter
 hi def link cAnsiFunction stdFunction
 hi def link cAnsiName Identifier
 hi def link cBoolean Boolean
-hi def link cOperator Special
+hi def link cOperator Operator
 hi def link cDelimiter Special
 hi def link cUserType Type
 
 
 " Highlight Class and Function names
-syn match    cCustomParen      "(" contains=cParen,cCppParen
+syn match    cCustomParen      "(" contains=cParen
 syn match    cCustomScope      "::"
 syn match    cCustomFunc       "\w\+\s*(" contains=cCustomParen
 syn match    cCustomClass      "\w\+\s*::" contains=cCustomScope
 " Will infortunately also match class static fields, but...
-syn match    cTypeInNameSpace  "\w\+::\w\+&\?\s" contains=cCustomParen,cCustomScope,cCustomClass,cOperator
+syn match    cTypeInNameSpace  "\w\+::\w\+&\?\s" contains=cCustomParen
+
 
 "hi def link cCustomClass Type " Pour une raison bizarre ça ne marche pas,
                                " direct dans le colorscheme, donc
 hi def link cCustomFunc  Function
 hi def link cTypeInNameSpace Type
+hi def link cTypeModifier TypeModifier
+hi def link cTypeDeclarator TypeModifier
+hi def link cStructName Type
+hi def link cEnumName Type
+hi def link cUnionName Type

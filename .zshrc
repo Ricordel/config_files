@@ -143,7 +143,6 @@ alias maked='make CPPFLAGS+=-DDEBUG'
 alias fsel='find . | selecta'
 
 alias g='git'
-<<<<<<< HEAD
 alias glh='git log | head -n 40'
 alias glo='git log --oneline'
 alias gloh='git log --oneline | head -n 40'

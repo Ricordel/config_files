@@ -137,7 +137,7 @@ syn match pythonDelimiter	"[][]"
 syn match pythonDelimiter	"[();:\\]"
 
 
-" self est également un mot qu'il fait bon mettre en évidence
+" self est alement un mot qu'il fait bon mettre en évidence
 syn keyword pythonSelf self
 
 " Pris sur c.vim : fonctions utilisateur
@@ -380,6 +380,8 @@ if version >= 508 || !exists("did_python_syn_inits")
 
   hi def link pythonBoolean Boolean
   hi def link pythonDelimiter Delimiter
+  hi def link pythonUserFunction Function
+  hi def link pythonSelf Keyword
   delcommand HiLink
 endif
 

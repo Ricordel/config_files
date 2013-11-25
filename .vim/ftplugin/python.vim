@@ -1,6 +1,9 @@
 setlocal nosmartindent   " As smartindent screws with comments in Python
 
-nnoremap <leader>m :PyLint<CR>
+"nnoremap <leader>m :PyLint<CR>
+nnoremap <leader>m :make<CR><CR><CR>:copen<CR>
+setlocal makeprg=pylint\ --reports=n\ --errors-only\ --output-format=parseable\ %:p
+setlocal errorformat=%f:%l:\ %m
 
 
 """"" Some eclim stuff -------

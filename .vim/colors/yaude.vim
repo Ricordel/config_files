@@ -5,8 +5,8 @@
 " License:  GPLv3
 
 " NB : 
-"   - The cUserFunction depends on an addon for C syntax
-"   - The PythonSelf and PythonUserFunction also depends on an addon 
+"   - The PythonSelf also depends on an addon 
+"   hi def link pythonSelf keyword
 "   for Python syntax
 
 " NOTE : the gui version is not up-to-date
@@ -57,19 +57,22 @@ hi Boolean      guifg=#89DE00       gui=bold        ctermfg=106     cterm=bold
 hi Identifier   guifg=#00AEFF       gui=bold        ctermfg=white       cterm=bold
 hi stdFunction                                      ctermfg=69    cterm=bold
 hi Function                                         ctermfg=39    cterm=bold
-hi pythonUserFunction guifg=#00AEFF     gui=bold    ctermfg=39      cterm=bold
+"hi pythonUserFunction guifg=#00AEFF     gui=bold    ctermfg=39      cterm=bold
 hi hsFunction                           ctermfg=white   cterm=bold
 hi hsUserFunction                           ctermfg=39      cterm=bold
-hi pythonSelf   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
-hi cTypeModifier                                    ctermfg=106     cterm=bold
-hi cTypeDeclarator                                    ctermfg=106     cterm=bold
+"hi pythonSelf   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
+"hi TypeModifier                                    ctermfg=106     cterm=bold
+hi TypeModifier                                    ctermfg=28     cterm=bold
+"hi TypeModifier                                    ctermfg=214     cterm=bold
 "hi Statement    guifg=#CC01F2       gui=bold        ctermfg=135     cterm=bold
-hi Statement    guifg=#CC01F2       gui=bold        ctermfg=161     cterm=bold
+"hi Statement    guifg=#CC01F2       gui=bold        ctermfg=161     cterm=bold
+hi Statement    guifg=#CC01F2       gui=bold        ctermfg=135     cterm=bold
 hi Exception    guifg=#D400E7       gui=bold        ctermfg=magenta cterm=bold
-hi operator     guifg=#5F5FFF       gui=bold        ctermfg=135       cterm=bold
+hi operator     guifg=#5F5FFF       gui=bold        ctermfg=161       cterm=bold
+"hi operator     guifg=#5F5FFF       gui=bold        ctermfg=135       cterm=bold
 hi PreProc      guifg=#48AFBF       gui=bold        ctermfg=31  cterm=bold
 "hi Type         guifg=#00BF09       gui=bold        ctermfg=106 cterm=bold
-hi Type         guifg=#00BF09       gui=bold        ctermfg=70 cterm=bold
+hi Type         guifg=#00BF09       gui=bold        ctermfg=106 cterm=bold
 hi Special      guifg=#FFC31C       gui=bold        ctermfg=214 cterm=bold
 hi Tag          guifg=red
 hi Delimiter    guifg=#FFA41E       gui=bold        ctermfg=214     cterm=bold
@@ -83,8 +86,6 @@ hi scalaRoot                                            ctermfg=white cterm=bold
 
 " weird thing that does not work if directly linked with Type... (cf after/syntax/c.vim)
 hi cCustomClass   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
-
-hi psycStatement    ctermfg=47  cterm=bold
 
 
 

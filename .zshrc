@@ -48,6 +48,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 #plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
 plugins=(git colored-man colorize cp scala sbt zsh-syntax-highlighting)
 
+# zmv, the built-in mass file renamer
+autoload zmv
+
 # Restore history search, apparently absent with vi-mode
 #bindkey '^R' history-incremental-search-backward
 
@@ -140,6 +143,7 @@ alias maked='make CPPFLAGS+=-DDEBUG'
 alias fsel='find . | selecta'
 
 alias g='git'
+<<<<<<< HEAD
 alias glh='git log | head -n 40'
 alias glo='git log --oneline'
 alias gloh='git log --oneline | head -n 40'
@@ -177,6 +181,7 @@ unalias gunwip
 unalias gup
 unalias gwip
 
+alias ts='tig status' # tig is SO awesome
 
 
 # A bit better than ps aux | grep pattern

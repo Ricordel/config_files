@@ -45,10 +45,13 @@ git clone https://github.com/honza/vim-snippets.git
 
 
 # Go standard plugins
-git clone https://github.com/jnwhiteh/vim-golang.git
+git clone https://github.com/jnwhiteh/vim-golang
 
 # Go autocomplete
-git clone https://github.com/nsf/gocode.git
+go get -u github.com/nsf/gocode # This has to go in $GOPATH, not in bundles, which 'go get' will do
+# Get the right stuff at the right place for pathogen
+$GOPATH/src/github.com/nsf/gocode/vim/pathogen_update.sh
+
 
 # Nyan cat, because...
 git clone https://github.com/koron/nyancat-vim.git
@@ -59,6 +62,7 @@ git clone https://github.com/Lokaltog/vim-powerline
 # vim clojure
 git clone https://github.com/vim-scripts/VimClojure.git
 
+<<<<<<< HEAD
 # Better documentation viewing BREAKS PYTHON SYNTAX !!
 #git clone https://github.com/powerman/vim-plugin-viewdoc
 
@@ -87,3 +91,11 @@ hg clone https://bitbucket.org/ns9tks/vim-fuzzyfinder
 
 # hilinks, to debug syntax files, mostly
 git clone https://github.com/kergoth/vim-hilinks.git
+# Better documentation viewing, breaks Python syntax highlighting
+#refresh https://github.com/powerman/vim-plugin-viewdoc
+
+# Scala files
+git clone git@github.com:Ricordel/vim-scala.git
+
+# Markdown files
+git clone https://github.com/tpope/vim-markdown.git

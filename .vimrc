@@ -258,6 +258,42 @@ let vimclojure#ParenRainbow=1           " Rainbow parentheses'!
 let g:viewdoc_open='split'      " Doc opened in an horizontal split
 
 
+" For go syntax highlighting, I HATE trailing whitespace highlighting while I type
+let go_highlight_trailing_whitespace_error = 0
+
+
+""""""""" For gotags, according to https://github.com/jstemmer/gotags
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+
+
 
 """""""""""""" Some pyclewn stuff
 

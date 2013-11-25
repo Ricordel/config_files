@@ -1,7 +1,7 @@
 "inoremap <Nul> <c-x><c-o>
 
 
-map <leader>m :make<CR><CR> :copen<CR> <C-k>
+map <leader>m :make<CR><CR> :copen<CR>
 
 
 
@@ -36,9 +36,10 @@ let g:clang_periodic_quickfix = 0
 let g:clang_auto_user_options = ".clang_complete"
 let g:clang_jumpto_declaration_key='gd'
 
-let g:clang_snippets=1
+let g:clang_snippets=0
 let g:clang_snippets_engine="clang_complete"
 let g:clang_trailing_placeholder=1
+let g:clang_conceal_snippets=1
 
 "setlocal tabstop=8
 "setlocal softtabstop=8

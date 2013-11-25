@@ -1,3 +1,6 @@
+# Export the correct locale
+export LC_ALL=en_US.utf8
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -42,10 +45,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # XXX from https://github.com/zsh-users/zsh-syntax-highlighting, it seems
 # that the syntax-highlight plugin must be set last
-plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
+#plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
+plugins=(git colored-man colorize cp scala sbt zsh-syntax-highlighting)
 
 # Restore history search, apparently absent with vi-mode
-bindkey '^R' history-incremental-search-backward
+#bindkey '^R' history-incremental-search-backward
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,8 +60,9 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
-# my local bin, IntelliJ Idea
-export PATH=~/bin:$PATH:/home/leyaude/bin/intellij/idea-IC-123.123/bin
+# For mono, by default I need the debian mono, so put /usr/bin in front of /usr/local/bin
+export PATH=~/bin:/usr/bin:/opt/qarnot/bin:/opt/qarnot/simulator/bin:$PATH:
+export LD_LIBRARY_PATH=/opt/qarnot/bin:$LD_LIBRARY_PATH
 # go root and stuff
 export GOROOT=/home/leyaude/bin/go
 export GOBIN=$GOROOT/bin
@@ -69,19 +74,29 @@ export PATH=$PATH:$GOBIN
 
 
 function recursive_grep {
-	grep --color=auto -r $* .
+	grep -E --color=auto -r "$*" .
 }
 function recursive_grep_case_ins {
-	grep --color=auto -ri $* .
+	grep -E --color=auto -ri "$*" .
 }
+function recursive_grep_sourcefiles {
+    find . -name "*.cs" -or -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.cc" -or -name "*.hpp" -or -name "*.hh" -or -name "*.py" -or -name "*.php" -or -name "*.qsh" -or -name "*.java"| xargs grep -E "$*"
+}
+function recursive_grep_sourcefiles_casei {
+    find . -name "*.cs" -or -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.cc" -or -name "*.hpp" -or -name "*.hh" -or -name "*.py" -or -name "*.php" -or -name "*.qsh" -or -name "*.java"| xargs grep -E -i "$*"
+}
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias rg='recursive_grep $*'
 alias rgi='recursive_grep_case_ins $*'
 
+alias rgs='recursive_grep_sourcefiles $*'
+alias rgsi='recursive_grep_sourcefiles_casei $*'
+
 # Gestion du 'ls' : couleur & ne touche pas aux accents
-alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
+alias ls='ls --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
 
 # Demande confirmation avant d'ecraser un fichier
 alias cp='cp --interactive'
@@ -97,7 +112,7 @@ alias lla='ls -lA'
 
 # Un cd && ls qui va bien
 function cd_ls {
-	cd "$*"; ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable;
+	cd "$*"; ls --tabsize=0 --literal --color=auto --show-control-chars --human-readable;
 }
 
 
@@ -116,12 +131,52 @@ alias rd='rmdir'
 alias maman='sudo'
 alias make='clear && make -j5'
 alias m='make'
+alias r='make run'
 # Make with clang as C compiler (for better error messages)
 alias makec='make CC=clang LD=clang CXX=clang++'
 # Make with debug infos
 alias maked='make CPPFLAGS+=-DDEBUG'
 
+alias fsel='find . | selecta'
+
 alias g='git'
+alias glh='git log | head -n 40'
+alias glo='git log --oneline'
+alias gloh='git log --oneline | head -n 40'
+alias gk='gitk --all'
+alias ts='tig status'
+
+export QSH_HEAD="~/work/qarnot/qapi/csharp/bin/Debug/QarnotShell.exe"
+export QSIMU_HEAD="~/work/qarnot/qnetwork/bin/Debug/qsimu.exe"
+alias qshell-head="mono --debug $QSH_HEAD"
+alias qsimu-head="mono --debug $QSIMU_HEAD"
+
+
+# Remove some unfortunate aliases that are set somewhere, and
+# might be a bit unpleasant if typed carelessly
+unalias gl # was 'git pull', WTF ?
+unalias gclean
+unalias ggpnp
+unalias ggpull
+unalias ggpur
+unalias gm
+unalias gp
+unalias gpoat
+unalias grba
+unalias grbc
+unalias grbi
+unalias grh
+unalias grhh
+unalias grmv
+unalias grrm
+unalias grset
+unalias grup
+unalias gsd
+unalias gsr
+unalias gunwip
+unalias gup
+unalias gwip
+
 
 
 # A bit better than ps aux | grep pattern
@@ -131,9 +186,10 @@ alias pgrep='pgrep -l -f'
 
 # A vim + find usefull when dealing with profound trees
 function vim_find {
-	vim "`find ./* -name *$1*`"
+    vim "`find ./* -name \"*$1*\"`"
 }
 alias vimf='vim_find $*'
+alias vims='vim $(find . | selecta)'
 
 
 # GCC in english and with colors
@@ -158,6 +214,22 @@ alias subwayssh='ssh ricordel@subway.it.kth.se'
 alias malavitassh='ssh ricordel@malavita.it.kth.se'
 alias ferlinssh='ssh ricordel@ferlin.pdc.kth.se'
 
+alias freyassh='ssh yoann@192.168.6.66'
+alias baldurssh='ssh yoann@192.168.6.67'
+
+alias subssh='ssh yricordel@submit.qarnot.net'
+
+# Buffer only one line instead of a lot. Better to view logs in real time
+# when they are on stdout
+alias nobuf='stdbuf -oL -eL'
+#alias qlog='nobuf remark /home/yoann/.config/remark/qarnot-log.syntax'
+#alias qtrim='nobuf cut -d"|" -f4-' # To trim the first fields of log that take space and are not always interesting.
+
+
+alias :q='exit' # vim forever
+alias :e='vim'  # and ever
+
+
 
 # Some shorthands for the conversion utility I wrote (in ~/bin)
 alias 10to16='~/bin/convert_base 10 16'
@@ -165,10 +237,20 @@ alias 16to10='~/bin/convert_base 16 10'
 alias 2to10='~/bin/convert_base 2 10'
 alias 10to2='~/bin/convert_base 10 2'
 
+
 # some zsh-specific awesomness
 
 # Global aliasing
-alias -g gr='| grep -i'
+alias -g gr='| nobuf grep -E -u'
+alias -g gri='| nobuf grep -E -i -u'
+alias -g qlog='| nobuf remark /home/yoann/.config/remark/qarnot-log.syntax'
+alias -g qtrim='| nobuf cut -d"|" -f4- | nobuf grep -E -v "^$"' # To trim the first fields of log that take space and are not always interesting.
+alias -g ple='| less'
+alias -g pyc='|& pygmentize -l pytb'
+alias -g pcat='| cat'
+alias -g phd='| head -n 40'
+alias -g pvim='| vim -'
+alias -g psel='| selecta '
 
 # Default applications to open some files
 alias -s c=vim
@@ -177,7 +259,7 @@ alias -s cc=vim
 alias -s hh=vim
 alias -s cpp=vim
 alias -s hpp=vim
-alias -s py=vim
+alias -s cs=vim
 alias -s scala=vim
 alias -s txt=vim
 alias -s jpg=gpicview

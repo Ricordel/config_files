@@ -13,5 +13,15 @@
 	br = branch
     aa = add -A
     au = add -u
+    ff = merge --ff-only
+    noff = merge --no-ff
 [color]
 	ui = true
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+    tool = vimdiff
+[mergetool]
+    prompt = false

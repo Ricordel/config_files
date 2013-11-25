@@ -43,6 +43,12 @@ set incsearch
 set ignorecase smartcase
 nnoremap <leader>n :nohls<CR>
 
+" Autocomments: continue comments in insert mode, but not wit o,O (just don' like it)
+au BufRead,BufNewFile * setlocal formatoptions+=r
+au BufRead,BufNewFile * setlocal formatoptions-=o
+set formatoptions+=r
+set formatoptions-=o
+
 
 " Backup-related stuff : use backup but don't put it in current dir !
 set backup
@@ -61,6 +67,10 @@ autocmd BufReadPost *
     \ endif
 
 
+" Tell vim that shell scripts should be posix
+let g:is_posix=1
+
+
 " Move correctly on wrapped lines
 nmap j gj
 nmap k gk
@@ -75,6 +85,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" Have the current file display on two columns with scrollbind
+noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 """" Quickfix and location windows related. All mappings exist beginning by 'q'
 " for quickfix and 'l' for location
@@ -130,6 +143,8 @@ set showmatch " Show matching parenthese
 syntax on
 filetype plugin indent on
 colors yaude " Personal colorscheme
+
+let g:rehash256=1 " for when I want to use the slightly modified Molokai theme.
 
 map <F10> :set paste<CR>
 map <F11> :set nopaste<CR>
@@ -190,6 +205,14 @@ au BufRead,BufNewFile *.tex setlocal ft=tex
 
 " Recognize Scala fileType, which does not seem automatic
 au BufRead,BufNewFile *.scala setlocal ft=scala
+
+" Recognize qarnot log files
+au BufRead,BufNewFile *.log setlocal ft=qlog
+au BufRead,BufNewFile *.log.1 setlocal ft=qlog
+au BufRead,BufNewFile *.log.2 setlocal ft=qlog
+au BufRead,BufNewFile *.log.3 setlocal ft=qlog
+au BufRead,BufNewFile *.log.4 setlocal ft=qlog
+au BufRead,BufNewFile *.log.5 setlocal ft=qlog
 
 
 " Scala syntax for tagbar
@@ -254,3 +277,22 @@ map <leader>dm :Cmapkeys <CR>
 map <leader>du :Cunmapkeys <CR>
 " Start a debug session
 map <leader>ds :Pyclewn <CR> :Cmapkeys <CR> :Cfile 
+
+
+" Mapping for FuzzyFinder, starting witj <leader>f
+" Buffer mode : search among open buffers
+map <leader>fb :FufBuffer<cr>
+" File mode, replacement for Cx-f
+map <leader>ff :FufFile<cr>
+" Recursive File mode, search recursively from current directory
+map <leader>fr :FufCoverageFile<cr>
+" Tags
+map <leader>ft :FufTag<cr>
+
+
+" Don't bother me with the question each time I quit.
+let g:Omnisharp_stop_server=0
+
+" SuperTab complete in 'logical' order
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"

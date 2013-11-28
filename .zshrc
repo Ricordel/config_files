@@ -71,6 +71,9 @@ export GOROOT=/home/leyaude/bin/go
 export GOBIN=$GOROOT/bin
 export PATH=$PATH:$GOBIN
 
+# java home
+export JAVA_HOME=/usr
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -195,6 +198,11 @@ function vim_find {
 alias vimf='vim_find $*'
 alias vims='vim $(find . | selecta)'
 
+function _calc {
+    echo $(($*))
+}
+alias calc='_calc $*'
+
 
 # GCC in english and with colors
 alias gcc='LC_ALL=C gcc'
@@ -232,6 +240,15 @@ alias nobuf='stdbuf -oL -eL'
 
 alias :q='exit' # vim forever
 alias :e='vim'  # and ever
+
+
+alias htop='htop -s PERCENT_CPU'
+alias nloadw='nload -u K wlan0'
+
+#alias hubic-mount='cloudfuse /home/leyaude/mount_point -o noauto_cache,sync_read'
+alias hubic-sync='hubic login "leyaude@gmail.com" /home/leyaude/data/hubic-sync'
+
+alias upgrade='sudo aptitude update && sudo aptitude upgrade'
 
 
 

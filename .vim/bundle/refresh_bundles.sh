@@ -99,3 +99,9 @@ git clone git@github.com:Ricordel/vim-scala.git
 
 # Markdown files
 git clone https://github.com/tpope/vim-markdown.git
+
+# To edit very large files without choking
+git clone https://github.com/vim-scripts/LargeFile.git
+
+# pss plugin to navigate source
+hg clone https://bitbucket.org/bernh/pss.vim

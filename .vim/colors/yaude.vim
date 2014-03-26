@@ -90,7 +90,8 @@ hi cCustomClass   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
 
 
 
-hi Visual   cterm=reverse
+"hi Visual       cterm=reverse
+hi Visual       ctermbg=240
 hi VisualNOS    cterm=bold,underline
 
 hi rstEmphasis      cterm=bold

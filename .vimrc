@@ -147,7 +147,7 @@ colors yaude " Personal colorscheme
 let g:rehash256=1 " for when I want to use the slightly modified Molokai theme.
 
 map <F10> :set paste<CR>
-map <F11> :set nopaste<CR>
+map <s-F10> :set nopaste<CR>
 
 
 " MULTIPURPOSE TAB KEY : Indent if we're at the beginning of a line. Else, do completion.
@@ -233,9 +233,6 @@ let g:tagbar_type_scala = {
 \ }
 
 
-
-
-
 " Attempt to cut myself from the ESC key.
 imap <leader>k <ESC>
 imap <leader>w <ESC>:w<CR>a
@@ -246,6 +243,16 @@ nmap <leader>w :w<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
+
+
+" Locate file, Eclim functionality (hence won't always be available)
+nnoremap <silent> <leader>jl :LocateFile<cr>
+" Buffers, a :buffers with benefits, also from Eclim
+" But I don't like horizontal split
+let g:EclimBuffersDefaultAction='edit'
+nnoremap <silent> <leader>b :BuffersToggle<cr>
+
+
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,*.pyc,*.a,*.class
 

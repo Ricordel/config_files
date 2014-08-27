@@ -157,32 +157,6 @@ export QSIMU_HEAD="~/work/qarnot/qnetwork/bin/Debug/qsimu.exe"
 alias qshell-head="mono --debug $QSH_HEAD"
 alias qsimu-head="mono --debug $QSIMU_HEAD"
 
-
-# Remove some unfortunate aliases that are set somewhere, and
-# might be a bit unpleasant if typed carelessly
-unalias gl # was 'git pull', WTF ?
-unalias gclean
-unalias ggpnp
-unalias ggpull
-unalias ggpur
-unalias gm
-unalias gp
-unalias gpoat
-unalias grba
-unalias grbc
-unalias grbi
-unalias grh
-unalias grhh
-unalias grmv
-unalias grrm
-unalias grset
-unalias grup
-unalias gsd
-unalias gsr
-unalias gunwip
-unalias gup
-unalias gwip
-
 alias ts='tig status' # tig is SO awesome
 
 

@@ -62,8 +62,6 @@ git clone https://github.com/Lokaltog/vim-powerline
 # vim clojure
 git clone https://github.com/vim-scripts/VimClojure.git
 
-# Better documentation viewing BREAKS PYTHON SYNTAX !!
-#git clone https://github.com/powerman/vim-plugin-viewdoc
 
 # Dependancy for Omnisharp
 git clone git://github.com/tpope/vim-dispatch.git
@@ -101,3 +99,15 @@ git clone https://github.com/vim-scripts/LargeFile.git
 
 # pss plugin to navigate source
 hg clone https://bitbucket.org/bernh/pss.vim
+
+# local vimrc .lvimrc
+git clone https://github.com/embear/vim-localvimrc.git
+
+# python plugin
+git clone git://github.com/klen/python-mode.git
+
+# trailing whitespace highlight and remove
+git clone https://github.com/bronson/vim-trailing-whitespace
+
+# Add doxygen syntax to C/C++ files, under the cpp.doxygen syntax declaration
+git clone https://github.com/vim-scripts/DoxyGen-Syntax.git

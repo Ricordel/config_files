@@ -47,8 +47,8 @@ syn keyword cAnsiFunction	strfxtime strftime localtime
 syn keyword cAnsiFunction	gmtime ctime asctime
 syn keyword cAnsiFunction	time mkxtime mktime
 syn keyword cAnsiFunction	difftime clock strlen
-syn keyword cAnsiFunction	strerror memset strtok
-syn keyword cAnsiFunction	strstr strspn strrchr
+syn keyword cAnsiFunction	strerror memset strtok strtok_r
+syn keyword cAnsiFunction	strstr strspn strrchr strdup
 syn keyword cAnsiFunction	strpbrk strcspn strchr
 syn keyword cAnsiFunction	memchr strxfrm strncmp
 syn keyword cAnsiFunction	strcoll strcmp memcmp
@@ -180,6 +180,12 @@ syn keyword cAnsiFunction	cacosf cacos assert
 syn keyword cAnsiFunction	UINTMAX_C INTMAX_C UINT64_C
 syn keyword cAnsiFunction	UINT32_C UINT16_C UINT8_C
 syn keyword cAnsiFunction	INT64_C INT32_C INT16_C INT8_C
+syn keyword cAnsiFunction	pthread_mutex_release pthread_mutex_init pthread_mutex_destroy ptrhead_mutex_timedlock
+syn keyword cAnsiFunction	pthread_create pthread_join pthread_cancel
+syn keyword cAnsiFunction	pthread_cond_wait pthread_cond_broadcast pthread_cond_signal
+syn keyword cAnsiFunction	sem_init sem_destroy sem_wait sem_post sem_timedwait
+syn keyword cAnsiFunction	clock_gettime
+syn keyword cAnsiFunction	socket send recv shutdown connect
 
 " Common ANSI-standard Names
 syn keyword	cAnsiName	PRId8 PRIi16 PRIo32 PRIu64
@@ -249,6 +255,8 @@ syn match cOperator	"/[^/*=]"me=e-1
 syn match cOperator	"/$"
 syn match cOperator "&&\|||"
 syn match cOperator	"[][]"
+syn match cOperator	":"
+syn match cOperator	"?"
 
 " Functions
 syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType,cEnumName,cStructName,cUnionName
@@ -262,8 +270,10 @@ syn match cDelimiter	"[(){};\\]"
 syn keyword cBoolean true false TRUE FALSE
 
 
-" user defined types ending by "_t"
+" user defined types ending by "_t", or starting by s_ (for structs)
 syn match cUserType "\w*_t "
+syn match cUserType "\(^\|\s\|(\)s_\w* " contains=cParen
+syn match cUserType "\(^\|\s\|(\)e_\w* " contains=cParen
 
 " Links
 hi def link cUserFunction Function
@@ -283,7 +293,9 @@ syn match    cCustomScope      "::"
 syn match    cCustomFunc       "\w\+\s*(" contains=cCustomParen
 syn match    cCustomClass      "\w\+\s*::" contains=cCustomScope
 " Will infortunately also match class static fields, but...
-syn match    cTypeInNameSpace  "\w\+::\w\+&\?\s" contains=cCustomParen
+syn match    cTypeInNameSpace  "\w\+::\w\+&\?\s" contains=cCustomParen,cOperator
+
+syn match cLabel "^\w\+:" contains=cOperator
 
 
 "hi def link cCustomClass Type " Pour une raison bizarre ça ne marche pas,
@@ -295,3 +307,4 @@ hi def link cTypeDeclarator TypeModifier
 hi def link cStructName Type
 hi def link cEnumName Type
 hi def link cUnionName Type
+hi def link cLabel Special

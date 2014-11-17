@@ -1,8 +1,13 @@
 "inoremap <Nul> <c-x><c-o>
 
+setlocal syn=cpp.doxygen
 
-map <leader>m :make<CR><CR> :copen<CR>
+map <leader>m :make<CR><CR> :cwindow<CR>
 
+" Ignore lines out of make tat do not match gcc error format
+"let g:compiler_gcc_ignore_unmatched_lines=1
+
+"setlocal errorformat=%f:%l:%c:\ %t%s:\ %m
 
 
 "For Eclim:
@@ -25,30 +30,28 @@ setlocal omnifunc=ClangComplete
 
 """" Clang_complete options
 let g:clang_auto_select = 0
-let g:clang_complete_auto = 0
+let g:clang_complete_auto = 1
 let b:clang_complete_macros = 1
 let g:clang_hl_errors = 0
 let g:clang_user_option = '2>/dev/null || exit 0'
 let g:clang_use_library = 1
-let g:clang_library_path = '/usr/lib/llvm-3.5/lib/'
-"let g:clang_library_name = 'libclang1'
-let g:clang_periodic_quickfix = 0
+let g:clang_library_path = '/usr/lib/llvm-3.4/lib/'
+let g:clang_library_name = 'libclang.so.1'
+let g:clang_periodic_quickfix = 0 " bypasses clang_hl_errors and breaks syntax highlighting.
+let g:clang_hl_errors=0 " was broken last time I tried
 let g:clang_auto_user_options = ".clang_complete"
 let g:clang_jumpto_declaration_key='gd'
 
-let g:clang_snippets=0
+let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
 let g:clang_trailing_placeholder=1
 let g:clang_conceal_snippets=1
 
-"setlocal tabstop=8
-"setlocal softtabstop=8
-"setlocal shiftwidth=8
-" To keep the 'style' in Qfs sources, let's put this to 2. Makes me sad.
-setlocal shiftwidth=2
-setlocal softtabstop=2
-setlocal tabstop=2
+set completeopt=menu,longest " choose which completion to use
 
+setlocal tabstop=8
+setlocal softtabstop=8
+setlocal shiftwidth=8
 setlocal autoindent
 setlocal smartindent
 setlocal expandtab

@@ -46,7 +46,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # XXX from https://github.com/zsh-users/zsh-syntax-highlighting, it seems
 # that the syntax-highlight plugin must be set last
 #plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
-plugins=(git colored-man colorize cp scala sbt zsh-syntax-highlighting)
+plugins=(git colored-man cp colorize z debian sudo vagrant zsh-syntax-highlighting)
+
+fpath=(~/.zsh/completions $fpath)
 
 # zmv, the built-in mass file renamer
 autoload zmv
@@ -77,19 +79,21 @@ export JAVA_HOME=/usr
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+__DUMMY='$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD)\h$ '
+
 
 
 function recursive_grep {
-	grep -E --color=auto -r "$*" .
+    find . -type f | xargs grep -n -I -E "$*"
 }
 function recursive_grep_case_ins {
-	grep -E --color=auto -ri "$*" .
+    find . -type f | xargs grep -n -I -i -E "$*"
 }
 function recursive_grep_sourcefiles {
-    find . -name "*.cs" -or -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.cc" -or -name "*.hpp" -or -name "*.hh" -or -name "*.py" -or -name "*.php" -or -name "*.qsh" -or -name "*.java"| xargs grep -E "$*"
+    find . -name "*.cs" -or -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.cc" -or -name "*.hpp" -or -name "*.hh" -or -name "*.py" -or -name "*.php" -or -name "*.qsh" -or -name "*.java" -or -name "*.phtml" -or -name "*.css" -or -name "*.html" | xargs grep -n -E "$*"
 }
 function recursive_grep_sourcefiles_casei {
-    find . -name "*.cs" -or -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.cc" -or -name "*.hpp" -or -name "*.hh" -or -name "*.py" -or -name "*.php" -or -name "*.qsh" -or -name "*.java"| xargs grep -E -i "$*"
+    find . -name "*.cs" -or -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.cc" -or -name "*.hpp" -or -name "*.hh" -or -name "*.py" -or -name "*.php" -or -name "*.qsh" -or -name "*.java" -or -name "*.phtml" -or -name "*.css" -or -name "*.html" | xargs grep -n -E -i "$*"
 }
 
 alias grep='grep --color=auto'
@@ -100,13 +104,14 @@ alias rgi='recursive_grep_case_ins $*'
 
 alias rgs='recursive_grep_sourcefiles $*'
 alias rgsi='recursive_grep_sourcefiles_casei $*'
+alias /='vim $(rgs . | selecta | cut -d":" -f 1)'
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 alias ls='ls --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
 
 # Demande confirmation avant d'ecraser un fichier
-alias cp='cp --interactive'
-alias mv='mv --interactive'
+alias cp='ionice -c3 cp --interactive'
+alias mv='ionice -c3 mv --interactive'
 
 # Raccourcis pour 'ls'
 alias l='ls'
@@ -126,6 +131,7 @@ function cd_ls {
 alias c='cd_ls $*'
 alias cl='clear'
 alias less='less --quiet'
+alias tf='tail -f'
 alias s='cd ..'
 alias u='cd .. && ls'
 alias p='cd -'
@@ -135,13 +141,20 @@ alias duu='du --max-depth=1'
 alias md='mkdir'
 alias rd='rmdir'
 alias maman='sudo'
-alias make='clear && make -j5'
 alias m='make'
 alias r='make run'
+alias mc='make clean'
+alias mb='make -B'
 # Make with clang as C compiler (for better error messages)
 alias makec='make CC=clang LD=clang CXX=clang++'
 # Make with debug infos
 alias maked='make CPPFLAGS+=-DDEBUG'
+
+alias xb='xbuild'
+alias xc='xbuild /target:Clean'
+alias xbb='xbuild /target:Clean && xbuild'
+
+alias v='vim'
 
 alias fsel='find . | selecta'
 
@@ -149,10 +162,10 @@ alias g='git'
 alias glh='git log | head -n 40'
 alias glo='git log --oneline'
 alias gloh='git log --oneline | head -n 40'
-alias gk='gitk --all'
+alias gk='gitk --all&'
 alias ts='tig status'
 
-export QSH_HEAD="~/work/qarnot/qapi/csharp/bin/Debug/QarnotShell.exe"
+export QSH_HEAD="~/work/qarnot/apps/qshell/bin/Debug/QarnotShell.exe"
 export QSIMU_HEAD="~/work/qarnot/qnetwork/bin/Debug/qsimu.exe"
 alias qshell-head="mono --debug $QSH_HEAD"
 alias qsimu-head="mono --debug $QSIMU_HEAD"
@@ -222,7 +235,7 @@ alias nloadw='nload -u K wlan0'
 #alias hubic-mount='cloudfuse /home/leyaude/mount_point -o noauto_cache,sync_read'
 alias hubic-sync='hubic login "leyaude@gmail.com" /home/leyaude/data/hubic-sync'
 
-alias upgrade='sudo aptitude update && sudo aptitude upgrade'
+alias upgrade='sudo aptitude update; sudo aptitude upgrade'
 
 
 
@@ -232,13 +245,17 @@ alias 16to10='~/bin/convert_base 16 10'
 alias 2to10='~/bin/convert_base 2 10'
 alias 10to2='~/bin/convert_base 10 2'
 
+alias _='sudo'
+
 
 # some zsh-specific awesomness
 
 # Global aliasing
 alias -g gr='| nobuf grep -E -u'
 alias -g gri='| nobuf grep -E -i -u'
-alias -g qlog='| nobuf remark /home/yoann/.config/remark/qarnot-log.syntax'
+#alias -g qlog='| nobuf remark /home/yoann/.config/remark/qarnot-log.syntax'
+alias -g plog='| /home/yoann/bin/qlog'
+alias -g pqfsl='| /home/yoann/bin/qfslog'
 alias -g qtrim='| nobuf cut -d"|" -f4- | nobuf grep -E -v "^$"' # To trim the first fields of log that take space and are not always interesting.
 alias -g ple='| less'
 alias -g pyc='|& pygmentize -l pytb'

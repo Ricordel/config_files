@@ -60,7 +60,7 @@ let g:fuf_coveragefile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(
 "let g:SuperTabDefaultCompletionType = "context"
 
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_checker_args='--ignore=E501,F405,F403,E303,E302'
+let g:syntastic_python_flake8_args='--ignore=E501,F405,F403,E303,E302'
 
 " python-mode related confituration
 "let g:pymode_run = 1

@@ -20,6 +20,7 @@ syn match	csLabel	 display "^\s*\I\i*\s*:$" contains=csDelimiter
 
 " Functions
 syn match csUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=csType
+syn keyword csNameofStatement	nameof
 
 hi def link csOperator Operator
 hi def link csDelimiter Delimiter
@@ -27,3 +28,6 @@ hi def link csUserFunction Function
 hi def link LINQKeyword Operator
 hi def link csLabel Statement
 hi def link csTypeModifier TypeModifier
+hi def link csNameofStatement Statement
+
+

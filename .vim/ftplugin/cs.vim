@@ -12,7 +12,7 @@ setlocal omnifunc=OmniSharp#Complete
 set splitbelow
 
 setlocal noexpandtab
-setlocal fileformat=dos
+"setlocal fileformat=dos
 
 setlocal formatoptions-=o
 
@@ -57,26 +57,42 @@ if exists(":CompilerSet") != 2  " older Vim always used :setlocal
   command -nargs=* CompilerSet setlocal <args>
 endif
 
-CompilerSet errorformat=\ %#%f(%l\\\,%c):\ error\ %m
-CompilerSet errorformat+=%f(%l):\ error\ %m
-"CompilerSet errorformat=\ %#%f(%l\\\,%c):\ warning\ %m
+"CompilerSet errorformat=\ %#%f(%l\\\,%c):\ %trror\ %m,
+"CompilerSet errorformat+=%f(%l):\ %trror\ %m,
+
+
+CompilerSet errorformat=
+    \%*[^\"]\"%f\"%*\\D%l:\ %m,
+    \\"%f\"%*\\D%l:\ %m,
+    \%f(%l\\,%c):\ %trror\ %m,
+    \%f(%l\\,%c+):\ %trror\ %m,
+    \%f(%l\\,%c):\ %tarning\ %m,
+    \%f(%l\\,%c+):\ %tarning\ %m,
+    \%f:%l:\ %m,
+    \\"%f\"\\,\ line\ %l%*\\D%c%*[^\ ]\ %m,
+    \%D%*\\a[%*\\d]:\ Entering\ directory\ `%f',
+    \%X%*\\a[%*\\d]:\ Leaving\ directory\ `%f',
+    \%DMaking\ %*\\a\ in\ %f,
+    \%-G%.%#Compilation%.%#,
+    \%-G%.%#
+
 CompilerSet makeprg=xbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /verbosity:quiet
-
-"CompilerSet errorformat=
-        "\%*[^\"]\"%f\"%*\\D%l:\ %m,
-        "\\"%f\"%*\\D%l:\ %m,
-        "\%f(%l\\,%c):\ %trror\ CS%\\d%\\+:\ %m,
-        "\%f(%l\\,%c):\ %tarning\ CS%\\d%\\+:\ %m,
-        "\%f:%l:\ %m,
-        "\\"%f\"\\,\ line\ %l%*\\D%c%*[^\ ]\ %m,
-        "\%D%*\\a[%*\\d]:\ Entering\ directory\ `%f',
-        "\%X%*\\a[%*\\d]:\ Leaving\ directory\ `%f',
-        "\%DMaking\ %*\\a\ in\ %f,
-        "\%-G%.%#Compilation%.%#,
-        "\%-G%.%#
-
 
 let &cpo = s:keepcpo
 unlet s:keepcpo
 
 nnoremap <leader>m :make!<cr> :cwindow<cr>
+
+"function! CompileWithWarning()
+    "try
+        "CompilerSet errorformat=\ %#%f(%l\\\,%c):\ error\ %m
+        "CompilerSet errorformat+=%f(%l):\ %trror\ %m
+        "CompilerSet errorformat=\ %#%f(%l\\\,%c):\ %tarning\ %m
+        ":make!
+    "finally
+        "CompilerSet errorformat=\ %#%f(%l\\\,%c):\ error\ %m
+        "CompilerSet errorformat+=%f(%l):\ %trror\ %m
+    "endtry
+"endfunction
+
+"nnoremap <leader>l :call CompileWithWarning()<cr> :cwindow<cr>

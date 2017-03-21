@@ -67,8 +67,9 @@ git clone https://github.com/vim-scripts/VimClojure.git
 git clone git://github.com/tpope/vim-dispatch.git
 # Testing Omnisharp, a C# plugin
 git clone https://github.com/nosami/Omnisharp.git
-git submodule update --init
-cd Omnisharp/server
+cd Omnisharp
+git submodule update --init --recursive
+cd server
 xbuild /p:Platform="Any CPU"
 
 # Buffer grep: grep on open buffers with :Bgrep
@@ -103,11 +104,20 @@ hg clone https://bitbucket.org/bernh/pss.vim
 # local vimrc .lvimrc
 git clone https://github.com/embear/vim-localvimrc.git
 
-# python plugin
-git clone git://github.com/klen/python-mode.git
+# python plugin - à chier
+#git clone git://github.com/klen/python-mode.git
 
 # trailing whitespace highlight and remove
 git clone https://github.com/bronson/vim-trailing-whitespace
 
 # Add doxygen syntax to C/C++ files, under the cpp.doxygen syntax declaration
 git clone https://github.com/vim-scripts/DoxyGen-Syntax.git
+
+# jedi-vim, jedi autocompletion for python #XXX assez pourri aussi, notamment l'auco-complétion
+git clone https://github.com/davidhalter/jedi-vim.git
+
+# syntastic
+git clone https://github.com/scrooloose/syntastic.git
+
+# auto-surround, to give it a try. Not a bad one, but in the end I don't really like the feature
+#git clone https://github.com/Raimondi/delimitMate.git

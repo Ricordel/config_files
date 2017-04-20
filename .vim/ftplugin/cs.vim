@@ -16,6 +16,13 @@ setlocal noexpandtab
 
 setlocal formatoptions-=o
 
+" Disable YouCompleteMe hijacking TAB
+let g:ycm_key_list_select_completion = ['<Down>']
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+
 " Use the preview window instead of the status line for type lookup
 let g:OmniSharp_typeLookupInPreview=1
 

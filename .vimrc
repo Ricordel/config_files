@@ -350,6 +350,34 @@ map <leader>ft :FufTag<cr>
 " Don't bother me with the question each time I quit.
 let g:Omnisharp_stop_server=0
 
+
+
+
+
+""""""""""""""""""""""""""" YouCompleteMe section """"""""""""""""""""""""""""""
+
+"let g:ycm_filetype_blacklist = {
+      "\ 'tagbar' : 1,
+      "\ 'qf' : 1,
+      "\ 'notes' : 1,
+      "\ 'markdown' : 1,
+      "\ 'unite' : 1,
+      "\ 'text' : 1,
+      "\ 'vimwiki' : 1,
+      "\ 'pandoc' : 1,
+      "\ 'infolog' : 1,
+      "\ 'mail' : 1,
+      "\ 'cs' : 1,
+      "\ 'fuf' : 1,
+      "\}
+
+let g:ycm_filetype_whitelist = {
+      \ 'python' : 1,
+      \}
+
+let g:ycm_python_binary_path = 'python3'
+
+
 " SuperTab complete in 'logical' order
 "let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabDefaultCompletionType = "context"

@@ -9,7 +9,7 @@ setlocal nosmartindent   " As smartindent screws with comments in Python
 
 " Function to activate a virtualenv in the embedded interpreter for
 " omnicomplete and other things like that.
-function LoadVirtualEnv(path)
+function! LoadVirtualEnv(path)
     let activate_this = a:path . '/bin/activate_this.py'
     if getftype(a:path) == "dir" && filereadable(activate_this)
         python << EOF
@@ -59,8 +59,13 @@ let g:fuf_coveragefile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(
 "let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "let g:SuperTabDefaultCompletionType = "context"
 
-let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint']
 let g:syntastic_python_flake8_args='--ignore=E501,F405,F403,E303,E302'
+
+nnoremap gr :YcmCompleter GoToDefinition<CR>
+nnoremap gd :YcmCompleter GoTo<CR>
+nnoremap <leader>fu :YcmCompleter GoToReferences<CR>
+nnoremap <leader>fk :YcmCompleter GetDoc<CR>
 
 " python-mode related confituration
 "let g:pymode_run = 1

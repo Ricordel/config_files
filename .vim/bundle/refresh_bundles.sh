@@ -121,3 +121,7 @@ git clone https://github.com/scrooloose/syntastic.git
 
 # auto-surround, to give it a try. Not a bad one, but in the end I don't really like the feature
 #git clone https://github.com/Raimondi/delimitMate.git
+
+
+# YouCompleteMe
+git clone https://github.com/Valloric/YouCompleteMe.git

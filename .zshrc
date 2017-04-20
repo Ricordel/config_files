@@ -128,7 +128,12 @@ alias lla='ls -lA'
 
 alias mono-custom='/opt/mono-3.2.8-debug/bin/mono'
 
-alias jpp='json_pp -json_opt pretty,canonical'
+alias jpp='jq -S .'
+
+alias jcurl='jcurl $*'
+function jcurl {
+    curl -s "$@" | jq -S .
+}
 
 alias ipt='sudo iptables -L -n -v'
 

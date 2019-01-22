@@ -31,7 +31,7 @@ if has("python")
     endif
 endif
 
-setlocal makeprg=flake8\ --ignore\ E501,F405,F403,E303,E302\ %:p
+setlocal makeprg=flake8\ --ignore\ E501,E303,W503,W504,E306,E301\ %:p
 setlocal errorformat=%f:%l:%c:\ %m
 nnoremap <leader>m :make<CR><CR><CR>:cwindow<CR>
 
@@ -59,8 +59,8 @@ let g:fuf_coveragefile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(
 "let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "let g:SuperTabDefaultCompletionType = "context"
 
-let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint']
-let g:syntastic_python_flake8_args='--ignore=E501,F405,F403,E303,E302'
+let g:syntastic_python_checkers = ['flake8', 'pyflakes']
+let g:syntastic_python_flake8_args='--ignore=E501,E303,W503,W504,E306,E301'
 
 nnoremap gr :YcmCompleter GoToDefinition<CR>
 nnoremap gd :YcmCompleter GoTo<CR>

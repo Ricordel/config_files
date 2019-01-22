@@ -2,7 +2,7 @@
 inoremap <Nul> <c-x><c-o>
 
 " Supertab: omnicompletion with tab
-"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 "
 " As long as I don't have a real omnicompletion for python
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -11,13 +11,15 @@ let g:SuperTabDefaultCompletionType = "context"
 setlocal omnifunc=OmniSharp#Complete
 set splitbelow
 
-setlocal noexpandtab
+setlocal expandtab
 "setlocal fileformat=dos
 
 setlocal formatoptions-=o
 
 " Disable YouCompleteMe hijacking TAB
-let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_select_completion = []
+"let g:ycm_key_list_previous_completion = []
+
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -90,16 +92,3 @@ unlet s:keepcpo
 
 nnoremap <leader>m :make!<cr> :cwindow<cr>
 
-"function! CompileWithWarning()
-    "try
-        "CompilerSet errorformat=\ %#%f(%l\\\,%c):\ error\ %m
-        "CompilerSet errorformat+=%f(%l):\ %trror\ %m
-        "CompilerSet errorformat=\ %#%f(%l\\\,%c):\ %tarning\ %m
-        ":make!
-    "finally
-        "CompilerSet errorformat=\ %#%f(%l\\\,%c):\ error\ %m
-        "CompilerSet errorformat+=%f(%l):\ %trror\ %m
-    "endtry
-"endfunction
-
-"nnoremap <leader>l :call CompileWithWarning()<cr> :cwindow<cr>

@@ -375,7 +375,7 @@ let g:ycm_filetype_whitelist = {
       \ 'python' : 1,
       \}
 
-let g:ycm_python_binary_path = 'python3'
+let g:ycm_python_binary_path = '/usr/bin/python3'
 
 
 " SuperTab complete in 'logical' order

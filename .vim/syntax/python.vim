@@ -115,8 +115,9 @@ syn keyword pythonStatement	exec return as
 syn keyword pythonStatement	pass raise
 syn keyword pythonStatement	global assert
 syn keyword pythonStatement	lambda yield
-syn keyword pythonStatement	with nonlocal
+syn keyword pythonStatement	with nonlocal await
 syn keyword pythonBoolean	False None True
+syn keyword pythonAsync     async nextgroup=pythonStatement skipwhite
 syn keyword pythonStatement	def class nextgroup=pythonFunction skipwhite
 syn match   pythonFunction	"\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 syn keyword pythonRepeat	for while
@@ -324,6 +325,7 @@ if version >= 508 || !exists("did_python_syn_inits")
     command -nargs=+ HiLink hi def link <args>
   endif
 
+  HiLink pythonAsync	    Statement
   HiLink pythonStatement	Statement
   HiLink pythonPreCondit	Statement
   HiLink pythonFunction		Function

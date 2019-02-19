@@ -1,28 +1,20 @@
 " Syntax completion with Ctrl-Space
-inoremap <Nul> <c-x><c-o>
+inoremap <c-k> <c-x><c-o>
 
-" Supertab: omnicompletion with tab
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-"
-" As long as I don't have a real omnicompletion for python
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabDefaultCompletionType = "context"
 
-setlocal omnifunc=OmniSharp#Complete
 set splitbelow
-
 setlocal expandtab
-"setlocal fileformat=dos
 
 setlocal formatoptions-=o
 
-" Disable YouCompleteMe hijacking TAB
-"let g:ycm_key_list_select_completion = []
-"let g:ycm_key_list_previous_completion = []
-
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+setlocal omnifunc=OmniSharp#Complete
+
+" Supertab: omnicompletion with tab
+"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 
 " Use the preview window instead of the status line for type lookup
@@ -49,12 +41,7 @@ nnoremap <leader>jc :OmniSharpFindSyntaxErrors<cr>
 set completeopt=longest,menuone,preview
 
 
-" It's cool, but it's killing my CPU, so don't use that.
-"autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-"set updatetime=500
-"set cmdheight=2
-"I find contextual code actions so useful that I have it mapped to the spacebar
-nnoremap <space> :OmniSharpGetCodeActions<cr>
+"nnoremap <space> :OmniSharpGetCodeActions<cr>
 
 
 " Add compiler stuff

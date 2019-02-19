@@ -1,7 +1,110 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" First of all, load and put in runtimepath all bundle with pathogen
-call pathogen#infect()
-call pathogen#helptags() " To generate doc, could be removed if lows down startup
+
+call plug#begin('~/.vim/plugged')
+
+" Nerd commenter and nerdTree
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+
+" Match non single-chars, for instance tags in html
+Plug 'vim-scripts/matchit.zip'
+
+" To have a view of vim 256 colors
+Plug 'guns/xterm-color-table.vim'
+
+" Tagbar, context-aware
+"git clone https://github.com/majutsushi/tagbar.git tagbar
+
+" Most recently used files
+" git clone https://github.com/ornicar/vim-mru.git mru
+
+
+" Fugitive: the ultimate git integration
+Plug 'tpope/vim-fugitive'
+
+" # Snipmate, snippet engine, and dependancies
+" git clone https://github.com/tomtom/tlib_vim.git
+" git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
+" git clone https://github.com/garbas/vim-snipmate.git
+" # And the snippets that go with
+" git clone https://github.com/honza/vim-snippets.git
+
+
+" TODO: replace that with a language server integration
+" Go standard plugins
+" Plug 'jnwhiteh/vim-golang'
+
+" # Go autocomplete
+" go get -u github.com/nsf/gocode # This has to go in $GOPATH, not in bundles, which 'go get' will do
+" # Get the right stuff at the right place for pathogen
+" $GOPATH/src/github.com/nsf/gocode/vim/pathogen_update.sh
+
+
+" Powerline, a better status line
+"Plug 'powerline/powerline', {'branch': 'develop'}
+Plug 'vim-airline/vim-airline'
+
+" TODO: replace with a language server
+" # Dependancy for Omnisharp
+" git clone git://github.com/tpope/vim-dispatch.git
+" # Testing Omnisharp, a C# plugin
+" git clone https://github.com/nosami/Omnisharp.git
+" cd Omnisharp
+" git submodule update --init --recursive
+" cd server
+" xbuild /p:Platform="Any CPU"
+
+" Buffer grep: grep on open buffers with :Bgrep
+Plug 'vim-scripts/buffergrep'
+
+Plug 'kien/ctrlp.vim'
+
+" hilinks, to debug syntax files, mostly
+Plug 'kergoth/vim-hilinks'
+
+" Markdown files
+Plug 'tpope/vim-markdown'
+
+" To edit very large files without choking
+Plug 'vim-scripts/LargeFile'
+
+" local vimrc .lvimrc
+Plug 'embear/vim-localvimrc'
+
+" trailing whitespace highlight and remove
+Plug 'bronson/vim-trailing-whitespace'
+
+Plug 'ervandew/supertab'
+
+
+" syntastic
+Plug 'scrooloose/syntastic'
+
+
+" Completion: let's give a try to deoplete  --  first need to upgrade to Stretch so I have a Python >= 3.5...
+
+"Plug 'Shougo/deoplete.nvim'
+
+" Python
+"Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'   " autocomplete is quite shitty, it finds about nothing except for built-in types...
+
+" Semantic highlighting for Python
+" Needs Python >= 3.5, to re-enable after upgrading to Stretch
+"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+Plug 'OmniSharp/omnisharp-vim'
+
+
+" Golang
+"Plug 'zchee/deoplete-go'
+
+" grep / git grep / ripgrep / whatevergrep plugin
+Plug 'mhinz/vim-grepper'
+
+
+call plug#end()
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General behaviour preferences
@@ -30,7 +133,6 @@ set laststatus=2 " tells when last window has status lines
 
 " File completion : emacs-mode (longest prefix, then show a list
 set wildmode=longest,list
-"set wildmenu
 
 " Folding-related
 set foldmethod=syntax  " Folds are decided conidering syntax
@@ -99,7 +201,7 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 " Have the current file display on two columns with scrollbind
-noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
+" noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 """" Quickfix and location windows related. All mappings exist beginning by 'q'
 " for quickfix and 'l' for location
@@ -136,6 +238,14 @@ nnoremap <leader>qe :QuickFixClear<CR>
 
 
 
+" XXX fix for neovim and terminator
+set guicursor=
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+let $VTE_VERSION="100"
+
+
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programmation-related options (tabs, completion, ...)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -163,40 +273,39 @@ map <s-F10> :set nopaste<CR>
 
 
 " MULTIPURPOSE TAB KEY : Indent if we're at the beginning of a line. Else, do completion.
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-n>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-p>
-"inoremap <Nul> <c-n>
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-n>"
+"     endif
+" endfunction
+" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <s-tab> <c-p>
 
 " C-space makes omnicompletion
-inoremap <Nul> <c-x><c-o>
+" inoremap <Nul> <c-x><c-o>
 
 
 
 " Only complete to longest common prefix and show the menu even for only
 " one match. That's usefull if there is extra info such as file of origin
 " of type of the completed element
-set completeopt=longest,menuone
-let g:SuperTabLongestEnhanced=1
+" set completeopt=longest,menuone
+" let g:SuperTabLongestEnhanced=1
 
 
 " Auto-completion, in case there is nothing in ftplugin
-autocmd FileType html        set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css         set omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript  set omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType c           set omnifunc=clang
-autocmd FileType php         set omnifunc=phpcomplete#CompletePHP
-autocmd FileType ruby        set omnifunc=rubycomplete#Complete
-autocmd FileType sql         set omnifunc=sqlcomplete#Complete
-autocmd FileType python      set omnifunc=pythoncomplete#Complete
-autocmd FileType xml         set omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType html        set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType css         set omnifunc=csscomplete#CompleteCSS
+" autocmd FileType javascript  set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType c           set omnifunc=clang
+" autocmd FileType php         set omnifunc=phpcomplete#CompletePHP
+" autocmd FileType ruby        set omnifunc=rubycomplete#Complete
+" autocmd FileType sql         set omnifunc=sqlcomplete#Complete
+" autocmd FileType python      set omnifunc=pythoncomplete#Complete
+" autocmd FileType xml         set omnifunc=xmlcomplete#CompleteTags
 
 
 
@@ -229,22 +338,24 @@ au BufRead,BufNewFile *.log.4 setlocal ft=qlog
 au BufRead,BufNewFile *.log.5 setlocal ft=qlog
 
 
+"""" Deactivate to prevent interaction with anything, because I don't use it anyway
+"
 " Scala syntax for tagbar
-let g:tagbar_type_scala = {
-		\ 'ctagstype' : 'Scala',
-		\ 'kinds'     : [
-			\ 'p:packages:1',
-			\ 'V:values',
-			\ 'v:variables',
-			\ 'T:types',
-			\ 't:traits',
-			\ 'o:objects',
-			\ 'a:aclasses',
-			\ 'c:classes',
-			\ 'r:cclasses',
-			\ 'm:methods'
-	\ ]
-\ }
+" let g:tagbar_type_scala = {
+" 		\ 'ctagstype' : 'Scala',
+" 		\ 'kinds'     : [
+" 			\ 'p:packages:1',
+" 			\ 'V:values',
+" 			\ 'v:variables',
+" 			\ 'T:types',
+" 			\ 't:traits',
+" 			\ 'o:objects',
+" 			\ 'a:aclasses',
+" 			\ 'c:classes',
+" 			\ 'r:cclasses',
+" 			\ 'm:methods'
+" 	\ ]
+" \ }
 
 
 " Attempt to cut myself from the ESC key.
@@ -253,27 +364,18 @@ imap <leader>w <ESC>:w<CR>a
 nmap <leader>w :w<CR>
 
 
-" Ctrl-P global settings
+""""""""" Ctrl-P global settings
+" That will ignore files ignored by git
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
-
-" Locate file, Eclim functionality (hence won't always be available)
-nnoremap <silent> <leader>jl :LocateFile<cr>
-" Buffers, a :buffers with benefits, also from Eclim
-" But I don't like horizontal split
-let g:EclimBuffersDefaultAction='edit'
-nnoremap <silent> <leader>b :BuffersToggle<cr>
-
+nmap <C-q> :CtrlPBuffer<CR>
 
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,*.pyc,*.a,*.class
 
-
-" Some stuff for clojure mode
-let vimclojure#HighlightBuiltins=1      " Highlight Clojure's builtins
-let vimclojure#ParenRainbow=1           " Rainbow parentheses'!
 
 " For the viewdoc plugin
 let g:viewdoc_open='split'      " Doc opened in an horizontal split
@@ -316,24 +418,24 @@ let g:tagbar_type_go = {
 
 
 
-"""""""""""""" Some pyclewn stuff
+"""""""""""""" Some pyclewn stuff  --  deactivated as I never use that
 
-" Print the variable under the cursor
-map <leader>dp :exe "Cprint " . expand("<cword>") <CR>
-" Print the value pointed to by the pointer under the cursor
-map <leader>dx :exe "Cprint *" . expand("<cword>") <CR>
-" Watch value under cursor
-map <leader>dw :exe "Cdbgvar " . expand("<cword>") <CR>
-" Unwatch value under cursor
-map <leader>dd :exe "Cdelvar " . expand("<cword>") <CR>
-" Expand/collapse watched value under cursor
-map <leader>de :exe "Cfoldvar " . expand("<cword>") <CR>
-" Activate the pyclewn mappings
-map <leader>dm :Cmapkeys <CR>
-" Desactivate them
-map <leader>du :Cunmapkeys <CR>
-" Start a debug session
-map <leader>ds :Pyclewn <CR> :Cmapkeys <CR> :Cfile 
+" " Print the variable under the cursor
+" map <leader>dp :exe "Cprint " . expand("<cword>") <CR>
+" " Print the value pointed to by the pointer under the cursor
+" map <leader>dx :exe "Cprint *" . expand("<cword>") <CR>
+" " Watch value under cursor
+" map <leader>dw :exe "Cdbgvar " . expand("<cword>") <CR>
+" " Unwatch value under cursor
+" map <leader>dd :exe "Cdelvar " . expand("<cword>") <CR>
+" " Expand/collapse watched value under cursor
+" map <leader>de :exe "Cfoldvar " . expand("<cword>") <CR>
+" " Activate the pyclewn mappings
+" map <leader>dm :Cmapkeys <CR>
+" " Desactivate them
+" map <leader>du :Cunmapkeys <CR>
+" " Start a debug session
+" map <leader>ds :Pyclewn <CR> :Cmapkeys <CR> :Cfile 
 
 
 " Mapping for FuzzyFinder, starting witj <leader>f
@@ -348,51 +450,73 @@ map <leader>ft :FufTag<cr>
 
 
 " Don't bother me with the question each time I quit.
-let g:Omnisharp_stop_server=0
+" let g:Omnisharp_stop_server=0
 
 
+" vimgrep key mapping
+nnoremap <leader>fp :Grepper -tool rg<cr>
+nnoremap <leader>fo :Grepper -tool rg -cword -noprompt<cr>
+nnoremap <leader>fg :Grepper -tool git<cr>
 
-
-
-""""""""""""""""""""""""""" YouCompleteMe section """"""""""""""""""""""""""""""
-
-"let g:ycm_filetype_blacklist = {
-      "\ 'tagbar' : 1,
-      "\ 'qf' : 1,
-      "\ 'notes' : 1,
-      "\ 'markdown' : 1,
-      "\ 'unite' : 1,
-      "\ 'text' : 1,
-      "\ 'vimwiki' : 1,
-      "\ 'pandoc' : 1,
-      "\ 'infolog' : 1,
-      "\ 'mail' : 1,
-      "\ 'cs' : 1,
-      "\ 'fuf' : 1,
-      "\}
-
-let g:ycm_filetype_whitelist = {
-      \ 'python' : 1,
-      \}
-
-let g:ycm_python_binary_path = '/usr/bin/python3'
-
-
-" SuperTab complete in 'logical' order
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-
-" Pss key-mapping
-nnoremap <leader>fp :Pss<space>
-nnoremap <leader>fo "zyiw:exe "Pss ".@z.""<cr>
 
 
 " Localvimrc stuff
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistent = 2
 
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Deoplete configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+
+" Little delay so that semshi is fast (https://github.com/numirias/semshi#semshi-is-slow-together-with-deopletenvim)
+let g:deoplete#auto_complete_delay = 100
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Jedi configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Jedi
+let g:jedi#auto_vim_configuration = 0
+" current default is 1.
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#rename_command = '<Leader>r'
+let g:jedi#usages_command = '<Leader>u'
+let g:jedi#completions_enabled = 0
+let g:jedi#smart_auto_mappings = 1
+
+let g:jedi#goto_command = "gd"
+let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#completions_command = "<C-Space>"
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Misc configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" Basic python highlight, replace for Semshi after upgrade to stretch
+let python_self_cls_highlight = 1
+
+
+" SuperTab complete in 'logical' order
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " Auto update when external changes occur (from http://vim.wikia.com/wiki/Have_Vim_check_automatically_if_the_file_has_changed_externally)
 

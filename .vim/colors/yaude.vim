@@ -54,7 +54,7 @@ hi Number       guifg=#72FC27       gui=none        ctermfg=105     cterm=bold
 hi String       guifg=#9DDA53                       ctermfg=11
 hi Character    guifg=#E0E0E0       gui=bold        ctermfg=lightgrey cterm=bold
 hi Boolean      guifg=#89DE00       gui=bold        ctermfg=106     cterm=bold
-hi Identifier   guifg=#00AEFF       gui=bold        ctermfg=white       cterm=bold
+hi Identifier   guifg=#00AEFF       gui=bold        ctermfg=198     cterm=bold
 hi stdFunction                                      ctermfg=69    cterm=bold
 hi Function                                         ctermfg=39    cterm=bold
 "hi pythonUserFunction guifg=#00AEFF     gui=bold    ctermfg=39      cterm=bold

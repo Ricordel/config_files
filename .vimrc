@@ -185,6 +185,10 @@ let g:is_posix=1
 
 set scrolloff=4
 
+" As I write comments in C# code that requires all sorts of weird
+" tricks to work with Mono, this shortcut is absolutely essential.
+command Shrug :normal i¯\_(ツ)_/¯<ESC>
+
 " Move correctly on wrapped lines
 nmap j gj
 nmap k gk

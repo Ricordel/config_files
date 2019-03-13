@@ -41,7 +41,6 @@ Plug 'tpope/vim-fugitive'
 
 
 " Powerline, a better status line
-"Plug 'powerline/powerline', {'branch': 'develop'}
 Plug 'vim-airline/vim-airline'
 
 " TODO: replace with a language server
@@ -76,32 +75,52 @@ Plug 'bronson/vim-trailing-whitespace'
 
 Plug 'ervandew/supertab'
 
-
-" syntastic
-Plug 'scrooloose/syntastic'
-
-
-" Completion: let's give a try to deoplete  --  first need to upgrade to Stretch so I have a Python >= 3.5...
-
-"Plug 'Shougo/deoplete.nvim'
-
-" Python
-"Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'   " autocomplete is quite shitty, it finds about nothing except for built-in types...
-
-" Semantic highlighting for Python
-" Needs Python >= 3.5, to re-enable after upgrading to Stretch
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-
-Plug 'OmniSharp/omnisharp-vim'
-
-
-" Golang
-"Plug 'zchee/deoplete-go'
-
 " grep / git grep / ripgrep / whatevergrep plugin
 Plug 'mhinz/vim-grepper'
 
+" syntastic
+"Plug 'scrooloose/syntastic'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Completion: deoplete + language servers look like the best combo. Language server
+" integrations also has some linting abilities that are nice
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+
+Plug 'Shougo/deoplete.nvim'
+
+" language agnostic language server
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+"""" Python
+
+" Language server from Palantir. They may be have disputable ethics, but they
+" make good software it seems...
+
+" Semantic highlighting for Python
+" Needs Python >= 3.5, to re-enable after upgrading to Stretch
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+Plug 'OmniSharp/omnisharp-vim'
+
+" Golang
+"Plug 'zchee/deoplete-go'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Linting: ale is pretty good, seems to do all I can want a.t.m
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -463,12 +482,9 @@ nnoremap <leader>fo :Grepper -tool rg -cword -noprompt<cr>
 nnoremap <leader>fg :Grepper -tool git<cr>
 
 
-
 " Localvimrc stuff
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistent = 2
-
-
 
 
 
@@ -476,35 +492,96 @@ let g:localvimrc_persistent = 2
 " Deoplete configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Deoplete
+""""" General configuration
 let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
+call g:deoplete#custom#option('camel_case', v:true)
+call g:deoplete#custom#option('smart_case', v:true)
+let g:deoplete#enable_refresh_always = 0
 
 " Little delay so that semshi is fast (https://github.com/numirias/semshi#semshi-is-slow-together-with-deopletenvim)
 let g:deoplete#auto_complete_delay = 100
 
 
+""""" Go
+let g:deoplete#sources#go#gocode_binary = '/home/yoann/work/go/bin/gocode-tamere'
+let g:deoplete#sources#go#builtin_objects = 1
+
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Jedi configuration
+" LanguageClient configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Jedi
-let g:jedi#auto_vim_configuration = 0
-" current default is 1.
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#rename_command = '<Leader>r'
-let g:jedi#usages_command = '<Leader>u'
-let g:jedi#completions_enabled = 0
-let g:jedi#smart_auto_mappings = 1
+""""" General configuration
 
-let g:jedi#goto_command = "gd"
-let g:jedi#goto_assignments_command = "<leader>g"
-" let g:jedi#goto_definitions_command = ""
-" let g:jedi#completions_command = "<C-Space>"
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ }
 
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = '.vim/settings.json'
+
+let g:LanguageClient_diagnosticsEnable = 0
+
+nmap 'gd' :call LanguageClient_textDocument_definition()<CR>
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+
+
+"""""" Python
+
+" Don't forget to create those venvs and to install neovim inside,
+" see (https://github.com/deoplete-plugins/deoplete-jedi#virtual-environments)
+"
+" NOTE: may need to install python-language-server[all] in the venv of the current
+" project to get correct Python version and completion. So be it.
+
+let g:python_host_prog = '/home/yoann/.vim/neovim-venv/venv/bin/python'
+let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""" General config
+
+let g:ale_linters = {
+    \ 'sh': ['shellcheck'],
+    \ 'go': ['golangserver', 'gofmt'],
+    \ }
+let g:ale_completion_enabled = 0
+
+
+""""" Python
+
+let g:ale_python_flake8_executable = 'python3'   " or 'python' for Python 2
+let g:ale_python_flake8_options = '-m flake8'
+let g:ale_set_quickfix = 1
+
+
+""""" shellcheck for Bash
+
+" deactivating:
+"   - SC2086: quote to prevent word splitting
+"   - SC2002: useless use of cat. I don't fucking care, it's just clearer
+"     to cat a file, then filter it
+let g:ale_sh_shellcheck_options = '-x -e SC2086,SC2002'
+
+
+""""" Go
+
+let g:ale_go_gofmt_options = '-s'
 
 
 
@@ -512,9 +589,6 @@ let g:jedi#goto_assignments_command = "<leader>g"
 " Misc configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-" Basic python highlight, replace for Semshi after upgrade to stretch
-let python_self_cls_highlight = 1
 
 
 " SuperTab complete in 'logical' order

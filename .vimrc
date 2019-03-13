@@ -91,7 +91,11 @@ Plug 'mhinz/vim-grepper'
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
 
-Plug 'Shougo/deoplete.nvim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'Shougo/deoplete.nvim'
+
+"Plug 'deoplete-plugins/deoplete-jedi'
+
 
 " language agnostic language server
 Plug 'autozimu/LanguageClient-neovim', {
@@ -112,7 +116,7 @@ Plug 'OmniSharp/omnisharp-vim'
 
 " Golang
 "Plug 'zchee/deoplete-go'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 
 
 
@@ -489,25 +493,27 @@ let g:localvimrc_persistent = 2
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Deoplete configuration
+" Deoplete configuration  --  DEACTIVATED AS IT's fucking stopped working. YCM instead
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"" General configuration
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-call g:deoplete#custom#option('camel_case', v:true)
-call g:deoplete#custom#option('smart_case', v:true)
-let g:deoplete#enable_refresh_always = 0
 
-" Little delay so that semshi is fast (https://github.com/numirias/semshi#semshi-is-slow-together-with-deopletenvim)
-let g:deoplete#auto_complete_delay = 100
+"let g:deoplete#enable_at_startup = 1
+"if !exists('g:deoplete#omni#input_patterns')
+  "let g:deoplete#omni#input_patterns = {}
+"endif
+"call g:deoplete#custom#option('camel_case', v:true)
+"call g:deoplete#custom#option('smart_case', v:true)
+"let g:deoplete#enable_refresh_always = 0
+
+"" Little delay so that semshi is fast (https://github.com/numirias/semshi#semshi-is-slow-together-with-deopletenvim)
+"let g:deoplete#auto_complete_delay = 100
 
 
 """"" Go
-let g:deoplete#sources#go#gocode_binary = '/home/yoann/work/go/bin/gocode-tamere'
-let g:deoplete#sources#go#builtin_objects = 1
+"let g:deoplete#sources#go#gocode_binary = '/home/yoann/work/go/bin/gocode-tamere'
+"let g:deoplete#sources#go#builtin_objects = 1
+
 
 
 
@@ -519,11 +525,12 @@ let g:deoplete#sources#go#builtin_objects = 1
 """"" General configuration
 
 let g:LanguageClient_serverCommands = {
-    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'python': ['pyls', '-v', '--log-file', '/tmp/pyls.log'],
     \ }
 
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '.vim/settings.json'
+
+"let g:LanguageClient_loadSettings = 1
+"let g:LanguageClient_settingsPath = '.vim/settings.json'
 
 let g:LanguageClient_diagnosticsEnable = 0
 
@@ -559,15 +566,21 @@ let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
 let g:ale_linters = {
     \ 'sh': ['shellcheck'],
     \ 'go': ['golangserver', 'gofmt'],
+    \ 'cs': [],
     \ }
-let g:ale_completion_enabled = 0
+" mcsc
+"
+"let g:ale_completion_enabled = 1
 
 
 """"" Python
 
 let g:ale_python_flake8_executable = 'python3'   " or 'python' for Python 2
 let g:ale_python_flake8_options = '-m flake8'
-let g:ale_set_quickfix = 1
+" Don't set quickfix as this is done periodically and will erase the list
+" set by a grep for instance
+let g:ale_set_quickfix = 0
+let g:ale_set_loclist = 1
 
 
 """"" shellcheck for Bash

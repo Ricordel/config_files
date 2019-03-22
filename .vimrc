@@ -2,8 +2,10 @@
 
 call plug#begin('~/.vim/plugged')
 
-" Nerd commenter and nerdTree
+" Nerd commenter, to comment / uncomment code easily
 Plug 'scrooloose/nerdcommenter'
+
+" A browsable tree view of the working directory
 Plug 'scrooloose/nerdtree'
 
 " Match non single-chars, for instance tags in html
@@ -12,15 +14,9 @@ Plug 'vim-scripts/matchit.zip'
 " To have a view of vim 256 colors
 Plug 'guns/xterm-color-table.vim'
 
-" Tagbar, context-aware
-"git clone https://github.com/majutsushi/tagbar.git tagbar
-
 " Most recently used files
-" git clone https://github.com/ornicar/vim-mru.git mru
+Plug 'vim-scripts/mru.vim'
 
-
-" Fugitive: the ultimate git integration
-Plug 'tpope/vim-fugitive'
 
 " # Snipmate, snippet engine, and dependancies
 " git clone https://github.com/tomtom/tlib_vim.git
@@ -29,33 +25,13 @@ Plug 'tpope/vim-fugitive'
 " # And the snippets that go with
 " git clone https://github.com/honza/vim-snippets.git
 
-
-" TODO: replace that with a language server integration
-" Go standard plugins
-" Plug 'jnwhiteh/vim-golang'
-
-" # Go autocomplete
-" go get -u github.com/nsf/gocode # This has to go in $GOPATH, not in bundles, which 'go get' will do
-" # Get the right stuff at the right place for pathogen
-" $GOPATH/src/github.com/nsf/gocode/vim/pathogen_update.sh
-
-
-" Powerline, a better status line
+" Airline, a better status line
 Plug 'vim-airline/vim-airline'
-
-" TODO: replace with a language server
-" # Dependancy for Omnisharp
-" git clone git://github.com/tpope/vim-dispatch.git
-" # Testing Omnisharp, a C# plugin
-" git clone https://github.com/nosami/Omnisharp.git
-" cd Omnisharp
-" git submodule update --init --recursive
-" cd server
-" xbuild /p:Platform="Any CPU"
 
 " Buffer grep: grep on open buffers with :Bgrep
 Plug 'vim-scripts/buffergrep'
 
+" Ctrl-p: fuzzy finder to open files
 Plug 'kien/ctrlp.vim'
 
 " hilinks, to debug syntax files, mostly
@@ -78,8 +54,20 @@ Plug 'ervandew/supertab'
 " grep / git grep / ripgrep / whatevergrep plugin
 Plug 'mhinz/vim-grepper'
 
-" syntastic
-"Plug 'scrooloose/syntastic'
+" auto-close brackets and friends
+Plug 'Raimondi/delimitMate'
+
+" show indentation
+Plug 'Yggdroot/indentLine'
+
+" systemd syntax
+Plug 'wgwoods/vim-systemd-syntax'
+
+" toml syntax hithlighting
+Plug 'cespare/vim-toml'
+
+" git plugin
+Plug 'tpope/vim-fugitive'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -112,12 +100,11 @@ Plug 'autozimu/LanguageClient-neovim', {
 " Needs Python >= 3.5, to re-enable after upgrading to Stretch
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
+
+
+"""" C#
+
 Plug 'OmniSharp/omnisharp-vim'
-
-" Golang
-"Plug 'zchee/deoplete-go'
-"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-
 
 
 
@@ -127,6 +114,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'w0rp/ale'
 
 call plug#end()
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -516,6 +504,21 @@ let g:localvimrc_persistent = 2
 
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" YCM is great, but slows down opening files. I don't really care about
+" YCM when writing a git commit for instance, but I do care to have my
+" vim operational in < 1 sec. So only enable YCM for the filetypes where
+" it's really useful.
+let g:ycm_filetype_whitelist = {
+            \ 'cs': 1,
+            \ 'python': 1,
+            \ 'go': 1
+        \ }
+
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -601,6 +604,14 @@ let g:ale_go_gofmt_options = '-s'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""" delimitmate (auto close char insertion)
+let g:delimitMate_expand_cr=2  " behave correctly when inserting a carriage return just after a { or (
+let g:delimitMate_expand_space=2  " behave correctly when inserting a space just after a { or (
+
+
+""""" indentLine: show indentation level with thin chars
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 
 

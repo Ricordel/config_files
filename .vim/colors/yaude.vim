@@ -88,7 +88,7 @@ hi scalaRoot                                            ctermfg=white cterm=bold
 hi cCustomClass   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
 
 
-
+hi SpecialKey      ctermfg=239
 
 "hi Visual       cterm=reverse
 hi Visual       ctermbg=240

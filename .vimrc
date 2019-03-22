@@ -69,6 +69,8 @@ Plug 'cespare/vim-toml'
 " git plugin
 Plug 'tpope/vim-fugitive'
 
+" surround text with stuff
+Plug 'tpope/vim-surround'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Completion: deoplete + language servers look like the best combo. Language server

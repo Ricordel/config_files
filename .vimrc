@@ -206,6 +206,13 @@ command Shrug :normal i¯\_(ツ)_/¯<ESC>
 nmap j gj
 nmap k gk
 
+
+" diffget and diffput shorthands
+nmap <leader>dg :diffget<CR>
+nmap <leader>dp :diffput<CR>
+vmap <leader>dg :diffget<CR>
+vmap <leader>dp :diffput<CR>
+
 " Buffer next and buffer previous
 nmap <c-n> :bn<cr>
 nmap <c-b> :bp<cr>
@@ -323,6 +330,8 @@ map <s-F10> :set nopaste<CR>
 " autocmd FileType sql         set omnifunc=sqlcomplete#Complete
 " autocmd FileType python      set omnifunc=pythoncomplete#Complete
 " autocmd FileType xml         set omnifunc=xmlcomplete#CompleteTags
+
+autocmd FileType json          set conceallevel=0
 
 
 
@@ -558,7 +567,8 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " project to get correct Python version and completion. So be it.
 
 let g:python_host_prog = '/home/yoann/.vim/neovim-venv/venv/bin/python'
-let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
+"let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
+let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3.7/bin/python'
 
 
 

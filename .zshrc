@@ -64,15 +64,22 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+export HISTSIZE=1000000
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 export EDITOR=nvim
 
 # For mono, by default I need the debian mono, so put /usr/bin in front of /usr/local/bin
-export PATH=~/.local/bin/:~/bin:/usr/bin:/opt/qarnot/bin:/opt/qarnot/simulator/bin:/opt/heap-shot/lib/heap-shot:/opt/influxdb:/opt/telegraf:$PATH:
+export PATH=~/.local/bin/:~/bin:/usr/bin:/opt/qarnot/bin:/opt/qarnot/simulator/bin:/opt/heap-shot/lib/heap-shot:/opt/influxdb:/opt/telegraf:/usr/local/go/bin:/home/yoann/work/qarnot/experimentations/linuxkit/linuxkit-git/bin:$PATH:
 export LD_LIBRARY_PATH=/opt/qarnot/bin:$LD_LIBRARY_PATH
-# go root and stuff
-export GOPATH=/home/yoann/work/go
-export GOBIN=$GOPATH/bin
+
+# Path for Go ginaries
+export GOPATH=~/work/go
+GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
 # java home
@@ -103,8 +110,9 @@ function recursive_grep_sourcefiles_casei {
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias rg='recursive_grep $*'
-alias rgi='recursive_grep_case_ins $*'
+#alias rg='recursive_grep $*'
+#alias rgi='recursive_grep_case_ins $*'
+alias rgi='rg -i'
 
 alias dsf=diff-so-fancy
 
@@ -155,7 +163,7 @@ function fuzzy_find {
 alias c='cd_ls $*'
 alias cl='clear'
 alias less='less --quiet'
-alias tf='tail -f'
+alias tf='tail -F'
 alias s='cd ..'
 alias u='cd .. && ls'
 alias p='cd -'
@@ -165,11 +173,12 @@ alias duu='du --max-depth=1'
 alias md='mkdir'
 alias mdc='mkdir_cd $*'
 alias rd='rmdir'
-alias maman='sudo'
+alias maman='sudo '
+alias sudo='sudo '
 alias m='make'
-alias mj='make -j5'
+alias mj='make -j9'
 alias r='make run'
-alias mb='make -j5 -B'
+alias mb='make -j9 -B'
 # Make with clang as C compiler (for better error messages)
 alias makec='make CC=clang LD=clang CXX=clang++'
 # Make with debug infos
@@ -184,6 +193,7 @@ alias xbb='xbuild /target:Clean && xbuild'
 
 alias v='nvim'
 alias vi='nvim'
+alias via='nvim /tmp/a'
 
 alias fsel='find . | selecta'
 
@@ -193,7 +203,7 @@ alias g='git'
 alias glh='git log | head -n 40'
 alias glo='git log --oneline'
 alias gloh='git log --oneline | head -n 40'
-alias gk='gitk --all&'
+alias gk='qgit --all&'
 alias ts='tig status'
 
 export QSH_HEAD="~/work/qarnot/apps/qshell/bin/Debug/QarnotShell.exe"
@@ -204,6 +214,10 @@ alias qsimu-head="mono --debug $QSIMU_HEAD"
 alias ts='tig status' # tig is SO awesome
 
 alias sc='systemctl'
+alias jc='journalctl -u '
+alias jcf='journalctl -f -u '
+
+alias td='tcpdump -l -vv -n'
 
 alias timestamp='date +%s'
 
@@ -253,8 +267,8 @@ alias baldurssh='ssh yoann@192.168.6.67'
 alias devboxssh='ssh -p 49022 root@82.239.66.128'
 alias devboxforward='ssh -L 8090:127.0.0.1:8081 -p 49022 root@82.239.66.128'
 
-alias qssh='ssh -p 50022'
-alias qscp='scp -P 50022'
+#alias qssh='ssh -p 50022'
+#alias qscp='scp -P 50022'
 
 # Buffer only one line instead of a lot. Better to view logs in real time
 # when they are on stdout
@@ -287,12 +301,20 @@ alias 16to10='~/bin/convert_base 16 10'
 alias 2to10='~/bin/convert_base 2 10'
 alias 10to2='~/bin/convert_base 10 2'
 
-alias _='sudo'
+alias _='sudo '
 
 #alias docker='sudo /usr/bin/docker'
 #alias docker='docker-1.9'
+alias d=docker
 alias dr='docker run --rm -it'
+alias drh='docker run --rm -it -v $PWD:/w -w /w'
+alias de='docker exec -it'
 
+alias rf='readlink -f'
+
+alias dnet='docker run -it -v $(readlink -f .):/w -w /w microsoft/dotnet dotnet'
+
+alias ve='source venv/bin/activate'
 
 # some zsh-specific awesomness
 
@@ -337,73 +359,22 @@ alias -s avi=mplayer
 
 
 # Alias for usual machines
-alias qrocosrv01='ssh -p 50022 root@qrocosrv01.qarnot.net -t "cd /opt/qarnot/www/qrocosrv/www/public; zsh --login"'
-alias qrocosrv='qrocosrv01'
-alias qrocomon01='ssh -p 50022 root@qrocomon01.qarnot.net -t zsh --login'
-alias qrocomon02='ssh -p 50022 root@qrocomon02.qarnot.net -t zsh --login'
-alias submit='ssh root@submit.qarnot.net'
-alias submit01='ssh -p 50022 root@submit01.qarnot.net -t zsh --login'
-alias submit02='ssh -p 50022 root@submit02.qarnot.net'
-alias docker01='ssh -p 50022 root@docker01.qarnot.net'
-alias qoala01='ssh -p 50022 root@qoala-blender01.qarnot.net -t zsh --login'
-alias qoala02='ssh -p 50022 root@qoala-blender02.qarnot.net -t zsh --login'
-alias python01='ssh -p 50022 root@qoala-python01.qarnot.net'
-alias python02='ssh -p 50022 root@qoala-python02.qarnot.net'
-alias qobra01='ssh -p 50022 root@qobra01.qarnot.net'
-alias qobra02='ssh -p 50022 root@qobra02.qarnot.net'
-alias rssh01='ssh -p 50022 root@rssh01.qarnot.net'
-alias build01='ssh -p 50022 root@build01.qarnot.net -t "cd /opt/qarnot/src/; zsh --login"'
-alias qmonitor-dev='ssh root@192.168.5.7'
-alias admin02='ssh -p 50022 root@admin02.qarnot.net'
-alias forward01='ssh -p 50022 root@forward01.qarnot.net'
-alias qtout='ssh root@192.168.6.246'
-alias qtout2='ssh root@192.168.6.160'
-alias rest01='ssh -p 50022 root@rest01.qarnot.net -t /usr/bin/zsh --login'
-alias rest02='ssh -p 50022 root@rest02.qarnot.net -t /usr/bin/zsh --login'
-alias api.prod='ssh -p 50022 root@api.qarnot.com -t /usr/bin/zsh --login'
-alias qrocodir='ssh -p 50022 root@qrocodir01.qarnot.net -t /usr/bin/zsh --login'
-alias bnp='ssh -p 50022 root@bnp.qarnot.net'
-alias qbig1='ssh -p 50022 root@62.210.95.37 -t /usr/bin/zsh --login'
-alias qbig2='ssh -p 50022 root@62.210.246.52 -t /usr/bin/zsh --login'
-alias qbig3='ssh root@195.154.154.175'
-alias qbig4='ssh root@195.154.154.176'
-alias qbig5='ssh root@195.154.154.177'
-alias qbig6='ssh root@195.154.154.178'
-alias qbig7='ssh root@195.154.154.179'
-alias osho01='ssh -p 50022 root@osho01.qarnot.net -t /usr/bin/zsh --login'
-alias jira01='ssh -p 50022 root@jira01.qarnot.net'
-alias boinc01='ssh -p 50022 root@boinc-snapshot01.qarnot.net'
-alias buildbot01='ssh -p 50022 root@buildbot.qarnot.loc'
-alias buildbot-slave='ssh root@192.168.6.238'
-alias sso-back01='ssh -p 50022 root@sso-back01.qarnot.net -t /usr/bin/zsh --login'
-alias sso-back02='ssh -p 50022 root@212.83.155.36 -t /usr/bin/zsh --login'
-alias sso-front01='ssh -p 50022 root@sso-front01.qarnot.net'
-alias sso-ldap01='ssh -p 50022 root@sso-ext01.qarnot.net'
-alias influx-smarthome='ssh -p 50022 root@influx-sensors.qarnot.net'
-alias influx-hpc='ssh -p 50022 root@influx-hpc.qarnot.net'
+#alias qrocosrv01='ssh -p 50022 yoann.ricordel@qrocosrv01.qarnot.net -t "cd /opt/qarnot/www/qrocosrv/www/public; sudo zsh --login"'
+alias qrocosrv02='ssh -p 50022 yoann.ricordel@qrocosrv02.qarnot.net -t "cd /opt/qarnot/www/qrocosrv/www/public; sudo zsh --login"'
+alias qrocosrv='ssh -p 50022 yoann.ricordel@qrocosrv.qarnot.net -t "cd /opt/qarnot/www/qrocosrv/www/public; sudo zsh --login"'
+alias qrocomon01='qqssh qrocomon01.qarnot.net'
+alias qrocomon02='qqssh qrocomon02.qarnot.net'
+alias submit01='qqssh submit01.qarnot.net'
+alias rssh01='qqssh rssh01.qarnot.net'
+alias build01='ssh -p 50022 yoann.ricordel@build01.qarnot.net -t "cd /opt/qarnot/src/; sudo zsh --login"'
+alias forward01='qqssh forward01.qarnot.net'
+alias bnp='qqssh bnp.qarnot.net'
+alias jira01='qqssh jira01.qarnot.net'
+alias buildbot01='qqssh buildbot.redmont.qarnot.net'
+alias buildbot-slave='qssh 192.168.6.16'
+alias buildbot-slave2='qqssh 192.168.6.17'
+alias influx-smarthome='qqssh influx-sensors.qarnot.net'
+alias influx-hpc='qqssh influx-hpc.qarnot.net'
+alias ceph-admin='ssh -p 50022 yoann.ricordel@92.222.155.248 -t sudo su'
 
-# Alias with tmux in supplement
-alias tqrocosrv01='ssh -p 50022 root@qrocosrv01.qarnot.net -t "tmux a || tmux"'
-alias tqrocosrv='tqrocosrv01'
-alias tqs='tqrocosrv01'
-alias tqrocomon01='ssh -p 50022 root@qrocomon01.qarnot.net -t "tmux a || tmux"'
-alias tqrocomon02='ssh -p 50022 root@qrocomon02.qarnot.net -t "tmux a || tmux"'
-alias tsubmit='ssh yricordel@submit.qarnot.net'
-alias tsubmit01='ssh -p 50022 root@submit01.qarnot.net -t "tmux a || tmux"'
-alias tsubmit02='ssh -p 50022 root@submit02.qarnot.net -t "tmux a || tmux"'
-alias tdocker01='ssh -p 50022 root@docker01.qarnot.net -t "tmux a || tmux"'
-alias tqoala01='ssh -p 50022 root@qoala-blender01.qarnot.net -t "tmux a || tmux"'
-alias tqoala02='ssh -p 50022 root@qoala-blender02.qarnot.net -t "tmux a || tmux"'
-alias tpython01='ssh -p 50022 root@qoala-python01.qarnot.net -t "tmux a || tmux"'
-alias tpython02='ssh -p 50022 root@qoala-python02.qarnot.net -t "tmux a || tmux"'
-alias tqobra01='ssh -p 50022 root@qobra01.qarnot.net -t "tmux a || tmux"'
-alias tqobra02='ssh -p 50022 root@qobra02.qarnot.net -t "tmux a || tmux"'
-alias trssh01='ssh -p 50022 root@rssh01.qarnot.net -t "tmux a || tmux"'
-alias tbuild01='ssh -p 50022 root@build01.qarnot.net -t "tmux a || tmux"'
-alias tb='tbuild01'
-alias tqmonitor-dev='ssh root@192.168.5.7 -t "tmux a || tmux"'
-alias tadmin02='ssh -p 50022 root@admin02.qarnot.net -t "tmux a || tmux"'
-alias tforward01='ssh -p 50022 root@forward01.qarnot.net -t "tmux a || tmux"'
-alias tqtout='ssh root@192.168.6.246 -t "tmux a || tmux"'
-alias trest01='ssh -p 50022 root@rest01.qarnot.net -t "tmux a || tmux"'
-alias trest01='ssh -p 50022 root@rest01.qarnot.net -t "tmux a || tmux"'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

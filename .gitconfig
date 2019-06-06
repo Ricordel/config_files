@@ -1,6 +1,6 @@
 [user]
-	name = Yoann Ricordel
-	email = leyaude@gmail.com
+    name = Yoann Ricordel
+    email = yoann.ricordel@qarnot-computing.com
 [core]
 	editor = vim
 	mergetool = vimdiff
@@ -16,13 +16,22 @@
     au = add -u
     ff = merge --ff-only
     noff = merge --no-ff
+    cp = cherry-pick
 [color]
 	ui = true
 [diff]
-	tool = vimdiff
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d -u ~/.vimrc \"$LOCAL\" \"$REMOTE\""
 [difftool]
 	prompt = false
 [merge]
-    tool = vimdiff
+    tool = nvimdiff
+[mergetool "nvimdiff"]
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool]
     prompt = false
+[push]
+	default = simple
+[branch]
+	autosetuprebase = always

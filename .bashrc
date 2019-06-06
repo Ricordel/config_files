@@ -14,7 +14,11 @@ export EDITOR=vim
 [ -z "$PS1" ] && return
 
 # my local bin, IntelliJ Idea
-export PATH=~/bin:$PATH:/home/leyaude/bin/intellij/idea-IC-123.123/bin
+export PATH=~/.local/bin/:~/bin:/usr/bin:/opt/qarnot/bin:/opt/qarnot/simulator/bin:/opt/heap-shot/lib/heap-shot:/opt/influxdb:/opt/telegraf:/usr/local/go/bin:/home/yoann/work/qarnot/experimentations/linuxkit/linuxkit-git/bin:$PATH:
+
+export GOPATH=/home/yoann/work/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -213,7 +217,5 @@ fi # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 #export JAVA_HOME=/usr/lib/jvm/java-7-openjdk/
 #export SCALA_HOME=/usr/share/scala
 
-# go root and stuff
-export GOROOT=/home/leyaude/bin/go
-export GOBIN=$GOROOT/bin
-export PATH=$PATH:$GOBIN
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

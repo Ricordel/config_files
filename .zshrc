@@ -48,7 +48,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # XXX from https://github.com/zsh-users/zsh-syntax-highlighting, it seems
 # that the syntax-highlight plugin must be set last
 #plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
-plugins=(git colored-man-pages cp colorize z debian sudo vagrant systemd docker redis-cli zsh-syntax-highlighting)
+plugins=(git pass colored-man-pages cp colorize z debian sudo vagrant systemd docker redis-cli zsh-syntax-highlighting)
 
 fpath=(~/.zsh/completions $fpath)
 
@@ -219,6 +219,8 @@ alias jcf='journalctl -f -u '
 
 alias td='tcpdump -l -vv -n'
 
+alias dn='dotnet'
+
 alias timestamp='date +%s'
 
 # A bit better than ps aux | grep pattern
@@ -287,7 +289,7 @@ alias nloadw='nload -u K wlan0'
 #alias hubic-mount='cloudfuse /home/leyaude/mount_point -o noauto_cache,sync_read'
 alias hubic-sync='hubic login "leyaude@gmail.com" /home/leyaude/data/hubic-sync'
 
-alias upgrade='sudo aptitude update; sudo aptitude upgrade'
+alias upgrade='sudo apt update; sudo apt upgrade'
 alias iotop='sudo iotop'
 
 alias ip='ip -c'
@@ -315,6 +317,8 @@ alias rf='readlink -f'
 alias dnet='docker run -it -v $(readlink -f .):/w -w /w microsoft/dotnet dotnet'
 
 alias ve='source venv/bin/activate'
+
+alias pas='pass -c'
 
 # some zsh-specific awesomness
 

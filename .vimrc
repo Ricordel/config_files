@@ -72,6 +72,9 @@ Plug 'tpope/vim-fugitive'
 " surround text with stuff
 Plug 'tpope/vim-surround'
 
+" vue.js components syntax
+Plug 'posva/vim-vue'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Completion: deoplete + language servers look like the best combo. Language server
 " integrations also has some linting abilities that are nice

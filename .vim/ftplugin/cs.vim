@@ -45,7 +45,7 @@ set completeopt=longest,menuone,preview
 
 
 " Add compiler stuff
-let current_compiler = "xbuild"
+let current_compiler = "msbuild"
 let s:keepcpo= &cpo
 set cpo&vim
 
@@ -72,7 +72,8 @@ CompilerSet errorformat=
     \%-G%.%#Compilation%.%#,
     \%-G%.%#
 
-CompilerSet makeprg=xbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /verbosity:quiet
+"CompilerSet makeprg=msbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /verbosity:quiet
+CompilerSet makeprg=/home/yoann/bin/msbuild-filtered\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /verbosity:quiet
 
 let &cpo = s:keepcpo
 unlet s:keepcpo

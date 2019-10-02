@@ -539,7 +539,7 @@ let g:ycm_filetype_whitelist = {
 """"" General configuration
 
 let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls', '-v', '--log-file', '/tmp/pyls.log'],
+    \ 'python': ['python', '-m', 'pyls', '-v', '--log-file', '/tmp/pyls.log'],
     \ }
 
 
@@ -567,8 +567,8 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " project to get correct Python version and completion. So be it.
 
 let g:python_host_prog = '/home/yoann/.vim/neovim-venv/venv/bin/python'
-"let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
-let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3.7/bin/python'
+let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
+"let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3.7/bin/python'
 
 
 
@@ -596,6 +596,10 @@ let g:ale_python_flake8_options = '-m flake8'
 " set by a grep for instance
 let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 1
+
+" mypy will blow up on missing imports if it does not find
+" typesheds, which is not always the case with uncomon packages
+let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 
 """"" shellcheck for Bash

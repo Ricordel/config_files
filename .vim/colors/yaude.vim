@@ -96,7 +96,8 @@ hi VisualNOS    cterm=bold,underline
 
 hi rstEmphasis      cterm=bold
 
-hi DiffAdd                     ctermbg=24
-hi DiffChange      ctermfg=181 ctermbg=239
+hi DiffAdd                     ctermbg=22
+hi DiffChange      ctermfg=181 ctermbg=24
 hi DiffDelete      ctermfg=162 ctermbg=53
-hi DiffText                    ctermbg=102 cterm=bold
+"hi DiffText                    ctermbg=102 cterm=bold
+hi DiffText                    ctermbg=52 cterm=bold

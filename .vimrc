@@ -130,6 +130,9 @@ set fileformat=unix		" Files at unix format (CR)
 set shell=bash
 set mouse=a                     " I can use the mouse if I want
 
+set ttyfast
+set redrawtime=10000
+
 " desactivate that useless antiquity of ex-mode
 nnoremap Q <nop>
 
@@ -445,41 +448,6 @@ let g:tagbar_type_go = {
 \ }
 
 
-
-
-"""""""""""""" Some pyclewn stuff  --  deactivated as I never use that
-
-" " Print the variable under the cursor
-" map <leader>dp :exe "Cprint " . expand("<cword>") <CR>
-" " Print the value pointed to by the pointer under the cursor
-" map <leader>dx :exe "Cprint *" . expand("<cword>") <CR>
-" " Watch value under cursor
-" map <leader>dw :exe "Cdbgvar " . expand("<cword>") <CR>
-" " Unwatch value under cursor
-" map <leader>dd :exe "Cdelvar " . expand("<cword>") <CR>
-" " Expand/collapse watched value under cursor
-" map <leader>de :exe "Cfoldvar " . expand("<cword>") <CR>
-" " Activate the pyclewn mappings
-" map <leader>dm :Cmapkeys <CR>
-" " Desactivate them
-" map <leader>du :Cunmapkeys <CR>
-" " Start a debug session
-" map <leader>ds :Pyclewn <CR> :Cmapkeys <CR> :Cfile 
-
-
-" Mapping for FuzzyFinder, starting witj <leader>f
-" Buffer mode : search among open buffers
-map <leader>fb :FufBuffer<cr>
-" File mode, replacement for Cx-f
-map <leader>ff :FufFile<cr>
-" Recursive File mode, search recursively from current directory
-map <leader>fr :FufCoverageFile<cr>
-" Tags
-map <leader>ft :FufTag<cr>
-
-
-" Don't bother me with the question each time I quit.
-" let g:Omnisharp_stop_server=0
 
 
 " vimgrep key mapping

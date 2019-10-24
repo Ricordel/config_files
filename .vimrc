@@ -552,7 +552,7 @@ let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
 let g:ale_linters = {
     \ 'sh': ['shellcheck'],
     \ 'go': ['golangserver', 'gofmt'],
-    \ 'cs': [],
+    \ 'cs': ['OmniSharp'],
     \ }
 " mcsc
 "

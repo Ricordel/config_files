@@ -18,7 +18,10 @@ setlocal omnifunc=OmniSharp#Complete
 
 
 " Use the preview window instead of the status line for type lookup
-let g:OmniSharp_typeLookupInPreview=1
+"let g:OmniSharp_typeLookupInPreview=1
+let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_timeout = 5
+"let g:OmniSharp_highlight_types = 2
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
 nnoremap <leader>jd :OmniSharpGotoDefinition<cr>
@@ -36,12 +39,16 @@ nnoremap <leader>js :OmniSharpReloadSolution<cr>
 
 nnoremap <leader>jc :OmniSharpFindSyntaxErrors<cr>
 
+nnoremap <leader>fm :OmniSharpFindMembers<cr>
+nnoremap <leader>ft :OmniSharpTypeLookup<cr>
+nnoremap <leader>fd :OmniSharpDocumentation<cr>
+nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
+nnoremap <F2> :OmniSharpRename<CR>
 
 "don't autoselect first item in omnicomplete, show if only one item (for preview)
 set completeopt=longest,menuone,preview
 
 
-"nnoremap <space> :OmniSharpGetCodeActions<cr>
 
 
 " Add compiler stuff
@@ -52,10 +59,6 @@ set cpo&vim
 if exists(":CompilerSet") != 2  " older Vim always used :setlocal
   command -nargs=* CompilerSet setlocal <args>
 endif
-
-"CompilerSet errorformat=\ %#%f(%l\\\,%c):\ %trror\ %m,
-"CompilerSet errorformat+=%f(%l):\ %trror\ %m,
-
 
 CompilerSet errorformat=
     \%*[^\"]\"%f\"%*\\D%l:\ %m,
@@ -72,8 +75,7 @@ CompilerSet errorformat=
     \%-G%.%#Compilation%.%#,
     \%-G%.%#
 
-"CompilerSet makeprg=msbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /verbosity:quiet
-CompilerSet makeprg=/home/yoann/bin/msbuild-filtered\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /verbosity:quiet
+CompilerSet makeprg=dotnet\ msbuild\ /property:GenerateFullPaths=true\ /verbosity:quiet
 
 let &cpo = s:keepcpo
 unlet s:keepcpo

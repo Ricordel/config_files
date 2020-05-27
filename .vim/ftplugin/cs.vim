@@ -44,6 +44,8 @@ nnoremap <leader>ft :OmniSharpTypeLookup<cr>
 nnoremap <leader>fd :OmniSharpDocumentation<cr>
 nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
 nnoremap <F2> :OmniSharpRename<CR>
+nnoremap <leader>t :OmniSharpRunTest<cr>
+nnoremap <leader>T :OmniSharpRunTestsInFile<cr>
 
 "don't autoselect first item in omnicomplete, show if only one item (for preview)
 set completeopt=longest,menuone,preview

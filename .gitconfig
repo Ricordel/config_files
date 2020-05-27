@@ -7,16 +7,18 @@
 
 [alias]
 	ci = commit
+    cia = commit --amend --no-edit
 	st = status
 	stu = status -uno
 	ch = checkout
     co = checkout
 	br = branch
-    aa = add -A
-    au = add -u
     ff = merge --ff-only
     noff = merge --no-ff
     cp = cherry-pick
+    pu = push
+    puf = push --force-with-lease
+    psu = push --set-upstream
 [color]
 	ui = true
 [diff]

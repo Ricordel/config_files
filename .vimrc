@@ -84,7 +84,7 @@ Plug 'posva/vim-vue'
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer' }
 "Plug 'Shougo/deoplete.nvim'
 
 "Plug 'deoplete-plugins/deoplete-jedi'
@@ -497,7 +497,8 @@ let g:localvimrc_persistent = 2
 let g:ycm_filetype_whitelist = {
             \ 'cs': 1,
             \ 'python': 1,
-            \ 'go': 1
+            \ 'go': 1,
+            \ 'c': 1
         \ }
 
 
@@ -511,6 +512,9 @@ let g:ycm_filetype_whitelist = {
 
 let g:LanguageClient_serverCommands = {
     \ 'python': ['python', '-m', 'pyls', '-v', '--log-file', '/tmp/pyls.log'],
+    \ 'cpp': ['clangd'],
+    \ 'c': ['clangd'],
+    \ 'bash': ['bash-language-server', 'start'],
     \ }
 
 
@@ -552,8 +556,10 @@ let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
 let g:ale_linters = {
     \ 'sh': ['shellcheck'],
     \ 'go': ['golangserver', 'gofmt'],
-    \ 'cs': ['OmniSharp'],
+    \ 'cs': [''],
     \ }
+
+""    \ 'cs': ['OmniSharp'],
 " mcsc
 "
 "let g:ale_completion_enabled = 1

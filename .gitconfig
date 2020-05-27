@@ -25,12 +25,14 @@
     cmd = "nvim -d -u ~/.vimrc \"$LOCAL\" \"$REMOTE\""
 [difftool]
 	prompt = false
+	trustExitCode = true
 [merge]
     tool = nvimdiff
 [mergetool "nvimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool]
     prompt = false
+	trustExitCode = true
 [push]
 	default = simple
 [branch]

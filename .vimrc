@@ -584,7 +584,7 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 "   - SC2086: quote to prevent word splitting
 "   - SC2002: useless use of cat. I don't fucking care, it's just clearer
 "     to cat a file, then filter it
-let g:ale_sh_shellcheck_options = '-x -e SC2086,SC2002'
+let g:ale_sh_shellcheck_options = '-x -e SC2002'
 
 
 """"" Go

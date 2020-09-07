@@ -348,7 +348,7 @@ autocmd FileType json          set conceallevel=0
 " NERDTree
 let NERDTreeQuitOnOpen=1 " Quit tree window when opening a file
 " Toggle nerdTree window with F9
-nnoremap <silent> <F8> :NERDTreeToggle ./<CR> 
+nnoremap <silent> <F8> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.class$', '\.o$', '\.pyc$', '\~$']
 
 " Tagbar toggles with F9

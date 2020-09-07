@@ -542,8 +542,7 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " project to get correct Python version and completion. So be it.
 
 let g:python_host_prog = '/home/yoann/.vim/neovim-venv/venv/bin/python'
-let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3/bin/python'
-"let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3.7/bin/python'
+let g:python3_host_prog = '/home/yoann/.vim/neovim-venv/venv3.8/bin/python'
 
 
 

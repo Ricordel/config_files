@@ -25,7 +25,7 @@ if version > 580
 endif
 let g:colors_name="yaude"
 
-hi Normal       guifg=#E0E0E0   guibg=#0B0B0B       ctermfg=254 cterm=bold
+hi Normal       guifg=#E0E0E0   guibg=#0B0B0B       ctermfg=254
 
 " highlight groups
 hi Cursor       guibg=grey90    guifg=grey20
@@ -41,7 +41,7 @@ hi NonText      guifg=LightBlue guibg=grey30
 hi Question     guifg=springgreen
 hi Search       guibg=#FFC31C   guifg=black         ctermfg=172     ctermbg=235
 hi SpecialKey   guifg=yellowgreen
-hi StatusLine   guibg=#353535   guifg=#F0F0F0   gui=none ctermfg=248 
+hi StatusLine   guibg=#353535   guifg=#F0F0F0   gui=none ctermfg=248
 hi StatusLineNC guibg=#c2bfa5   guifg=grey50    gui=none
 hi Title        guifg=indianred
 hi Visual       guibg=#2D2D2D                   gui=none
@@ -54,7 +54,7 @@ hi Number       guifg=#72FC27       gui=none        ctermfg=105     cterm=bold
 hi String       guifg=#9DDA53                       ctermfg=11
 hi Character    guifg=#E0E0E0       gui=bold        ctermfg=lightgrey cterm=bold
 hi Boolean      guifg=#89DE00       gui=bold        ctermfg=106     cterm=bold
-hi Identifier   guifg=#00AEFF       gui=bold        ctermfg=198     cterm=bold
+hi Identifier   guifg=#00AEFF                       ctermfg=111   cterm=bold
 hi stdFunction                                      ctermfg=69    cterm=bold
 hi Function                                         ctermfg=39    cterm=bold
 "hi pythonUserFunction guifg=#00AEFF     gui=bold    ctermfg=39      cterm=bold
@@ -80,6 +80,7 @@ hi pythonDelimiter guifg=#FFC005 gui=bold           ctermfg=214     cterm=bold
 hi Ignore       guifg=grey40
 hi Todo         guifg=black guibg=yellow2
 hi keyword                                          ctermfg=161      cterm=bold
+hi def PropertyName                                 ctermfg=152      cterm=bold
 
 hi scalaSymbol                                          ctermfg=white cterm=bold
 hi scalaRoot                                            ctermfg=white cterm=bold

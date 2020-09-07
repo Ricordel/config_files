@@ -21,7 +21,7 @@ setlocal omnifunc=OmniSharp#Complete
 "let g:OmniSharp_typeLookupInPreview=1
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_timeout = 5
-"let g:OmniSharp_highlight_types = 2
+let g:OmniSharp_highlighting = 2
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
 nnoremap <leader>jd :OmniSharpGotoDefinition<cr>
@@ -84,3 +84,13 @@ unlet s:keepcpo
 
 nnoremap <leader>m :make!<cr> :cwindow<cr>
 
+
+""" Semantic highlight bindings
+let g:OmniSharp_highlight_groups = {
+    \ 'Comment': 'NonText',
+    \ 'LocalName': 'Normal',
+    \ 'PropertyName': 'PropertyName',
+    \ 'ParameterName': 'Identifier',
+    \ 'XmlDocCommentName': 'Identifier',
+    \ 'XmlDocCommentText': 'NonText'
+\}

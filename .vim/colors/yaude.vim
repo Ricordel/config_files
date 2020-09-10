@@ -29,7 +29,9 @@ hi Normal       guifg=#E0E0E0   guibg=#0B0B0B       ctermfg=254
 
 " highlight groups
 hi Cursor       guibg=grey90    guifg=grey20
-hi CursorLine   guibg=#1D1D1D                       ctermbg=darkgrey
+hi CursorLine   guibg=#1D1D1D                   ctermbg=235
+hi clear CursorLine
+hi CursorLineNR guibg=#1D1D1D                   ctermbg=39
 hi VertSplit    guibg=#c2bfa5   guifg=grey50    gui=none
 hi Folded       guibg=grey30    guifg=gold
 hi FoldColumn   guibg=grey30    guifg=tan

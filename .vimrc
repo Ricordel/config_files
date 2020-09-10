@@ -208,6 +208,17 @@ set scrolloff=4
 " tricks to work with Mono, this shortcut is absolutely essential.
 command Shrug :normal i¯\_(ツ)_/¯<ESC>
 
+
+" Highlight line number of the current cursor line
+" Enable cursor line position tracking:
+set cursorline
+" Both the following are done in the colorscheme: This has to be done in the colorscheme
+"   Remove the underline from enabling cursorline:
+"   highlight clear CursorLine
+
+"   Set line numbering to red background.
+"   highlight CursorLineNR ctermbg=red
+
 " Move correctly on wrapped lines
 nmap j gj
 nmap k gk

@@ -87,7 +87,7 @@ nnoremap <leader>m :make!<cr> :cwindow<cr>
 
 """ Semantic highlight bindings
 let g:OmniSharp_highlight_groups = {
-    \ 'Comment': 'NonText',
+    \ 'Comment': 'Comment',
     \ 'LocalName': 'Normal',
     \ 'PropertyName': 'PropertyName',
     \ 'ParameterName': 'Identifier',

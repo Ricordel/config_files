@@ -146,6 +146,7 @@ function jcurl {
 }
 
 alias ipt='sudo iptables -L -n -v'
+alias iptn='sudo iptables -t nat -L -n -v'
 
 # Un cd && ls qui va bien
 function cd_ls {
@@ -216,6 +217,7 @@ alias qsimu-head="mono --debug $QSIMU_HEAD"
 alias ts='tig status' # tig is SO awesome
 
 alias sc='systemctl'
+alias scs='systemctl status'
 alias jc='journalctl -u '
 alias jcf='journalctl -f -u '
 

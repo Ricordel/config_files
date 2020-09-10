@@ -74,13 +74,15 @@ export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 export EDITOR=nvim
 
 # For mono, by default I need the debian mono, so put /usr/bin in front of /usr/local/bin
-export PATH=~/.local/bin/:~/bin:/usr/bin:/opt/qarnot/bin:/opt/qarnot/simulator/bin:/opt/heap-shot/lib/heap-shot:/opt/influxdb:/opt/telegraf:/usr/local/go/bin:/home/yoann/work/qarnot/experimentations/linuxkit/linuxkit-git/bin:$PATH:
+export PATH=~/.local/bin/:~/bin:/usr/bin:/opt/qarnot/bin:/opt/qarnot/simulator/bin:/opt/heap-shot/lib/heap-shot:/opt/influxdb:/opt/telegraf:/usr/local/go/bin:/home/yoann/work/qarnot/experimentations/linuxkit/linuxkit-git/bin:/snap/bin:$PATH:/home/yoann/.npm-global/bin
 export LD_LIBRARY_PATH=/opt/qarnot/bin:$LD_LIBRARY_PATH
 
 # Path for Go ginaries
 export GOPATH=~/work/go
 GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+
+export PATH="$PATH:/home/yoann/.dotnet/tools"
 
 # java home
 export JAVA_HOME=/usr

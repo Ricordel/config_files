@@ -15,6 +15,7 @@ syn keyword Keyword in where
 syn keyword LINQKeyword from where select group into orderby join let in on equals by ascending descending
 
 syn keyword csTypeModifier internal volatile static private public protected override virtual final abstract
+syn keyword csRecord record
 
 syn match	csLabel	 display "^\s*\I\i*\s*:$" contains=csDelimiter
 
@@ -29,5 +30,5 @@ hi def link LINQKeyword Operator
 hi def link csLabel Statement
 hi def link csTypeModifier TypeModifier
 hi def link csNameofStatement Statement
-
+hi def link csRecord Type
 

@@ -21,7 +21,7 @@ setlocal omnifunc=OmniSharp#Complete
 "let g:OmniSharp_typeLookupInPreview=1
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_timeout = 5
-let g:OmniSharp_highlighting = 2
+let g:OmniSharp_highlighting = 1
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
 nnoremap <leader>jd :OmniSharpGotoDefinition<cr>

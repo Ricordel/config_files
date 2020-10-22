@@ -17,6 +17,8 @@ syn keyword LINQKeyword from where select group into orderby join let in on equa
 syn keyword csTypeModifier internal volatile static private public protected override virtual final abstract
 syn keyword csRecord record
 
+syn keyword Statement init
+
 syn match	csLabel	 display "^\s*\I\i*\s*:$" contains=csDelimiter
 
 " Functions

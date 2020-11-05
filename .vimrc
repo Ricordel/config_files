@@ -113,6 +113,9 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'OmniSharp/omnisharp-vim'
 
 
+"""" Jira wiki
+Plug 'https://github.com/dix75/jira.vim.git'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Linting: ale is pretty good, seems to do all I can want a.t.m
@@ -380,6 +383,9 @@ au BufRead,BufNewFile *.log.2 setlocal ft=qlog
 au BufRead,BufNewFile *.log.3 setlocal ft=qlog
 au BufRead,BufNewFile *.log.4 setlocal ft=qlog
 au BufRead,BufNewFile *.log.5 setlocal ft=qlog
+
+" Recognize Jira wiki syntax file
+au BufRead,BufNewFile *.jira setlocal ft=jira syn=confluencewiki
 
 
 """" Deactivate to prevent interaction with anything, because I don't use it anyway

@@ -104,3 +104,7 @@ hi DiffChange      ctermfg=181 ctermbg=24
 hi DiffDelete      ctermfg=162 ctermbg=53
 "hi DiffText                    ctermbg=102 cterm=bold
 hi DiffText                    ctermbg=52 cterm=bold
+hi SpellBad                ctermbg=88  cterm=italic
+hi SpellCap                ctermbg=20  cterm=italic
+hi SpellLocal              ctermbg=17  cterm=italic
+hi SpellRare  ctermfg=none ctermbg=none  cterm=reverse

@@ -84,8 +84,9 @@ Plug 'posva/vim-vue'
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer' }
-"Plug 'Shougo/deoplete.nvim'
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'dimixar/deoplete-omnisharp'
 
 "Plug 'deoplete-plugins/deoplete-jedi'
 
@@ -479,16 +480,16 @@ let g:localvimrc_persistent = 2
 
 """"" General configuration
 
-"let g:deoplete#enable_at_startup = 1
-"if !exists('g:deoplete#omni#input_patterns')
-  "let g:deoplete#omni#input_patterns = {}
-"endif
-"call g:deoplete#custom#option('camel_case', v:true)
-"call g:deoplete#custom#option('smart_case', v:true)
-"let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+ "let g:deoplete#omni#input_patterns = {}
+endif
+call g:deoplete#custom#option('camel_case', v:true)
+call g:deoplete#custom#option('smart_case', v:true)
+call g:deoplete#custom#option('enable_refresh_always', v:false)
+" Little delay so that semshi is fast (https://github.com/numirias/semshi#semshi-is-slow-together-with-deopletenvim)
+call g:deoplete#custom#option('auto_complete_delay', 100)
 
-"" Little delay so that semshi is fast (https://github.com/numirias/semshi#semshi-is-slow-together-with-deopletenvim)
-"let g:deoplete#auto_complete_delay = 100
 
 
 """"" Go
@@ -513,6 +514,19 @@ let g:ycm_filetype_whitelist = {
         \ }
 
 
+  let g:ycm_semantic_triggers =  {
+    \   'c': ['->', '.'],
+    \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+    \            're!\[.*\]\s'],
+    \   'ocaml': ['.', '#'],
+    \   'cpp,cuda,objcpp': ['->', '.', '::'],
+    \   'perl': ['->'],
+    \   'php': ['->', '::'],
+    \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+    \   'ruby,rust': ['.', '::'],
+    \   'lua': ['.', ':'],
+    \   'erlang': [':'],
+    \ }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

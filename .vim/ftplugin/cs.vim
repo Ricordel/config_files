@@ -8,13 +8,13 @@ setlocal expandtab
 setlocal formatoptions-=o
 
 
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
-setlocal omnifunc=OmniSharp#Complete
+inoremap <c-space> <c-x><c-o>
 
 " Supertab: omnicompletion with tab
-"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 
 " Use the preview window instead of the status line for type lookup

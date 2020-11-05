@@ -64,6 +64,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
+export DOTNET_ROOT=~/bin/dotnet-5-rc2
+
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 setopt hist_ignore_space
@@ -83,6 +86,7 @@ GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
 export PATH="$PATH:/home/yoann/.dotnet/tools"
+export PATH="$PATH:$HOME/bin/dotnet-5-rc2"
 
 # java home
 export JAVA_HOME=/usr

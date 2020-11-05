@@ -324,9 +324,11 @@ alias rf='readlink -f'
 
 alias dnet='docker run -it -v $(readlink -f .):/w -w /w microsoft/dotnet dotnet'
 
-alias ve='source venv/bin/activate'
+alias ve='[ -f venv/bin/activate ] && source venv/bin/activate || source .venv/bin/activate'
 
 alias pas='pass -c'
+
+alias dug='dig +noall +answer'
 
 # some zsh-specific awesomness
 
@@ -378,7 +380,7 @@ alias qrocomon01='qqssh qrocomon01.qarnot.net'
 alias qrocomon02='qqssh qrocomon02.qarnot.net'
 alias submit01='qqssh submit01.qarnot.net'
 alias rssh01='qqssh rssh01.qarnot.net'
-alias build01='ssh -p 50022 yoann.ricordel@build01.qarnot.net -t "cd /opt/qarnot/src/; sudo zsh --login"'
+alias build01='ssh yoann.ricordel@build01.redmont.qarnot.net -t "cd /opt/qarnot/src/; sudo zsh --login"'
 alias forward01='qqssh forward01.qarnot.net'
 alias bnp='qqssh bnp.qarnot.net'
 alias jira01='qqssh jira01.qarnot.net'

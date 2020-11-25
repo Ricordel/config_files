@@ -108,3 +108,8 @@ hi SpellBad                ctermbg=88  cterm=italic
 hi SpellCap                ctermbg=20  cterm=italic
 hi SpellLocal              ctermbg=17  cterm=italic
 hi SpellRare  ctermfg=none ctermbg=none  cterm=reverse
+
+
+" Popup colors
+hi Pmenu                    ctermbg=56  ctermfg=252
+hi PmenuSel                 ctermbg=22  ctermfg=252

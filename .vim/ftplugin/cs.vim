@@ -20,7 +20,7 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " Use the preview window instead of the status line for type lookup
 "let g:OmniSharp_typeLookupInPreview=1
 let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_timeout = 5
+let g:OmniSharp_timeout = 20
 let g:OmniSharp_highlighting = 1
 
 nnoremap gd :OmniSharpGotoDefinition<cr>

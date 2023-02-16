@@ -11,7 +11,7 @@ syn match csOperator	"[][]"
 syn match csDelimiter	"[(){};:\\]"
 syn match csDelimiter	"??"
 
-syn keyword Keyword in where
+syn keyword Keyword in where with or
 syn keyword LINQKeyword from where select group into orderby join let in on equals by ascending descending
 
 syn keyword csTypeModifier internal volatile static private public protected override virtual final abstract

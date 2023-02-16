@@ -13,6 +13,16 @@ setlocal formatoptions-=o
 
 inoremap <c-space> <c-x><c-o>
 
+
+" Arguments function alignment like:
+"       func(int a, int b
+"            int c, int d)
+set cinoptions=(0
+
+" Wrap on 120 chars. With the one above, gqq will wrap arguments properly
+set textwidth=120
+
+
 " Supertab: omnicompletion with tab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
@@ -22,6 +32,10 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_timeout = 20
 let g:OmniSharp_highlighting = 1
+" show help and documentation in a buffer, not in a popup. Popups disappear when
+" entering insert mode, hence the documentation disappears precisely at the time
+" when we want to use it...
+let g:OmniSharp_popup = 0
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
 nnoremap <leader>jd :OmniSharpGotoDefinition<cr>
@@ -42,6 +56,7 @@ nnoremap <leader>jc :OmniSharpFindSyntaxErrors<cr>
 nnoremap <leader>fm :OmniSharpFindMembers<cr>
 nnoremap <leader>ft :OmniSharpTypeLookup<cr>
 nnoremap <leader>fd :OmniSharpDocumentation<cr>
+nnoremap <leader>fh :OmniSharpFixUsings<cr>
 nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
 nnoremap <F2> :OmniSharpRename<CR>
 nnoremap <leader>t :OmniSharpRunTest<cr>

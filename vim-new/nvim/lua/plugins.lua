@@ -16,13 +16,15 @@ return require('packer').startup(function()
   use 'vim-airline/vim-airline' -- Airline, a better status line
   use 'tpope/vim-markdown' -- Markdown files
   use 'embear/vim-localvimrc' -- local vimrc .lvimrc
-  use 'bronson/vim-trailing-whitespace' -- trailing whitespace highlight and remove
+  use 'ntpeters/vim-better-whitespace' -- trailing whitespace highlight and remove
   use 'Yggdroot/indentLine' -- show indentation
   use 'wgwoods/vim-systemd-syntax' -- systemd syntax
   use 'cespare/vim-toml' -- toml syntax hithlighting
   use 'ray-x/lsp_signature.nvim' -- show type signatures when typing
   use 'tpope/vim-fugitive' -- feature rich git integration
   use 'simrat39/rust-tools.nvim' -- more Rust niceness
+  --use 'vim-python/python-syntax' -- Better Python syntax highlighting
+  use 'wookayin/semshi' -- Better Python syntax highlighting
 
   use {
       'lewis6991/gitsigns.nvim',
@@ -52,7 +54,7 @@ return require('packer').startup(function()
 
   -- omnisharp lsp config
   require'lspconfig'.omnisharp.setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = function(_, bufnr)
       vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
       require "lsp_signature".on_attach({
@@ -72,5 +74,8 @@ return require('packer').startup(function()
 
   -- rust lsp config, mostly automated by rust-tools
   require('rust-tools').setup({})
+
+  -- Python lsp config using Microsoft's Pyright static analyzer
+  require'lspconfig'.pyright.setup{}
 
 end)

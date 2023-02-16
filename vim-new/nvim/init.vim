@@ -313,13 +313,15 @@ au BufRead,BufNewFile *.log.5 setlocal ft=qlog
 " NERDTree
 let NERDTreeQuitOnOpen=1 " Quit tree window when opening a file
 " Toggle nerdTree window with F9
-nnoremap <silent> <F8> :NERDTreeToggle<CR>
+nnoremap <silent> <F8> :NERDTreeMirror<CR>:NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.class$', '\.o$', '\.pyc$', '\~$']
 let NERDTreeWinSize=60
 
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,*.pyc,*.a,*.class
 
+" Enable python-highlight
+let g:python_highlight_all = 1
 
 
 " Localvimrc stuff

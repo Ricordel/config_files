@@ -5,6 +5,7 @@ return require('packer').startup(function()
     requires = { {'nvim-lua/plenary.nvim'},
                  {'BurntSushi/ripgrep'}}
   }
+  use 'nvim-treesitter/nvim-treesitter'
   use 'neovim/nvim-lspconfig' -- native LSP support
   use 'hrsh7th/nvim-cmp' -- autocompletion framework
   use 'hrsh7th/cmp-nvim-lsp' -- LSP autocompletion provider
@@ -25,6 +26,7 @@ return require('packer').startup(function()
   use 'simrat39/rust-tools.nvim' -- more Rust niceness
   --use 'vim-python/python-syntax' -- Better Python syntax highlighting
   use 'wookayin/semshi' -- Better Python syntax highlighting
+  use 'OmniSharp/omnisharp-vim'
 
   use {
       'lewis6991/gitsigns.nvim',
@@ -33,6 +35,7 @@ return require('packer').startup(function()
       },
       -- tag = 'release' -- To use the latest release
   }
+
 
   -- autocomplete config
   local cmp = require 'cmp'

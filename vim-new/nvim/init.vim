@@ -1,4 +1,5 @@
 lua require('plugins')
+lua require('diagnostics')
 lua <<EOF
 require('gitsigns').setup {
   signs = {
@@ -12,28 +13,6 @@ require('gitsigns').setup {
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
   linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
   word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  keymaps = {
-    -- Default keymap options
-    noremap = true,
-
-    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-
-    ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-    ['n <leader>hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
-    ['n <leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
-
-    -- Text objects
-    ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-    ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-  },
   watch_gitdir = {
     interval = 1000,
     follow_files = true
@@ -263,7 +242,7 @@ nmap <leader>w :w<CR>
 
 """"" Misc
 nnoremap <C-p> :Telescope find_files<CR>
-nnoremap <C-s-p> :Telescope buffers<CR>
+nnoremap <M-p> :Telescope buffers<CR>
 nnoremap <leader>jl :Telescope jumplist<CR>
 nnoremap <leader>fp :Telescope live_grep<CR>
 nnoremap <leader>fo :Telescope grep_string<CR>
@@ -277,11 +256,10 @@ nnoremap <leader>fs :Telescope lsp_dynamic_workspace_symbols<CR>
 
 
 nnoremap <F2> :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <leader>dN :lua vim.lsp.diagnostic.goto_prev()<CR>
+"nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
+"nnoremap <leader>dN :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>dh :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>dd :Telescope lsp_document_diagnostics<CR>
-nnoremap <leader>dD :Telescope diagnostics<CR>
+nnoremap <leader>dd :Telescope diagnostics<CR>
 nnoremap <leader><space> :Telescope lsp_code_actions<CR>
 nnoremap <leader>xd :%Telescope lsp_range_code_actions<CR>
 
@@ -319,9 +297,6 @@ let NERDTreeWinSize=60
 
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,*.pyc,*.a,*.class
-
-" Enable python-highlight
-let g:python_highlight_all = 1
 
 
 " Localvimrc stuff

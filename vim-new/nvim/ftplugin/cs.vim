@@ -32,6 +32,15 @@ if exists(":CompilerSet") != 2  " older Vim always used :setlocal
   command -nargs=* CompilerSet setlocal <args>
 endif
 
+let g:OmniSharp_highlighting = 0
+
+nnoremap <leader>pi :OmniSharpPreviewImplementation<CR>
+nnoremap <leader><space> :OmniSharpGetCodeActions<CR>
+nnoremap <leader>gt :OmniSharpTypeLookup<CR>
+
+inoremap <leader>ct CancellationToken ct = default
+
+
 CompilerSet errorformat=
     \%*[^\"]\"%f\"%*\\D%l:\ %m,
     \\"%f\"%*\\D%l:\ %m,

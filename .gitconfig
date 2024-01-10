@@ -2,8 +2,8 @@
     name = Yoann Ricordel
     email = yoann.ricordel@qarnot-computing.com
 [core]
-	editor = vim
-	mergetool = vimdiff
+	editor = nvim
+	mergetool = nvimdiff
 
 [alias]
 	ci = commit
@@ -11,20 +11,22 @@
 	st = status
 	stu = status -uno
 	ch = checkout
-    co = checkout
 	br = branch
     ff = merge --ff-only
     noff = merge --no-ff
-    cp = cherry-pick
+    chp = cherry-pick
     pu = push
     puf = push --force-with-lease
     psu = push --set-upstream
+    pul = pull --rebase --autostash
+    sw = switch
 [color]
 	ui = true
 [diff]
     tool = nvimdiff
 [difftool "nvimdiff"]
-    cmd = "nvim -d -u ~/.vimrc \"$LOCAL\" \"$REMOTE\""
+    ;cmd = "nvim -d -u ~/.vimrc \"$LOCAL\" \"$REMOTE\""
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]
 	prompt = false
 	trustExitCode = true
@@ -39,3 +41,5 @@
 	default = simple
 [branch]
 	autosetuprebase = always
+[tag]
+	sort = v:refname

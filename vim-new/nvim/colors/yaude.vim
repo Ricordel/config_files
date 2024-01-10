@@ -36,7 +36,7 @@ hi VertSplit    guibg=#c2bfa5   guifg=grey50    gui=none
 hi Folded       guibg=grey30    guifg=gold
 hi FoldColumn   guibg=grey30    guifg=tan
 hi IncSearch    guifg=black     guibg=#FFC31C       ctermfg=black   ctermbg=yellow
-hi LineNr       guifg=#4B23FF                       ctermfg=250     ctermbg=234
+hi LineNr       guifg=#e4e4e4                       ctermfg=250     ctermbg=234
 hi ModeMsg      guifg=goldenrod
 hi MoreMsg      guifg=SeaGreen
 hi NonText      guifg=LightBlue guibg=grey30
@@ -50,42 +50,29 @@ hi Visual       guibg=#2D2D2D                   gui=none
 hi WarningMsg   guifg=salmon
 
 " syntax highlighting groups
-hi Comment      guifg=#808080       gui=bold        ctermfg=245     cterm=bold
-hi Constant     guifg=#6CD800       gui=bold        ctermfg=106     cterm=bold
-hi Number       guifg=#72FC27       gui=none        ctermfg=105     cterm=bold
-hi String       guifg=#9DDA53                       ctermfg=11
+hi Comment      guifg=#8a8a8a       gui=bold        ctermfg=245     cterm=bold
+hi Constant     guifg=#87af00       gui=bold        ctermfg=106     cterm=bold
+hi Number       guifg=#8787ff       gui=none        ctermfg=105     cterm=bold
+hi String       guifg=#ffff87                       ctermfg=11
 hi Character    guifg=#E0E0E0       gui=bold        ctermfg=lightgrey cterm=bold
-hi Boolean      guifg=#89DE00       gui=bold        ctermfg=106     cterm=bold
-hi Identifier   guifg=#00AEFF                       ctermfg=111   cterm=bold
-hi stdFunction                                      ctermfg=69    cterm=bold
-hi Function                                         ctermfg=39    cterm=bold
-"hi pythonUserFunction guifg=#00AEFF     gui=bold    ctermfg=39      cterm=bold
-hi hsFunction                           ctermfg=white   cterm=bold
-hi hsUserFunction                           ctermfg=39      cterm=bold
-"hi pythonSelf   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
-"hi TypeModifier                                    ctermfg=106     cterm=bold
-hi TypeModifier                                    ctermfg=28     cterm=bold
-"hi TypeModifier                                    ctermfg=214     cterm=bold
-"hi Statement    guifg=#CC01F2       gui=bold        ctermfg=135     cterm=bold
-"hi Statement    guifg=#CC01F2       gui=bold        ctermfg=161     cterm=bold
-hi Statement    guifg=#CC01F2       gui=bold        ctermfg=135     cterm=bold
-hi Exception    guifg=#D400E7       gui=bold        ctermfg=magenta cterm=bold
-hi operator     guifg=#5F5FFF       gui=bold        ctermfg=161       cterm=bold
-"hi operator     guifg=#5F5FFF       gui=bold        ctermfg=135       cterm=bold
+hi Boolean      guifg=#87af00       gui=bold        ctermfg=106     cterm=bold
+hi Identifier   guifg=#87afff                       ctermfg=111   cterm=bold
+hi stdFunction  guifg=#5f87ff       gui=bold        ctermfg=69    cterm=bold
+hi Function     guifg=#00afff       gui=bold        ctermfg=39    cterm=bold
+hi TypeModifier guifg=#008700       gui=bold        ctermfg=28     cterm=bold
+hi Statement    guifg=#af5fff       gui=bold        ctermfg=135     cterm=bold
+hi Exception    guifg=#aaf0ff       gui=bold        ctermfg=magenta cterm=bold
+hi operator     guifg=#df5f5f       gui=bold        ctermfg=161       cterm=bold
 hi PreProc      guifg=#48AFBF       gui=bold        ctermfg=31  cterm=bold
-"hi Type         guifg=#00BF09       gui=bold        ctermfg=106 cterm=bold
-hi Type         guifg=#00BF09       gui=bold        ctermfg=106 cterm=bold
-hi Special      guifg=#FFC31C       gui=bold        ctermfg=214 cterm=bold
+hi Type         guifg=#87af00       gui=bold        ctermfg=106 cterm=bold
+hi Special      guifg=#FFaf00       gui=bold        ctermfg=214 cterm=bold
 hi Tag          guifg=red
-hi Delimiter    guifg=#FFA41E       gui=bold        ctermfg=214     cterm=bold
-hi pythonDelimiter guifg=#FFC005 gui=bold           ctermfg=214     cterm=bold
+hi Delimiter    guifg=#FFaf00       gui=bold        ctermfg=214     cterm=bold
+hi pythonDelimiter guifg=#FFaf00    gui=bold        ctermfg=214     cterm=bold
 hi Ignore       guifg=grey40
 hi Todo         guifg=black guibg=yellow2
-hi keyword                                          ctermfg=161      cterm=bold
-hi def PropertyName                                 ctermfg=152      cterm=bold
-
-hi scalaSymbol                                          ctermfg=white cterm=bold
-hi scalaRoot                                            ctermfg=white cterm=bold
+hi keyword      guifg=#df5f5f       gui=bold        ctermfg=161      cterm=bold
+hi def PropertyName guifg=#afdfdf                   ctermfg=152      cterm=bold
 
 " weird thing that does not work if directly linked with Type... (cf after/syntax/c.vim)
 hi cCustomClass   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold

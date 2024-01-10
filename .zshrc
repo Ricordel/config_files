@@ -1,4 +1,5 @@
 # Export the correct locale
+#
 export LC_ALL=en_US.utf8
 
 # Path to your oh-my-zsh configuration.
@@ -48,9 +49,10 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # XXX from https://github.com/zsh-users/zsh-syntax-highlighting, it seems
 # that the syntax-highlight plugin must be set last
 #plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
-plugins=(git pass colored-man-pages cp colorize z debian sudo vagrant systemd docker redis-cli zsh-syntax-highlighting)
+plugins=(git pass colored-man-pages cp colorize z k debian sudo vagrant systemd docker redis-cli zsh-syntax-highlighting)
 
 fpath=(~/.zsh/completions $fpath)
+
 
 # zmv, the built-in mass file renamer
 autoload zmv
@@ -60,6 +62,21 @@ autoload zmv
 
 source $ZSH/oh-my-zsh.sh
 
+autoload -U compinit && compinit
+
+
+# SSH hosts completion
+#   https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh/170481#170481
+#
+h=()
+if [[ -r ~/.ssh/config ]]; then
+  h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+fi
+if [[ $#h -gt 0 ]]; then
+  zstyle ':completion:*:ssh:*' hosts $h
+  zstyle ':completion:*:slogin:*' hosts $h
+  zstyle ':completion:*:scp:*' hosts $h
+fi
 
 
 # Customize to your needs...
@@ -91,11 +108,34 @@ export PATH="$PATH:$HOME/bin/dotnet-5-rc2"
 # java home
 export JAVA_HOME=/usr
 
+
+## Pyenv stuff
+#
+# Load pyenv automatically by appending
+# the following to 
+# ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# and ~/.bashrc (for interactive shells) :
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Restart your shell for the changes to take effect.
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+
+eval "$(pyenv virtualenv-init -)"
+
+
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 __DUMMY='$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD)\h$ '
 
+
+export BROWSER=firefox
 
 
 function recursive_grep {
@@ -134,11 +174,13 @@ alias cp='ionice -c3 cp --interactive'
 alias mv='ionice -c3 mv --interactive'
 
 # Raccourcis pour 'ls'
-alias l='ls'
-alias ll='ls -lh'
-alias lll='ls -lh | less'
-alias la='ls -A'
-alias lla='ls -lA'
+alias l='exa'
+#alias ll='ls -lh'
+alias ll='exa --long --git --group'
+alias llt='exa --long --git --group --sort=modified'
+alias lll='exa --long --git --group --accessed --modified --created --links --inode --header --time-style=long-iso'
+alias la='exa --all'
+alias lla='exa --all --long --git --group'
 
 alias mono-custom='/opt/mono-3.2.8-debug/bin/mono'
 
@@ -201,6 +243,7 @@ alias xbb='xbuild /target:Clean && xbuild'
 alias v='nvim'
 alias vi='nvim'
 alias via='nvim /tmp/a'
+alias vdiff='nvim -d'
 
 alias fsel='find . | selecta'
 
@@ -212,6 +255,7 @@ alias glo='git log --oneline'
 alias gloh='git log --oneline | head -n 40'
 alias gk='qgit --all&'
 alias ts='tig status'
+alias gpsu='git push --set-upstream origin $(git branch --show-current)'
 
 export QSH_HEAD="~/work/qarnot/apps/qshell/bin/Debug/QarnotShell.exe"
 export QSIMU_HEAD="~/work/qarnot/qnetwork/bin/Debug/qsimu.exe"
@@ -222,12 +266,15 @@ alias ts='tig status' # tig is SO awesome
 
 alias sc='systemctl'
 alias scs='systemctl status'
-alias jc='journalctl -u '
 alias jcf='journalctl -f -u '
 
 alias td='tcpdump -l -vv -n'
 
 alias dn='dotnet'
+alias dnt='dotnet test -l "console;verbosity=detailed"'
+alias dntnb='dotnet test -v normal --no-build'
+
+alias weeknum='/bin/date +%V'
 
 alias timestamp='date +%s'
 
@@ -252,6 +299,7 @@ alias calc='_calc $*'
 # GCC in english and with colors
 alias gcc='LC_ALL=C gcc'
 
+alias qpy='ipython --profile=qarnot'
 
 # Tell tmux to use ~/.config/tmux/.tmux.conf as a config file
 # -2 is to use 256 colors
@@ -288,7 +336,7 @@ alias nobuf='stdbuf -oL -eL'
 
 
 alias :q='exit' # vim forever
-alias :e='vim'  # and ever
+alias :e='nvim'  # and ever
 
 
 alias htop='htop -s PERCENT_CPU'
@@ -330,17 +378,19 @@ alias pas='pass -c'
 
 alias dug='dig +noall +answer'
 
+alias gpg-clement='gpg --output message-$(date +%Y%m%d%H%M).gpg --encrypt --sign --armor --recipient "clement@qarnot.com"'
+
 # some zsh-specific awesomness
 
 # Global aliasing
-alias -g gr='| nobuf grep -E -u'
-alias -g grc='| nobuf grep -E -u --color'
-alias -g gri='| nobuf grep -E -i -u'
-alias -g grci='| nobuf grep -E -u -i --color'
+alias -g gr='| nobuf grep -E -a'
+alias -g grc='| nobuf grep -E -a --color'
+alias -g gri='| nobuf grep -E -i -a'
+alias -g grci='| nobuf grep -E -a -i --color'
 #alias -g qlog='| nobuf remark /home/yoann/.config/remark/qarnot-log.syntax'
 alias -g plog='| /home/yoann/bin/qlog'
 alias -g pqfsl='| /home/yoann/bin/qfslog'
-alias -g qtrim='| nobuf cut -d"|" -f4- | nobuf grep -E -v "^$"' # To trim the first fields of log that take space and are not always interesting.
+alias -g qtrim='| nobuf cut -d"|" -f4- | nobuf grep -E -v -a "^$"' # To trim the first fields of log that take space and are not always interesting.
 alias -g ple='| less'
 alias -g pyc='|& pygmentize -l pytb'
 alias -g pcat='| cat'
@@ -350,6 +400,7 @@ alias -g psel='| selecta '
 alias -g sel='$(find | selecta)'
 alias -g pwc='| wc -l'
 alias -g logmsg='| cut -d"|" -f6'
+alias -g GB='$(git branch --show-current)'
 
 # Default applications to open some files
 alias -s c=vim
@@ -382,13 +433,17 @@ alias submit01='qqssh submit01.qarnot.net'
 alias rssh01='qqssh rssh01.qarnot.net'
 alias build01='ssh yoann.ricordel@build01.redmont.qarnot.net -t "cd /opt/qarnot/src/; sudo zsh --login"'
 alias forward01='qqssh forward01.qarnot.net'
-alias bnp='qqssh bnp.qarnot.net'
+alias bnp='qqssh 158.255.111.139'
 alias jira01='qqssh jira01.qarnot.net'
-alias buildbot01='qqssh buildbot.redmont.qarnot.net'
-alias buildbot-slave='qssh 192.168.6.16'
-alias buildbot-slave2='qqssh 192.168.6.17'
+alias buildbot01='qssh buildbot.redmont.qarnot.net'
+alias buildbot-slave='qssh buildbot-worker-2.redmont.qarnot.net'
+alias buildbot-slave2='qqssh buildbot-worker-tr-0.redmont.qarnot.net'
+alias buildbot-slave3='ssh buildbot-worker-tr-3990x.redmont.qarnot.net'
 alias influx-smarthome='qqssh influx-sensors.qarnot.net'
 alias influx-hpc='qqssh influx-hpc.qarnot.net'
 alias ceph-admin='ssh -p 50022 yoann.ricordel@92.222.155.248 -t sudo su'
+alias pab1='ssh -p 50022 yoann.ricordel@qrocodir-v2-1.qarnot.net -t sudo zsh'
+alias pab2='ssh -p 50022 yoann.ricordel@qrocodir-v2-2.qarnot.net -t sudo zsh'
+alias pab3='ssh -p 50022 yoann.ricordel@qrocodir-v2-3.qarnot.net -t sudo zsh'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

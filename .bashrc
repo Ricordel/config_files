@@ -219,3 +219,4 @@ fi # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"

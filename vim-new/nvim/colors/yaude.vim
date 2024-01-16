@@ -30,7 +30,7 @@ hi Normal       guifg=#E0E0E0   guibg=#0B0B0B       ctermfg=254
 " highlight groups
 hi Cursor       guibg=grey90    guifg=grey20
 hi CursorLine   guibg=#1D1D1D                   ctermbg=235
-hi clear CursorLine
+"hi clear CursorLine
 hi CursorLineNR guibg=#1D1D1D                   ctermbg=39
 hi VertSplit    guibg=#c2bfa5   guifg=grey50    gui=none
 hi Folded       guibg=grey30    guifg=gold
@@ -39,7 +39,7 @@ hi IncSearch    guifg=black     guibg=#FFC31C       ctermfg=black   ctermbg=yell
 hi LineNr       guifg=#e4e4e4                       ctermfg=250     ctermbg=234
 hi ModeMsg      guifg=goldenrod
 hi MoreMsg      guifg=SeaGreen
-hi NonText      guifg=LightBlue guibg=grey30
+hi NonText      guifg=LightBlue guibg=#0B0B0B
 hi Question     guifg=springgreen
 hi Search       guibg=#FFC31C   guifg=black         ctermfg=172     ctermbg=235
 hi SpecialKey   guifg=yellowgreen
@@ -81,7 +81,7 @@ hi cCustomClass   guifg=#36C23C       gui=bold,italic ctermfg=28      cterm=bold
 hi SpecialKey      ctermfg=239
 
 "hi Visual       cterm=reverse
-hi Visual       ctermbg=240
+hi Visual       guibg=#585858 ctermbg=240
 hi VisualNOS    cterm=bold,underline
 
 hi rstEmphasis      cterm=bold

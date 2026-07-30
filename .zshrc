@@ -2,67 +2,48 @@
 #
 export LC_ALL=en_US.utf8
 
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
 export XDG_CONFIG_HOME=~/.config/
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="yaude"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# XXX from https://github.com/zsh-users/zsh-syntax-highlighting, it seems
-# that the syntax-highlight plugin must be set last
-#plugins=(git colored-man colorize cp scala sbt vi-mode zsh-syntax-highlighting)
-plugins=(git pass colored-man-pages cp colorize z k debian sudo vagrant systemd docker redis-cli zsh-syntax-highlighting)
+export TERM=xterm-256color
 
 fpath=(~/.zsh/completions $fpath)
 
-
-# zmv, the built-in mass file renamer
-autoload zmv
+# Only run the full compinit security check once a day, otherwise use the cache
+autoload -Uz compinit
+_comp_files=(${ZDOTDIR:-$HOME}/.zcompdump(Nmh+24))
+if (( $#_comp_files )); then
+  compinit
+else
+  compinit -C
+fi
+unset _comp_files
 
 # Restore history search, apparently absent with vi-mode
-#bindkey '^R' history-incremental-search-backward
+bindkey '^R' history-incremental-search-backward
 
-source $ZSH/oh-my-zsh.sh
+# Per-directory history (vendored from jimhester/per-directory-history,
+# previously loaded as an oh-my-zsh plugin)
+source ~/config_files/.zsh/per-directory-history.zsh
 
-autoload -U compinit && compinit
+# zoxide (modern, maintained successor to rupa/z)
+eval "$(zoxide init zsh)"
+
+# Prompt (previously the "yaude" oh-my-zsh theme), using zsh's native vcs_info
+setopt PROMPT_SUBST
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' formats ' %F{magenta}%b%f%u'
+zstyle ':vcs_info:git:*' unstagedstr ' %F{yellow}✗%f'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' get-revision false
+precmd() { vcs_info }
+
+PROMPT='%B%F{green}(%f%F{blue}%n%f%F{green}@%f%F{cyan}%m%f%F{green})%f%b %B%F{white}%c%f%b%B%F{blue} » %f%b'
+RPROMPT='%(?..%F{red})%D{%H:%M}%f${vcs_info_msg_0_}'
+
+# colored-man-pages (previously an oh-my-zsh plugin)
+export LESS_TERMCAP_mb=$'\e[1;31m' LESS_TERMCAP_md=$'\e[1;31m' \
+       LESS_TERMCAP_me=$'\e[0m'    LESS_TERMCAP_se=$'\e[0m' \
+       LESS_TERMCAP_so=$'\e[1;44;33m' LESS_TERMCAP_ue=$'\e[0m' \
+       LESS_TERMCAP_us=$'\e[1;32m'
 
 
 # SSH hosts completion
@@ -82,7 +63,6 @@ fi
 # Customize to your needs...
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
-export DOTNET_ROOT=~/bin/dotnet-5-rc2
 
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
@@ -102,9 +82,6 @@ export GOPATH=~/work/go
 GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
-export PATH="$PATH:/home/yoann/.dotnet/tools"
-export PATH="$PATH:$HOME/bin/dotnet-5-rc2"
-
 # java home
 export JAVA_HOME=/usr
 
@@ -116,16 +93,16 @@ export JAVA_HOME=/usr
 # ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
 # and ~/.bashrc (for interactive shells) :
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
 
-# Restart your shell for the changes to take effect.
+## Restart your shell for the changes to take effect.
 
-# Load pyenv-virtualenv automatically by adding
-# the following to ~/.bashrc:
+## Load pyenv-virtualenv automatically by adding
+## the following to ~/.bashrc:
 
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 
 
@@ -173,14 +150,70 @@ alias ls='ls --tabsize=0 --literal --color=auto --show-control-chars --human-rea
 alias cp='ionice -c3 cp --interactive'
 alias mv='ionice -c3 mv --interactive'
 
+# rsync-based cp with progress (previously the oh-my-zsh "cp" plugin)
+function cpv {
+    rsync -pogbr -hhh --backup-dir=/tmp/rsync -e /dev/null --progress "$@"
+}
+compdef _files cpv
+
+# Colorized cat/less via pygmentize (previously the oh-my-zsh "colorize" plugin)
+alias ccat='colorize_via_pygmentize'
+alias cless='colorize_via_pygmentize_less'
+
+function colorize_via_pygmentize {
+    if ! (( $+commands[pygmentize] )); then
+        echo "package 'Pygments' is not installed!"
+        return 1
+    fi
+
+    if [ -z $ZSH_COLORIZE_STYLE ]; then
+        ZSH_COLORIZE_STYLE="default"
+    fi
+
+    if [ $# -eq 0 ]; then
+        pygmentize -O style="$ZSH_COLORIZE_STYLE" -g
+        return $?
+    fi
+
+    local FNAME lexer
+    for FNAME in "$@"
+    do
+        lexer=$(pygmentize -N "$FNAME")
+        if [[ $lexer != text ]]; then
+            pygmentize -O style="$ZSH_COLORIZE_STYLE" -l "$lexer" "$FNAME"
+        else
+            pygmentize -O style="$ZSH_COLORIZE_STYLE" -g "$FNAME"
+        fi
+    done
+}
+
+colorize_via_pygmentize_less() (
+    declare -a tmp_files
+
+    cleanup () {
+        [[ ${#tmp_files} -gt 0 ]] && rm -f "${tmp_files[@]}"
+        exit
+    }
+    trap 'cleanup' EXIT HUP TERM INT
+
+    while (( $# != 0 )); do
+        tmp_file="$(mktemp -t "tmp.colorize.XXXX.$(sed 's/\//./g' <<< "$1")")"
+        tmp_files+=("$tmp_file")
+        colorize_via_pygmentize "$1" > "$tmp_file"
+        shift 1
+    done
+
+    less -f "${tmp_files[@]}"
+)
+
 # Raccourcis pour 'ls'
-alias l='exa'
+alias l='eza'
 #alias ll='ls -lh'
-alias ll='exa --long --git --group'
-alias llt='exa --long --git --group --sort=modified'
-alias lll='exa --long --git --group --accessed --modified --created --links --inode --header --time-style=long-iso'
-alias la='exa --all'
-alias lla='exa --all --long --git --group'
+alias ll='eza --long --git --group'
+alias llt='eza --long --git --group --sort=modified'
+alias lll='eza --long --git --group --accessed --modified --created --links --inode --header --time-style=long-iso'
+alias la='eza --all'
+alias lla='eza --all --long --git --group'
 
 alias mono-custom='/opt/mono-3.2.8-debug/bin/mono'
 
@@ -196,7 +229,7 @@ alias iptn='sudo iptables -t nat -L -n -v'
 
 # Un cd && ls qui va bien
 function cd_ls {
-	cd "$*"; ls --tabsize=0 --literal --color=auto --show-control-chars --human-readable;
+    cd "$*"; ls --tabsize=0 --literal --color=auto --show-control-chars --human-readable;
 }
 
 function mkdir_cd {
@@ -244,6 +277,7 @@ alias v='nvim'
 alias vi='nvim'
 alias via='nvim /tmp/a'
 alias vdiff='nvim -d'
+alias vd='nvim -d -c "set diffopt+=iwhiteall,algorithm:patience"'
 
 alias fsel='find . | selecta'
 
@@ -271,7 +305,8 @@ alias jcf='journalctl -f -u '
 alias td='tcpdump -l -vv -n'
 
 alias dn='dotnet'
-alias dnt='dotnet test -l "console;verbosity=detailed"'
+alias dnt='dotnet test -v normal -l "console;verbosity=detailed"'
+alias dntf='dotnet test -v normal -l "console;verbosity=detailed" --filter'
 alias dntnb='dotnet test -v normal --no-build'
 
 alias weeknum='/bin/date +%V'
@@ -397,7 +432,6 @@ alias -g pcat='| cat'
 alias -g phd='| head -n 40'
 alias -g pvim='| vim -'
 alias -g psel='| selecta '
-alias -g sel='$(find | selecta)'
 alias -g pwc='| wc -l'
 alias -g logmsg='| cut -d"|" -f6'
 alias -g GB='$(git branch --show-current)'
@@ -446,4 +480,22 @@ alias pab1='ssh -p 50022 yoann.ricordel@qrocodir-v2-1.qarnot.net -t sudo zsh'
 alias pab2='ssh -p 50022 yoann.ricordel@qrocodir-v2-2.qarnot.net -t sudo zsh'
 alias pab3='ssh -p 50022 yoann.ricordel@qrocodir-v2-3.qarnot.net -t sudo zsh'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# OLD version
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# opencode
+export PATH=/home/yoann.ricordel/.opencode/bin:$PATH
+
+# Tell Claude to use LSPs
+export ENABLE_LSP_TOOL=1
+
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet
+export PATH="$PATH:/home/yoann/.dotnet/tools"
+
+# zsh-syntax-highlighting and zsh-autosuggestions must be sourced last
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh

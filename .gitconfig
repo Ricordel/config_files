@@ -20,20 +20,26 @@
     psu = push --set-upstream
     pul = pull --rebase --autostash
     sw = switch
+    local-only-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
+    rim = "rebase -i master"
 [color]
 	ui = true
 [diff]
     tool = nvimdiff
 [difftool "nvimdiff"]
     ;cmd = "nvim -d -u ~/.vimrc \"$LOCAL\" \"$REMOTE\""
-  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+    ;cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'set diffopt=iwhitall,algorithm:patience'
+    ;cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'set diffopt=iwhitall'
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'set diffopt=algorithm:patience'
 [difftool]
 	prompt = false
 	trustExitCode = true
 [merge]
     tool = nvimdiff
 [mergetool "nvimdiff"]
-  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  ;cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'set diffopt=iwhitall,algorithm:patience'
+  ;cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'set diffopt=iwhitall'
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'set diffopt=algorithm:patience'
 [mergetool]
     prompt = false
 	trustExitCode = true

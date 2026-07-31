@@ -17,6 +17,14 @@ else
 fi
 unset _comp_files
 
+# Case-insensitive, partial-word, and substring completion matching
+# (previously came from oh-my-zsh's lib/completion.zsh)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:*:*:*:*' menu select
+setopt complete_in_word
+setopt always_to_end
+unsetopt menu_complete
+
 # Restore history search, apparently absent with vi-mode
 bindkey '^R' history-incremental-search-backward
 
@@ -499,3 +507,4 @@ export PATH="$PATH:/home/yoann/.dotnet/tools"
 # zsh-syntax-highlighting and zsh-autosuggestions must be sourced last
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^N' autosuggest-accept
